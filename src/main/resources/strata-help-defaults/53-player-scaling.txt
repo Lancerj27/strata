@@ -1,0 +1,17 @@
+# Player scaling
+@screen ScalingScreen:player
+Where: Scaling > Player scaling.
+
+How players grow stronger with their XP level.
+scaled = base x (1 + per_level x level^exponent)
+
+What you can do here
+- One curve per attribute. Edit sets its per-level, exponent and start level.
+- The switch at the top turns player scaling on or off. It ships Off: the curves below grow players as soon as it is On.
+- Player base stats sets the values the curves grow from.
+
+Examples
+- +1 health per 5 levels.
+- A little more attack speed per level, from level 20.
+
+When it applies: at once, after Save.

@@ -1,0 +1,19 @@
+# Profiles
+@screen ProfileScreen
+Where: Profiles (top bar).
+
+A profile is a whole saved config. Every launch loads the ACTIVE profile.
+
+What you can do here
+- Save: keeps your edits as a profile. Do this, or the next launch loads the active profile over them.
+- Activate: makes a profile the one every launch loads, and loads it now. On a server, as an operator, onto the server too.
+- Default: the game as it is. It has no rows and Strata's shipped settings, which leave the game its own. Strata writes it again at every start.
+- Export file writes a profile as a .zip in config/strata/exports. Import... takes one from config/strata/imports.
+- Regenerate on next start: the next start updates mobs and existing land.
+- Load active profile to server: sends the active profile, and the custom files it uses, to the server you are on.
+- Reload server config (operators).
+
+Examples
+- "hard-mode" and "easy-mode" profiles to switch between.
+- Send your config to a friend with Export file.
+- Play the plain game for a while: Activate Default.

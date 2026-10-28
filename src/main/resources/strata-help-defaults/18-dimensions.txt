@@ -1,0 +1,16 @@
+# Dimensions
+@screen OverridesScreen:dimensions
+Where: World > Dimensions.
+
+The game's dimension types and the dimensions a mod or a pack adds.
+
+What you can do here
+- Height and lowest Y, light, ceiling, sky, and whether beds and respawn anchors work.
+- Select a field, type a value, Set value. Restore puts it back.
+
+Examples
+- Beds that work in the Nether.
+- A taller Overworld with a lower bottom.
+- Ambient light in the End.
+
+When it applies: in a new world, or land not made yet.

@@ -1,0 +1,24 @@
+# Equipment
+@screen EquipmentScreen
+@screen EquipmentItemScreen
+Where: the mob editor, Equipment.
+
+What the mob wears and holds, slot by slot.
+
+What you can do here
+- Add an item to a slot with a chance on Normal and on Hard. A blank Hard is the Normal chance.
+- Drop %: the chance it drops when a player kills the mob. Enchant %: the chance it is enchanted.
+- Deny empties a slot. A slot with no row keeps the game's equipment.
+- Local difficulty Yes: the chances drop in new or easy areas, as the game's armor does.
+- Restore all removes your rows.
+
+A slot you give a row is yours: a bow at 25% is a 25% bow and a 75% empty hand.
+A tier's mob takes the global rows, and a variant its base mob's, until you save its own.
+Worn armor adds to the mob's own armor. Scaling raises the mob's own stat, not the armor.
+
+Examples
+- Skeletons with a 10% chance of an iron sword.
+- Zombies in full diamond armor on Hard only.
+- A boss variant whose helmet always drops: Drop % 100.
+
+When it applies: to mobs that spawn after the save.

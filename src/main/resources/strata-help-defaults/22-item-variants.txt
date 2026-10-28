@@ -1,0 +1,20 @@
+# Item variants
+@screen ItemVariantScreen
+@screen ItemVariantStatsScreen
+Where: Items > Items, + Add variant under an item.
+
+Your own items, made from a base item.
+
+What you can do here
+- The look: display name, lore, rarity, glint, unbreakable, custom model data.
+- Stats: the base item's numbers, yours in yellow. + Add attribute and + Add enchantment add more.
+- Effects: abilities while worn or held, on deal damage or on take damage.
+- Use it anywhere an item is picked: mob equipment, loot, chest loot and trades. Variants are listed first.
+- /strata item give <player> <variant> [count] gives one.
+
+Examples
+- "Frostbite", an iron sword that slows what it hits.
+- "Miner's Helmet", a helmet that gives night vision.
+- A rare loot sword with Sharpness 6.
+
+When it applies: at once. Stacks already made get the change too.

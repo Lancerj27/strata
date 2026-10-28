@@ -1,0 +1,50 @@
+modLoader = "javafml"
+loaderVersion = "${loader_version_range}"
+license = "${mod_license}"
+
+[[mods]]
+modId = "${mod_id}"
+version = "${mod_version}"
+displayName = "${mod_name}"
+authors = "${mod_authors}"
+description = '''${mod_description}'''
+logoFile = "strata_icon.png"
+
+# Strata's mixins (strata.mixins.json): common and client.
+[[mixins]]
+config = "strata.mixins.json"
+
+[modproperties.${mod_id}]
+    configuredBackground="minecraft:textures/block/deepslate.png"
+
+[[dependencies.${mod_id}]]
+    modId = "neoforge"
+    type = "required"
+    versionRange = "${neo_version_range}"
+    ordering = "NONE"
+    side = "BOTH"
+
+[[dependencies.${mod_id}]]
+    modId = "minecraft"
+    type = "required"
+    versionRange = "[1.21.1,1.21.2)"
+    ordering = "NONE"
+    side = "BOTH"
+
+# Required on the client: Configured shows Strata's options. A dedicated server does not need it.
+[[dependencies.${mod_id}]]
+    modId = "configured"
+    type = "required"
+    versionRange = "[2.0,)"
+    ordering = "AFTER"
+    side = "CLIENT"
+
+# Optional: Strata runs fine without Jade. ONE block only, ordering AFTER.
+# A second jade block with ordering = "BEFORE" produced a mod-sorting CYCLE
+# and a ClassCastException in FML before the game ever loaded.
+[[dependencies.${mod_id}]]
+    modId = "jade"
+    type = "optional"
+    versionRange = "[15,)"
+    ordering = "AFTER"
+    side = "BOTH"

@@ -1,0 +1,15 @@
+# Player spawn
+@screen PlayerSpawnScreen
+Where: Options > Player spawn.
+
+Move the world spawn to a biome or a tier, for testing a start.
+
+What you can do here
+- Pick a biome or a tier: the world spawn moves to the nearest place of it, and you with it.
+- Off stops the moves.
+
+Examples
+- Start every test in a desert.
+- Start in your hardest tier.
+
+When it applies: at once.

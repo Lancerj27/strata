@@ -1,0 +1,17 @@
+# Brewing
+@screen OverridesScreen:brewing
+Where: Items > Data... > Brewing.
+
+Every brewing stand mix of the game and its mods: from which potion, with which ingredient, makes which.
+Bottle mixes turn a potion into a splash potion, and a splash potion into a lingering one.
+
+What you can do here
+- Change a mix's input, ingredient or output.
+- Duplicate element copies a mix. Change the copy for a new mix.
+- Remove element takes a mix out.
+
+Examples
+- A potion of luck from an awkward potion and an emerald.
+- No potions of weakness: remove the mixes that make them.
+
+When it applies: at the next world load.

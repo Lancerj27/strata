@@ -1,0 +1,3 @@
+# Game test fixture: a block variant registered at game start. BlockVariantGameTests checks it.
+name,base_block
+reinforced_oak_door,minecraft:oak_door

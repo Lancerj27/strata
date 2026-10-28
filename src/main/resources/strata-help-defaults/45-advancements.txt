@@ -1,0 +1,15 @@
+# Advancements
+@screen OverridesScreen:advancement
+Where: Options > Advancements.
+
+Every advancement of the game and its mods.
+
+What you can do here
+- Its title, icon, rewards and criteria.
+- Off: it cannot be earned.
+
+Examples
+- 100 XP for Diamonds!
+- Hide the "How Did We Get Here?" advancement.
+
+When it applies: at the next world load or /reload.

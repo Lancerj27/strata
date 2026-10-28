@@ -1,0 +1,22 @@
+# Loot tables
+@screen ChestsScreen:tables
+@screen LootTableScreen
+Where: Items > Loot tables.
+
+Every loot table that is not a chest's, a mob's or a block's: fishing, archaeology, gifts, bartering, and each mod's own.
+
+What you can do here
+- Edit opens the table's entries, pool by pool, each with its count and share of the picks.
+- + Add loot entry, Edit and Remove change the entries.
+- Edit on a pool's row sets how many times it picks.
+- Loot table opens every raw value: conditions, enchantments and the rest.
+- Restore all puts the whole table back.
+
+Mob and block tables are on their own Loot screens. Options > Show duplicate editors lists them here too.
+
+Examples
+- Fishing gives more treasure.
+- Piglins barter netherite scrap at 1%.
+- A sniffer egg in suspicious sand.
+
+When it applies: from the next world load.

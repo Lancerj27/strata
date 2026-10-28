@@ -1,0 +1,4 @@
+# The game tests' starting vegetation rules: the desert loses its cactus and gains the plains' trees.
+scope,scope_id,feature,enabled
+biome,minecraft:desert,minecraft:patch_cactus_desert,false
+biome,minecraft:desert,minecraft:trees_plains,true

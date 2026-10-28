@@ -1,0 +1,28 @@
+# Goals and goal sets
+@screen GoalSetsScreen
+@screen GoalsScreen
+@screen GoalScreen
+Where: World > Mobs > Goal sets, or the Goal set button in the mob editor.
+
+The AI of a mob: what it attacks, how it moves, when it flees.
+A mob runs two lists: target goals (who it attacks) and goals (what it does). A lower priority runs first.
+A goal set is a whole goal list that many mobs can share. The game's families (zombie, skeleton, creeper and dozens more) each have one.
+
+What you can do here
+- Use for this mob: pick the goal set the mob runs.
+- Edit this mob's goals: the mob's list, with the game's real values.
+- Edit a goal: speed, range, who it hunts or flees, how often, which items tempt it.
+- Add, remove or switch off goals.
+- Give a goal a condition: day, night, health, rain, water or target distance.
+- Copy from mob starts a list from any mob's goals.
+- Save as goal set turns a mob's list into a goal set by name.
+
+Examples
+- Zombies that flee from players below 25% health.
+- Cows that attack players who hit them.
+- Skeletons that only hunt at night.
+- Every zombie-family mob faster at once: edit the zombie goal set.
+
+Villagers, piglins and other Brain mobs keep the game's Brain. Your goals run beside it.
+
+When it applies: to mobs that spawn, and to every mob the next time it loads.

@@ -1,0 +1,18 @@
+# Mob tags
+@screen OverridesScreen:mob_tags
+Where: World > Mobs > Data... > Mob tags.
+
+Groups of mobs the game uses for its rules, grouped by theme: Aquatic, Undead, Raiders, Arthropods, Immunities, Riding and boats, Attacks and targets, Spawning, Other.
+
+What you can do here
+- Select a tag to see its members.
+- Duplicate element adds a member: type its id in Value first.
+- Remove element takes one out.
+- On / Off empties the tag.
+
+Examples
+- Make your mob take extra Smite damage: add it to sensitive_to_smite.
+- Stop axolotls hunting a fish: remove it from axolotl_hunt_targets.
+- Make a mob immune to powder snow freezing: add it to freeze_immune_entity_types.
+
+When it applies: from the next world load or /reload.

@@ -1,0 +1,8 @@
+# Moving a config to a server
+1. In Profiles, save your config as a profile.
+2. Join the server as an operator. In Profiles, pick the profile and press Activate. It becomes the server's active profile too.
+3. Restart the server when asked, or ask the host. At the next start the regenerate brings mobs and existing land in line.
+
+Players need no Strata files. The server sends names and textures when they join.
+A server with Own entity variants asks a player's game to restart once, the first time it joins.
+Without the editor: copy config/strata/profiles/<name> to the server, run /strata profile activate <name>, and restart.

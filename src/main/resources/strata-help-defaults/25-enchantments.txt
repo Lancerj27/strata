@@ -1,0 +1,19 @@
+# Enchantments
+@screen OverridesScreen:enchantments
+@screen OverridesScreen:enchantment_provider
+Where: Items > Data... > Enchantments, and Enchantment rolls.
+
+The enchantments and their tags in one list, a group each.
+Enchantment rolls decide what enchantments mob gear, trades and loot can get.
+
+What you can do here
+- An enchantment's max level, weight, cost, the items it goes on, and what it does.
+- Enchantment tags: which enchantments are treasure, which go on tables, which clash.
+- Select a field, type a value, Set value.
+
+Examples
+- Sharpness up to level 10.
+- Mending on the enchanting table: add it to the in_enchanting_table tag.
+- Protection that stacks with Fire Protection: remove the clash.
+
+When it applies: at the next world load or /reload.

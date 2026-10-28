@@ -1,0 +1,16 @@
+# Test mode
+@screen TestModeScreen
+Where: Options > Test mode.
+
+Spawn a mob at a level, to see what scaling does.
+
+What you can do here
+- Pick a mob and type an area level.
+- The preview shows its scaled stats.
+- Spawn test mob spawns it beside you.
+
+Examples
+- A level 50 zombie, to check your curves.
+- Your variant at level 1, to check its look.
+
+/strata test spawn <mob> <level> does the same.

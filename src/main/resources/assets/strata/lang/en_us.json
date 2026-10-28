@@ -1,0 +1,12 @@
+{
+  "config.jade.plugin_strata.mob_level": "Strata Mob Level",
+  "strata.configuration.enableLootOverrides": "Enable Loot Overrides",
+  "strata.configuration.enableMobScaling": "Enable Mob Scaling",
+  "strata.configuration.enableOreRestriction": "Enable Ore Restriction",
+  "strata.configuration.enablePlayerScaling": "Enable Player Scaling",
+  "strata.configuration.enableSpawnSubstitution": "Enable Spawn Substitution",
+  "strata.configuration.enableHudOverlay": "Show Strata HUD Overlay",
+  "strata.configuration.mobXpExponent": "Mob XP Growth Exponent",
+  "strata.configuration.mobXpPerLevel": "Bonus XP Per Mob Level",
+  "strata.jade.mob_level": "Level %s"
+}

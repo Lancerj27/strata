@@ -1,0 +1,17 @@
+# Terrain
+@screen OverridesScreen:terrain
+Where: World > Terrain.
+
+How the land is made: terrain settings, terrain shape, noises, and caves and canyons.
+
+What you can do here
+- Terrain settings: sea level, default block and fluid, surface rules.
+- Terrain shape and noises: the math that makes hills and valleys.
+- Caves and canyons: how often and how big they carve.
+
+Examples
+- Sea level at 80 for a flooded world.
+- Deepslate as the default block.
+- Fewer canyons: lower their chance.
+
+When it applies: in a new world, or land not made yet.

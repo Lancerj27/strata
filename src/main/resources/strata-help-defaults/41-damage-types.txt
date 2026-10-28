@@ -1,0 +1,15 @@
+# Damage types
+@screen OverridesScreen:damage_types
+Where: Options > Damage types.
+
+Every kind of damage, and the damage tags, in one list.
+
+What you can do here
+- A damage type's exhaustion and how it scales with difficulty.
+- Damage tags: what armor blocks, what bypasses shields, what burns.
+
+Examples
+- Fall damage that armor reduces.
+- Arrows that ignore shields.
+
+When it applies: at the next world load or /reload.

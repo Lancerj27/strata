@@ -1,0 +1,27 @@
+# Items
+@screen ItemsScreen
+@screen ItemStatScreen
+Where: Items > Items.
+
+Every item of the game and its mods, by kind: weapons, armor, tools, food, blocks and the rest.
+Your item variants sit under their item.
+
+What you can do here
+- Edit opens the item's values, each with what it does and the game's number: stack size, durability, rarity, fire resistance, food, mining speed, attack and armor.
+- Every other component is a value too (lore, repair cost, potion contents and more), shown as JSON.
+- + Add component gives the item any component the game or a mod has.
+- The crafting grid on the item's page shows the recipes that make it. + Add recipe makes your own. Shaped: the pattern counts. Shapeless: only the items count.
+- On / Off disables the picked items: they leave the creative tabs, recipes that make them switch off, and no loot drops them.
+- + Add variant, under an item, makes your own item from it.
+- Data... opens recipes, brewing, enchantments, armor trims, banner patterns, jukebox songs, paintings, item tags and item data.
+
+Examples
+- Swords with 3000 durability.
+- Ender pearls that stack to 64.
+- Bread that fills more hunger.
+- A recipe for saddles from leather and iron.
+- Disable the elytra.
+
+When it applies
+- Item values: at the next game start. The server and each player need the same profile.
+- Recipes and disabling: at the next world load or /reload.

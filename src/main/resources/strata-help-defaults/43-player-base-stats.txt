@@ -1,0 +1,17 @@
+# Player base stats
+@screen PlayerBaseStatsScreen
+Where: Options > Player base stats, or Scaling > Player scaling.
+
+The player's own values, each with what it does and the game's number.
+
+What you can do here
+- Select a value, type yours, Set value.
+
+Examples
+- 40 health.
+- A longer reach.
+- Faster walking.
+
+Player scaling grows these values with the XP level.
+
+When it applies: to every player, at once.

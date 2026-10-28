@@ -1,0 +1,14 @@
+# Paintings
+@screen OverridesScreen:paintings
+Where: Items > Data... > Paintings.
+
+The paintings and their tags in one list, a group each.
+
+What you can do here
+- A painting's size and texture.
+- Painting tags: which paintings a placed painting can pick.
+
+Examples
+- Only small paintings when placed: remove the large ones from the placeable tag.
+
+When it applies: at the next world load or /reload.

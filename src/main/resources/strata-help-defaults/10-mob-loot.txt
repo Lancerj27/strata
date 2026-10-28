@@ -1,0 +1,21 @@
+# Mob loot
+@screen LootScreen
+@screen LootEntryScreen
+Where: the mob editor, Loot.
+
+What the mob drops, at this scope, on top of its own loot table.
+
+What you can do here
+- + Add loot entry adds an item with its chance and count.
+- Remove on one of the game's drops denies it here.
+- Loot table opens every value of the mob's own loot table: rolls, items, weights, counts, looting bonus and chances.
+- Remove takes entries out. Restore all clears this scope's changes.
+
+Examples
+- Zombies drop an emerald 5% of the time in a hard tier.
+- Creepers stop dropping gunpowder in one biome.
+- A boss variant that always drops a diamond.
+
+When it applies
+- Your loot entries: at once.
+- Loot table values: from the next world load.

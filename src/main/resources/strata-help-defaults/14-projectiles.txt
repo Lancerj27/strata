@@ -1,0 +1,22 @@
+# Projectiles
+@screen ProjectileListScreen
+@screen ProjectileEditScreen
+Where: World > Mobs > Data... > Projectiles.
+
+Your own projectiles, fired as one the game or a mod has: an arrow, a snowball, a fireball, a trident.
+
+What you can do here
+- Speed, gravity (0 flies straight, 1 falls as normal), damage, explosion power and seconds of fire.
+- Looks like item draws it as any item. Arrow texture draws an arrow with any texture.
+- Keep its own impact: Yes still does its own thing where it lands (a fireball's blast).
+- Abilities: what happens where it lands, the same abilities a mob has.
+- Off fires the plain projectile it is based on.
+
+A mob fires one with the Shoots a projectile goal, or Combat in Mob data.
+
+Examples
+- A snowball that deals 4 damage and slows the target.
+- A straight-flying arrow with gravity 0.
+- A fireball that explodes with power 2 and sets fire for 5 seconds.
+
+When it applies: from the next shot.

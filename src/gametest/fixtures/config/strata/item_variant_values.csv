@@ -1,0 +1,8 @@
+# Game test fixture: the variant's own values; the rest are the iron sword's.
+variant,key,value
+gt_frost_blade,display_name,Frost Blade
+gt_frost_blade,lore,Cold | to the touch
+gt_frost_blade,rarity,rare
+gt_frost_blade,attribute|minecraft:generic.attack_damage|mainhand,7
+gt_frost_blade,attribute|minecraft:generic.movement_speed|mainhand,0.05
+gt_frost_blade,enchantment|minecraft:sharpness,3

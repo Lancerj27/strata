@@ -1,0 +1,21 @@
+# Special spawns
+@screen SpecialMobsScreen
+@screen SpecialSpawnsScreen
+Where: World > Mobs, Special spawns. Also in a tier's or biome's editor.
+
+The game's special spawners: phantoms, pillager patrols, village sieges, the wandering trader, village cats and villagers (iron golems, breeding, type and profession).
+
+What you can do here
+- Each value says what it does and shows the game's number. Set value types yours.
+- Pick... picks a mob, or a villager's type or profession. A double-click turns a switch.
+- Special mob spawns Off, at the top, stops every special spawner here.
+- Spawn as in the mob editor makes a mob Normal (from spawn lists) or Special (from its spawner).
+
+A biome's value wins, then its tier's, then Global's. How often each spawner tries is set on Global only.
+
+Examples
+- No phantoms in a peaceful tier: Special mob spawns Off.
+- Patrols of your own variant in place of pillagers.
+- Phantoms as Normal mobs that spawn only where your lists put them.
+
+When it applies: at once. Your first edit turns Options > Special spawners On, which takes effect at the next world load.

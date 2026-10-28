@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  Console-only logging for the runHeadlessSelfTest task (build.gradle).
+  Without it, Minecraft's own log4j2.xml on the classpath writes logs/latest.log,
+  logs/debug.log and rotated archives into the project root on every gate run
+  The pattern matches the lines the gate printed before.
+-->
+<Configuration status="WARN">
+    <Appenders>
+        <Console name="Console" target="SYSTEM_OUT">
+            <PatternLayout pattern="[%d{HH:mm:ss.SSS}] [%t/%level] [%c{1}/]: %msg%n"/>
+        </Console>
+    </Appenders>
+    <Loggers>
+        <Root level="info">
+            <AppenderRef ref="Console"/>
+        </Root>
+    </Loggers>
+</Configuration>

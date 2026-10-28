@@ -1,0 +1,16 @@
+# Sounds
+@screen AssetMasterScreen:Sound
+Where: Options > Sounds.
+
+Every sound the game knows, grouped by mod and folder.
+
+What you can do here
+- Click a sound to play it. Play plays it again.
+- Replace... puts one of your custom sounds in its place.
+- Restore puts the game's sound back.
+
+Examples
+- A softer creeper hiss.
+- Your own music for the title screen.
+
+Replacements are saved in the profile. Load active profile to server (in Profiles) sends them to every player.

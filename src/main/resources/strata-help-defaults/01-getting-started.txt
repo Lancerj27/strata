@@ -1,0 +1,32 @@
+# Getting started
+@screen ClientScreen
+Strata changes how your world plays: which mobs spawn where, how strong they are, what they carry and drop, and the items, blocks and world generation of the game and its mods.
+
+The main menu has three sections: World, Items and Blocks.
+The dropdown at the title moves between a section's screens. Blocks has tabs across the top instead.
+The buttons at the top right are on every screen:
+- Go to: any World, Items or Blocks screen in one click.
+- Profiles: save, load and switch configs.
+- Scaling: mob scaling, player scaling and the formulas.
+- Options: Strata's settings and tools.
+- Exit: closes the editor.
+- ?: the help for the screen you are on.
+
+How the screens work
+- Click a row to select it. Edit, or a double-click, opens it.
+- Ctrl-click picks one more row. Shift-click picks a run of rows.
+- Remove and On / Off act on every picked row.
+- Yellow is a value you changed. Grey is switched off or locked.
+- Restore puts back the value under yours. Restore all clears every change.
+- Ctrl+Z, or Undo, takes back the last change.
+- Click a group heading to open or fold it. A search shows every match.
+- Click a column heading over a list to change, add or remove a column.
+
+Examples
+- Make zombies stronger deep underground: World > Tiers, make a tier, put the deep biomes in it, set its level.
+- Give skeletons iron swords: World > Mobs, edit the skeleton, Equipment.
+- Make diamonds rarer: Blocks > Ores, type a lower chance for diamond ore.
+- Keep your work for the next launch: Profiles, Save.
+
+Your edits save at once, but the next launch loads the active profile over them.
+Press Save in Profiles to keep them.

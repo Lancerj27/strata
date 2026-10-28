@@ -1,0 +1,4 @@
+# Game test fixture: the variant's effect. ItemVariantGameTests checks it.
+# A class row: Slowness on whoever the Frost Blade hits, from the main hand only.
+variant,ability,parameter,amount,interval_ticks,radius,enabled,effect_class,trigger,chance,damage,duration,can_kill,damage_type,particle,hud_icon,cure,entity
+gt_frost_blade,,minecraft:slowness,0,,,true,apply_effect,on_hit,,,100,,,,,,

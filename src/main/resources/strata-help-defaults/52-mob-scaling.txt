@@ -1,0 +1,20 @@
+# Mob scaling
+@screen ScalingScreen:mob
+@screen ScalingEditScreen
+Where: Scaling > Mob scaling.
+
+How mobs grow stronger with the area level.
+scaled = base x (1 + per_level x level^exponent x coefficient)
+
+What you can do here
+- One curve per attribute: health, damage, armor, speed and more. Edit sets its per-level, exponent and start level.
+- The switch at the top turns mob scaling on or off.
+- Chunk scaling: the area level also follows the game's local difficulty.
+- XP: how much more XP a scaled mob drops.
+
+Examples
+- +5% health per level: per_level 0.05.
+- Damage that grows slowly at first: exponent 1.5.
+- Scaling only from level 10: start level 10.
+
+When it applies: at once, after Save.

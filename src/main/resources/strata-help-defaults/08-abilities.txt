@@ -1,0 +1,20 @@
+# Abilities
+@screen AbilitiesScreen
+Where: the mob editor, Abilities. Item variants (Effects) and block variants (Abilities) use the same screen.
+
+Special powers that run on a trigger.
+
+What you can do here
+- Add an ability: apply an effect, damage, life steal, an aura, healing, an immunity, spawn a mob, explode, and more.
+- Each ability has a trigger: on spawn, on death, on deal damage, on take damage, on flee, in sunlight, and the rest of the game's own triggers.
+- Chance %: how often it lands when the trigger fires.
+- Hover a field for what it means. 20 ticks are 1 second.
+- Turn off switches one off without removing it.
+
+Examples
+- A spider that poisons on hit: Apply effect, poison, on deal damage.
+- A zombie that heals 2 health every 5 seconds.
+- A creeper that spawns silverfish on death.
+- A block variant that burns whoever stands on it.
+
+When it applies: at once, to every mob that has it.

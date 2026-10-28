@@ -1,0 +1,21 @@
+# Blocks
+@screen BlockStatsScreen
+@screen BlockStatScreen
+Where: Blocks > Blocks.
+
+Every block of the game and its mods, by kind: ores, stone and metal, wood, plants, liquids and the rest.
+The tabs at the top open Ores, Vegetation and Block replacements.
+
+What you can do here
+- Edit opens a block's values: hardness, blast resistance, the correct-tool rule, friction, speed and jump, light level, flammability, sound, map colour, collision and more.
+- On / Off disables the picked blocks: they cannot be placed, leave the creative tabs, and stop generating.
+- + Add variant, under a block, makes your own block from it.
+- Data... opens block tags, block data (waxing, oxidizing), fluid tags, game event tags and workstation tags.
+
+Examples
+- Obsidian that breaks in 2 seconds.
+- Ice that is not slippery: friction 0.6.
+- Glowstone with light level 10.
+- Disable the TNT block.
+
+When it applies: at once. A new light level shows where light is worked out again.

@@ -1,0 +1,18 @@
+# Features
+@screen OverridesScreen:features
+Where: World > Features.
+
+What biomes place: ores, trees, lakes, geodes, flowers. Grouped by the biome that places them.
+A feature several biomes place is listed under each. A change changes it everywhere.
+
+What you can do here
+- An ore's lowest and highest Y, times per chunk and rarity.
+- Settings (the button beside Edit): vein size and the block it places.
+- Off: it is placed zero times.
+
+Examples
+- Iron veins of 20 blocks.
+- Diamonds from Y -64 to Y 32.
+- No amethyst geodes: Off.
+
+When it applies: in land made after the next world load.

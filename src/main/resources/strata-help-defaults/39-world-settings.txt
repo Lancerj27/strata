@@ -1,0 +1,21 @@
+# World settings
+@screen WorldSettingsScreen
+Where: Options > World settings.
+
+The open world's own settings, changed live. A world must be open.
+
+What you can do here
+- World border: centre, size, damage, safe zone, warning distance and time.
+- Difficulty and Difficulty locked.
+- Time of day (0 sunrise, 6000 noon, 12000 sunset, 18000 midnight) and day length in minutes.
+- Weather and how long it lasts.
+- Spawn angle.
+
+Save sets only what you changed.
+
+Examples
+- A 2000-block world border centred on spawn.
+- 40-minute days.
+- Hard difficulty, locked.
+
+When it applies: at once.

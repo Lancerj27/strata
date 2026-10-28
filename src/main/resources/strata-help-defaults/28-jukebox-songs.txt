@@ -1,0 +1,14 @@
+# Jukebox songs
+@screen OverridesScreen:jukebox_song
+Where: Items > Data... > Jukebox songs.
+
+Every music disc's song.
+
+What you can do here
+- A song's sound, length, name and the redstone signal it gives.
+
+Examples
+- A disc that plays your own sound (add it in Options > Custom textures & sounds first).
+- A comparator signal of 15 for one disc.
+
+When it applies: at the next world load or /reload.

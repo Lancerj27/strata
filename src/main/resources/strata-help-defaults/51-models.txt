@@ -1,0 +1,15 @@
+# Models
+@screen AssetMasterScreen:Model
+Where: Options > Models.
+
+Every block and item model the game loaded. A mob's model is code, not a file, so it is not here.
+
+What you can do here
+- Replace... puts one of your custom models in its place. The textures it names must exist.
+- Restore puts the game's model back.
+
+Examples
+- A taller torch.
+- A sword model from a resource pack you made.
+
+Replacements are saved in the profile. Load active profile to server (in Profiles) sends them to every player.

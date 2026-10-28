@@ -1,0 +1,17 @@
+# Commands
+/strata help  prints this list.
+/strata ui  opens the editor (single player host only).
+/strata reload  reads the config again. Operator.
+/strata regenerate  updates mobs and existing land at the next start. Operator.
+/strata validate  checks the tables and lists any problems. Operator.
+/strata selftest  runs Strata's own tests. Operator.
+/strata assets reload  imports files put in config/strata/custom/import/ on the server. Operator.
+/strata profile list | export <name> | activate <name> | delete <name>  manages profiles. Operator.
+/strata level get [player]  shows the power level and the biome's level range; another player needs operator.
+/strata mob get  shows the nearest mob's level, health and attack.
+/strata mob goals  shows the nearest mob's AI, with * on the goal running now.
+/strata list <registry>  lists one of entity, item, attribute, ore, biome, structure, goal_set.
+/strata ore list  lists every known ore.
+/strata item list  lists every item variant.
+/strata item give <players> <variant> [count]  gives an item variant. Operator.
+/strata test spawn <mob> <level>  spawns a test mob at a level. Operator.

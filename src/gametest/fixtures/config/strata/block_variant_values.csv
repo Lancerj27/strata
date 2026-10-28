@@ -1,0 +1,4 @@
+# Game test fixture: the variant's own values over its base block's.
+variant,key,value
+reinforced_oak_door,hardness,10
+reinforced_oak_door,display_name,Reinforced Oak Door

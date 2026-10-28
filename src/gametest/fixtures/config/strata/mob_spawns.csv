@@ -1,0 +1,3 @@
+# The game tests' starting spawn rows: gt_replace's list is a skeleton.
+scope,scope_id,entity,category,weight,min_count,max_count,enabled,coefficient,is_variant,variant_name,variant_mode,origin
+tier,gt_replace,minecraft:skeleton,monster,100,1,4,true,,false,,,designer

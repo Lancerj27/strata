@@ -1,0 +1,3 @@
+# Game test fixture: an item variant. ItemVariantGameTests checks it.
+name,base_item
+gt_frost_blade,minecraft:iron_sword

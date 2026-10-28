@@ -1,0 +1,41 @@
+# Mobs
+@screen MobListScreen
+@screen MobBatchScreen
+@screen MobCapScreen
+@screen MobBiomesScreen
+@screen ReplacementsScreen
+Where: World > Mobs.
+
+Every mob of the game and its mods, grouped by category: Monster, Creature, Ambient, Water creature and the rest.
+The tabs show the Global list, a tier's list or a biome's list.
+Your variants sit under their base mob.
+
+What you can do here
+- Edit opens the mob editor.
+- + Add mob puts a mob on this tier's or biome's spawn list.
+- Edit picked changes every picked mob at once: spawning, scaling, mob griefing, category, loot, spawn rules, abilities or equipment.
+- Remove takes mobs off this list. On a mob the game spawns here it reads Restore: the game's own spawn comes back.
+- Add default mobs adds the mobs the game spawns here as rows, with the game's numbers.
+- Replace mob swaps one mob for another where it spawns.
+- Mob caps: how many mobs of each kind an area holds, and how far away one may despawn.
+- Special spawns opens the game's special spawners.
+- Goal sets opens the shared AI lists.
+- Data... opens projectiles, cat and wolf variants, mob tags and mob data maps.
+- Click a column heading to show health, damage, speed or another stat.
+
+Replace mob
+- Replace: the mob that would spawn. With: the mob that spawns.
+- Share %: how many change. Blank is 100. At 50, half the zombies are husks.
+- Sources natural: only the biome's own spawns. Sources all: structures, spawners and patrols too.
+- Eggs and commands are never changed.
+
+Examples
+- Add the husk to a desert tier's list with weight 80.
+- Replace 30% of zombies with your "Brute" variant in a dark forest.
+- Lower the monster cap so fewer monsters crowd the night.
+- Set many mobs to the Monster category at once with Edit picked.
+
+When it applies
+- Stats and mob caps: at once.
+- Spawn lists and natural replacements: from the next world load.
+- Replacements for all sources: at once.

@@ -1,0 +1,14 @@
+# Banner patterns
+@screen OverridesScreen:banner_patterns
+Where: Items > Data... > Banner patterns.
+
+The banner patterns and their tags in one list, a group each.
+
+What you can do here
+- A pattern's texture and name.
+- Banner pattern tags: which patterns each pattern item gives.
+
+Examples
+- Add a pattern to the globe banner pattern item.
+
+When it applies: at the next world load or /reload.

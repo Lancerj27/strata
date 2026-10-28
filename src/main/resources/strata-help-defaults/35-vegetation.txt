@@ -1,0 +1,15 @@
+# Vegetation
+@screen VegetationScreen
+Where: Blocks > Vegetation, or the Blocks button of a tier or biome.
+
+The plants, trees and flowers, on or off.
+A biome's rule wins over its tier's, a tier's over Global.
+
+What you can do here
+- On / Off for each plant, tree or flower.
+
+Examples
+- No tall grass in a desert-like tier.
+- No cherry trees in one biome.
+
+When it applies: in land made after the next world load.

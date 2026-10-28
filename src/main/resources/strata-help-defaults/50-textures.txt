@@ -1,0 +1,15 @@
+# Textures
+@screen AssetMasterScreen:Texture
+Where: Options > Textures.
+
+Every texture the game loaded, grouped by mod and folder.
+
+What you can do here
+- Replace... puts one of your custom textures in its place. Keep the original's size.
+- Restore puts the game's texture back.
+
+Examples
+- A new texture for diamond ore.
+- A different zombie skin for every zombie.
+
+Replacements are saved in the profile. Load active profile to server (in Profiles) sends them to every player.

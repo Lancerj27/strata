@@ -1,0 +1,28 @@
+# Biomes
+@screen BiomeListScreen
+@screen BiomeEditScreen
+@screen BiomeDataScreen
+@screen OverridesScreen:biome
+Where: World > Biomes.
+
+Every biome of the game and its mods, grouped by tier.
+A biome takes its tier's settings until you give it its own.
+
+What you can do here
+- Edit opens a biome: its level, coefficient and own lists.
+- From a tier's + Add biomes, Add shown to <tier> puts every biome the search shows into that tier.
+- Mobs, Blocks and Structures open the biome's own lists.
+- Rules holds the biome's spawn switches, over its tier's.
+- Climate & looks edits the biome itself: temperature, rain, colours, music, ambience, and the carvers and features it places.
+- Biome data: the chance a new chunk gets its animals, and each spawn cost's charge and energy budget.
+- Data... opens biome placement (climate ranges), biome modifiers (a mod's additions) and biome tags.
+
+Examples
+- Make Plains a level 5 biome inside a level 1 tier.
+- Stop rain in a biome: Climate & looks, Rain or snow, false.
+- Change the grass colour of a swamp: Climate & looks, its grass colour.
+- Take one ore out of one biome: Climate & looks, select the feature, Remove element.
+
+When it applies
+- Level and coefficient: at once.
+- Climate & looks and Biome data: from the next world load. Land already made keeps its shape.

@@ -1,0 +1,12 @@
+# The game tests' settings. A fresh install now starts on Default's vanilla settings (every
+# system off); the tests exercise the systems, so they start with each one on.
+[systems]
+	enableMobScaling = true
+	enablePlayerScaling = true
+	enableOreRestriction = true
+	enableSpawnSubstitution = true
+	enableLoot = true
+	# These three ship Off (the game's own); the tests exercise Strata's versions.
+	enableSpecialSpawners = true
+	enableTrades = true
+	enableExtraMobAttributes = true

@@ -1,0 +1,28 @@
+# Mob editor
+@screen MobEditScreen
+Where: World > Mobs, Edit on a mob.
+
+One mob, or one of your variants, at the scope you opened it from: Global, a tier or a biome.
+
+What you can do here
+- Spawn weight: its share when the game picks among its category's mobs (not a chance).
+- Min count and Max count: the group size.
+- Spawn chance %: how often it then spawns. Blank is 100.
+- Scaling, Coefficient and Start level: whether and how strongly it scales, and the first level with a bonus.
+- Display name, for a variant.
+- Goal set: which AI it runs.
+- Mob data, Biomes, Spawn rules, Loot, Equipment, Abilities and Trades open their own screens.
+- Category, Mob griefing and Spawn as are in Mob data, at the top of Attributes.
+- Restore all puts the mob back as the game makes it, in every scope. A list of what goes comes first.
+
+Variants
+- A variant is your own mob made from a base mob, with its own name, look and values.
+- It uses its base mob's values for anything it does not set itself.
+- Give the skeleton a sword and its variants carry it too.
+
+Examples
+- A "Frost Zombie" variant: blue tint, slowness on hit, double health.
+- Zombies that spawn in groups of 4 to 6.
+- A rare golden skeleton: a variant with weight 2 and better loot.
+
+When it applies: at once, after Save. Spawn weight and counts reach the spawn lists from the next world load.

@@ -1,0 +1,331 @@
+plugins {
+    id 'java-library'
+    id 'idea'
+    id 'net.neoforged.moddev' version '2.0.78'
+}
+
+version = mod_version
+group = mod_group_id
+
+base {
+    archivesName = mod_id
+}
+
+java.toolchain.languageVersion = JavaLanguageVersion.of(21)
+
+// Source sets are auto-configured by the NeoForge moddev plugin.
+// Main source set: src/main/java (server/common code)
+// Client source set: src/client/java (client-only code, auto-detected)
+// Gametest source set: src/gametest/java (in-game tests)
+// Test source set: src/test/java (headless self-tests)
+sourceSets {
+    // Ensure client source set uses src/client/java
+    client {
+        compileClasspath += sourceSets.main.output
+        runtimeClasspath += sourceSets.main.output
+    }
+    // The in-game tests run on a dedicated game test server, so they see the
+    // COMMON tree and nothing client-side - which is why this gets main.output
+    // and not test's main+client. It used to get neither, and compileGametestJava
+    // had been failing with "package com.strata.data does not exist" for the
+    // whole life of the source set: zero class files had ever been written, so
+    // nothing in src/gametest had actually run. An empty block here is not a
+    // declaration, it is an omission, and the omission was silent because a
+    // source set nobody builds cannot fail.
+    gametest {
+        compileClasspath += sourceSets.main.output
+        runtimeClasspath += sourceSets.main.output
+    }
+    test {
+        compileClasspath += sourceSets.main.output + sourceSets.client.output
+        runtimeClasspath += sourceSets.main.output + sourceSets.client.output
+    }
+}
+
+// EACH RUN STARTS FROM A CLEAN CONFIG: the tests write
+// tables, and the rows one run left changed the next. The fixtures hold what
+// must be there before the game starts (an own-entity variant).
+tasks.matching { it.name == 'runGameTestServer' }.configureEach {
+    doFirst {
+        // The folder, not a fileTree: a fileTree delete keeps empty folders, and an empty
+        // profiles/Default wiped the fixtures at launch.
+        delete 'run/gametest/config/strata'
+        delete 'run/gametest/config/strata-common.toml'
+        copy {
+            from 'src/gametest/fixtures/config'
+            into 'run/gametest/config'
+        }
+    }
+}
+
+neoForge {
+    version = neo_version
+
+    parchment {
+        mappingsVersion = parchment_mappings_version
+        minecraftVersion = parchment_minecraft_version
+    }
+
+    runs {
+        client {
+            client()
+            gameDirectory = project.file('run')
+            // A 1920x1080 window, the common screen.
+            programArgument '--width'
+            programArgument '1920'
+            programArgument '--height'
+            programArgument '1080'
+            sourceSet = sourceSets.client
+        }
+        // The client check:
+        // gradlew runUiSmoke checks what the game gave Strata at start and
+        // compares the gates' font with the live one, then quits. Screens are
+        // checked by the headless fit gate. See com.strata.client.UiSmoke.
+        uiSmoke {
+            client()
+            gameDirectory = project.file('run')
+            systemProperty 'strata.uismoke', 'true'
+            sourceSet = sourceSets.client
+        }
+        // gradlew runUiTour: opens each screen in a flat world, writes every control to
+        // run/strata-uitour.txt and a screenshot to run/screenshots, then quits. See UiTour.
+        uiTour {
+            client()
+            gameDirectory = project.file('run')
+            // A 1920x1080 window, the common screen; -PuiW/-PuiH for a smaller window.
+            programArgument '--width'
+            programArgument(project.findProperty('uiW') ?: '1920')
+            programArgument '--height'
+            programArgument(project.findProperty('uiH') ?: '1080')
+            systemProperty 'strata.uitour', 'true'
+            sourceSet = sourceSets.client
+        }
+        uiTourFull {
+            client()
+            gameDirectory = project.file('run')
+            // A 1920x1080 window, the common screen.
+            programArgument '--width'
+            programArgument '1920'
+            programArgument '--height'
+            programArgument '1080'
+            systemProperty 'strata.uitour', 'true'
+            systemProperty 'strata.uitour.fullscreen', 'true'
+            systemProperty 'strata.uitour.guiscale', project.findProperty('uiScale') ?: '-1'
+            sourceSet = sourceSets.client
+        }
+        server {
+            server()
+            gameDirectory = project.file('run/server')
+            programArgument '--nogui'
+        }
+        // gradlew runVanillaCheck: a fresh install (so Default) on a dedicated server checks that every place
+        // Strata could touch is the game's own, logs "Vanilla check: PASS" or each FAIL, then stops.
+        vanillaCheck {
+            server()
+            gameDirectory = project.file('run/vanillacheck')
+            programArgument '--nogui'
+            systemProperty 'strata.vanillacheck', 'true'
+        }
+        // gradlew runGameTestServer: Strata's in-game tests (src/gametest).
+        gameTestServer {
+            type = "gameTestServer"
+            gameDirectory = project.file('run/gametest')
+            sourceSet = sourceSets.gametest
+            systemProperty 'neoforge.enabledGameTestNamespaces', mod_id
+            // -Pcensus: dump everything the game holds to run/gametest/census (Census).
+            if (project.hasProperty('census')) {
+                systemProperty 'strata.census', 'true'
+            }
+        }
+    }
+
+    mods {
+        "${mod_id}" {
+            sourceSet sourceSets.main
+            sourceSet sourceSets.client
+            sourceSet sourceSets.gametest
+        }
+    }
+
+    // The gate-only self-test suites live in src/test/java, NOT in the mod
+    // source set. They need Minecraft and NeoForge on their classpath exactly
+    // as main does â€” LayoutCheck and DriftCheck read real screen classes â€” but
+    // they must not be compiled into the shipped jar.
+    // Three suites are the exception and ship in main BY DESIGN, because the
+    // /strata selftest command runs them in the released jar: SelfTestHarness,
+    // ResolverSelfTest and TableWriterSelfTest.
+    addModdingDependenciesTo sourceSets.test
+    addModdingDependenciesTo sourceSets.gametest
+    addModdingDependenciesTo sourceSets.client
+}
+
+repositories {
+    mavenCentral()
+
+    // NOTE: put ONLY optional mod dependencies in libs/. The NeoForge jar
+    // in particular must NOT go there - ModDevGradle already provides it,
+    // and a second copy causes duplicate-class failures that are painful
+    // to trace back to a stray file.
+    //
+    // Local jars in libs/ exposed as resolvable module dependencies.
+    // A plain files()/fileTree() dependency is enough to COMPILE against,
+    // but ModDevGradle's additionalRuntimeClasspath needs a real resolved
+    // module for FML to register the jar as a MOD - with a fileTree the
+    // classes are on the classpath but the mod never appears in the mod
+    // list, which is exactly the symptom this replaced.
+    flatDir {
+        dirs 'libs'
+    }
+    // Jade's API to compile against, so the repo needs no third-party jar.
+    exclusiveContent {
+        forRepository { maven { url = 'https://api.modrinth.com/maven' } }
+        filter { includeGroup 'maven.modrinth' }
+    }
+}
+
+dependencies {
+    // Attributes / data components / attachments used here are all vanilla + NeoForge core APIs.
+
+    // ---- Jade (optional compat) ----
+    //
+    // compileOnly from Modrinth's maven (jade_version in gradle.properties):
+    // the compat classes need Jade's API to COMPILE, but Strata never
+    // requires Jade to RUN. com.strata.compat.jade is only classloaded by
+    // Jade's own @WailaPlugin scan. Jade is NOT bundled into the built jar.
+    // The dev runs load Jade from libs/ (see below) when the jar is there.
+    compileOnly "maven.modrinth:jade:${jade_version}"
+
+    // ---- Configured (required on the client, the config UI host) ----
+    //
+    // Strata's integration is the registered ModConfigSpec itself.
+    // Configured discovers a mod's configs and renders strata.toml, and the
+    // editor hotkey is a value in that config. Nothing compiles against
+    // Configured, so there is no compileOnly line. The jar in libs/ is used
+    // only by the dev runClient/runServer, so the mods-screen Config button
+    // can be tested in game. It does not affect the built jar.
+        // Only wired when the property names a real jar, because a dev-only mod
+    // that is missing must not take down the whole run: an empty or stale
+    // configured_jar/jade_jar used to make this line evaluate to "::", which
+    // is the malformed dependency that failed runGameTestServer with
+    // "Could not find ::". A blank now simply means "no such mod in the dev
+    // run", which is what a missing jar is.
+    if (configured_jar && file("libs/${configured_jar}.jar").exists()) {
+        additionalRuntimeClasspath ":${configured_jar}"
+    }
+
+    // Same jar in the dev runClient/runServer so the integration can be
+    // tested in-game. Does not affect the built jar.
+    // Runtime still needs a resolved module for FML to register Jade as a
+    // MOD rather than just put its classes on the classpath, so this one
+    // keeps the exact name from gradle.properties. It is only used by
+    // runClient/runServer - if the name is stale the DEV RUN loses Jade,
+    // but the built jar is unaffected.
+    if (jade_jar && file("libs/${jade_jar}.jar").exists()) {
+        additionalRuntimeClasspath ":${jade_jar}"
+    }
+}
+
+tasks.named('processResources', ProcessResources).configure {
+    var replaceProperties = [
+            minecraft_version: minecraft_version,
+            neo_version_range: neo_version_range,
+            loader_version_range: loader_version_range,
+            mod_id: mod_id,
+            mod_name: mod_name,
+            mod_license: mod_license,
+            mod_version: mod_version,
+            mod_authors: mod_authors,
+            mod_description: mod_description,
+    ]
+    inputs.properties replaceProperties
+    filesMatching(['META-INF/neoforge.mods.toml']) {
+        expand replaceProperties + [project: project]
+    }
+}
+
+// Include client classes in the shipped JAR (UI code)
+tasks.named('jar') {
+    from sourceSets.client.output
+}
+
+tasks.withType(JavaCompile).configureEach {
+    options.encoding = 'UTF-8'
+    options.release = 21
+}
+
+// ---------------------------------------------------------------------
+// Optional: copy the built jar straight into a modpack instance.
+//
+// WHY THIS EXISTS: `gradlew build` writes to build/libs, and the jar has
+// to be copied into the pack's mods folder before it means anything. That
+// step is easy to forget, and when it is forgotten the symptom is that
+// your changes appear to have done nothing - which reads exactly like a
+// bug in the mod. It cost a long debugging session once already.
+//
+// SET IT UP: put a line like this in gradle.properties, pointing at your
+// instance's mods folder (forward slashes, no quotes needed):
+//
+//   modpack_mods_dir=C:/Users/You/curseforge/minecraft/Instances/MyPack/mods
+//
+// Then `gradlew build` also installs. Three outcomes:
+//   - Property NOT set   â†’ task logs "SKIPPED" and does nothing.
+//   - Property set, dir missing â†’ BUILD FAILS with a clear error.
+//   - Property set, dir exists  â†’ copies the jar, logs success.
+// ---------------------------------------------------------------------
+tasks.register('installToModpack') {
+    dependsOn tasks.named('jar')
+    doLast {
+        if (!project.hasProperty('modpack_mods_dir')) {
+            logger.lifecycle("installToModpack: SKIPPED â€” set modpack_mods_dir in gradle.properties to enable.")
+            return
+        }
+        def modsDir = file(project.property('modpack_mods_dir'))
+        if (!modsDir.isDirectory()) {
+            throw new GradleException(
+                "installToModpack: modpack_mods_dir points to '${modsDir}' which does not exist or is not a directory. " +
+                "Create the directory or fix the path in gradle.properties.")
+        }
+        project.copy {
+            from tasks.named('jar')
+            into modsDir
+        }
+        logger.lifecycle("installToModpack: copied ${project.name} jar to ${modsDir}")
+    }
+}
+
+tasks.named('build') {
+    finalizedBy 'installToModpack'
+}
+
+// ---------------------------------------------------------------------
+// Headless self-test: runs the model/data-flow suites under the plain JVM
+// â€” no runClient, no runServer, no FML bootstrap. Verifies that the CSVs
+// the screens write actually reach the loader/resolver/table-writer the
+// runtime consumes. Must stay green.
+//
+//   gradlew runHeadlessSelfTest
+// ---------------------------------------------------------------------
+tasks.register('runHeadlessSelfTest', JavaExec) {
+    group = 'verification'
+    description = 'Runs all self-tests headlessly (no client/server launch).'
+    // TEST runtime classpath, which includes main's output (and therefore the
+    // three shipped suites SelfTestHarness, ResolverSelfTest and
+    // TableWriterSelfTest). The gate-only suites live in src/test/java, so
+    // this task's classpath is the whole cost of that split.
+    classpath = sourceSets.test.runtimeClasspath
+    mainClass = 'com.strata.HeadlessSelfTest'
+    // JDK 21, NOT THE JVM THAT RUNS GRADLE. JavaExec
+    // otherwise launches with the Gradle JVM, which is JAVA_HOME's JDK here.
+    // The suites above are compiled by the 21 toolchain, so that launch dies
+    // with UnsupportedClassVersionError: HeadlessSelfTest has been compiled by
+    // a more recent version of the Java Runtime (class file version 65.0).
+    // The error names the suite and never mentions the JDK, which is what
+    // makes it expensive to read. The launcher is pinned here so the gate
+    // works whatever JAVA_HOME is set to.
+    javaLauncher = javaToolchains.launcherFor {
+        languageVersion = JavaLanguageVersion.of(21)
+    }
+    // Console-only logging. Minecraft's log4j2.xml would otherwise write
+    // logs/ into the project root on every run.
+    systemProperty 'log4j2.configurationFile', file('src/test/resources/log4j2-headless.xml').absolutePath
+}

@@ -1,0 +1,32 @@
+{
+  "required": true,
+  "minVersion": "0.8",
+  "package": "com.strata.mixin",
+  "compatibilityLevel": "JAVA_21",
+  "mixins": [
+    "BlockMixin",
+    "BlockStateMixin",
+    "ItemStackCodecMixin",
+    "BrainMixin",
+    "FireBlockMixin",
+    "EntitySoundMixin",
+    "ChunkGeneratorMixin",
+    "MobAttackBoxMixin",
+    "MobMovementFlagsMixin",
+    "PanicFleeMixin",
+    "AvoidEntityFleeMixin",
+    "FleeSunFleeMixin",
+    "MobSunBurnMixin"
+  ],
+  "client": [
+    "client.ArrowRendererMixin",
+    "client.LivingEntityRendererMixin",
+    "client.IntegratedServerMixin",
+    "client.ClientLevelParticlesMixin",
+    "client.MobEffectTextureManagerMixin",
+    "client.SoundEngineMixin"
+  ],
+  "injectors": {
+    "defaultRequire": 1
+  }
+}

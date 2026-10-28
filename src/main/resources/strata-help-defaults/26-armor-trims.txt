@@ -1,0 +1,15 @@
+# Armor trims
+@screen OverridesScreen:armor_trims
+Where: Items > Data... > Armor trims.
+
+The trim materials and trim patterns in one list, a group each.
+
+What you can do here
+- A material's item, colour and name.
+- A pattern's template item and texture.
+
+Examples
+- A trim material made from your own item.
+- A different colour for the copper trim.
+
+When it applies: at the next world load or /reload.

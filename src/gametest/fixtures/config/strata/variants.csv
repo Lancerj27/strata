@@ -1,0 +1,5 @@
+# The game tests' starting variants. Copied over a cleared
+# run\gametest\config before each run. An own entity must be in this table
+# when the game starts, so it is here: gt_own_zombie.
+name,scope,scope_id,base_entity,display_name,coefficient,texture_path,is_own_entity,scaling
+gt_own_zombie,,,minecraft:zombie,,1.0,,true,

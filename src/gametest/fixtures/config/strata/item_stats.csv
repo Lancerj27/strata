@@ -1,0 +1,9 @@
+# Game test fixture: item stats set at game start. ItemStatsGameTests checks them.
+item,key,value
+minecraft:golden_sword,max_damage,100
+minecraft:golden_sword,attribute|minecraft:generic.attack_damage|mainhand,6
+minecraft:golden_sword,fire_resistant,true
+minecraft:cookie,max_stack_size,16
+minecraft:cookie,food.nutrition,6
+minecraft:diamond_chestplate,attribute|minecraft:generic.armor|chest,10
+minecraft:golden_pickaxe,tool.rule.1.speed,20

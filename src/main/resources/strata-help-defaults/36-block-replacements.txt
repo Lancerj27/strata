@@ -1,0 +1,17 @@
+# Block replacements
+@screen BlockSwapScreen
+Where: Blocks > Block replacements, or the Blocks button of a tier or biome.
+
+Where the world would make the From block, it makes the To block, or nothing (air) when To is Disabled.
+A biome's rule wins over its tier's, a tier's over Global. Rules never chain.
+
+What you can do here
+- + Add, then pick From and To.
+- Remove takes rules out.
+
+Examples
+- Grass Block to Dirt in Plains.
+- Stone to Deepslate in a deep tier.
+- No gravel anywhere: Gravel to Disabled.
+
+When it applies: to chunks made from now on. Land already made keeps its blocks.

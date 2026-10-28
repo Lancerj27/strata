@@ -1,0 +1,19 @@
+# Recipes
+@screen OverridesScreen:recipe
+Where: Items > Data... > Recipes.
+
+Every recipe of the game and its mods: crafting table, furnace, blast furnace, smoker, campfire, stonecutter, smithing table and each mod's own.
+Search finds a recipe by its id, what it makes, or its type ("smelting", "stonecutter").
+
+What you can do here
+- Select a field, type a value, Set value: cook time, XP, result count, ingredients.
+- Off: the recipe is not loaded.
+- Restore puts one field back. Restore all puts the whole recipe back.
+- Your own crafting recipes are made on the item's page in Items.
+
+Examples
+- Smelting iron in 100 ticks.
+- 4 torches become 8.
+- No recipe for TNT: Off.
+
+When it applies: at the next world load or /reload.

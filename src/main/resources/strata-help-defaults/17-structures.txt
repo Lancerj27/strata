@@ -1,0 +1,26 @@
+# Structures
+@screen OverridesScreen:structures
+@screen CustomStructuresScreen
+@screen CustomStructureScreen
+Where: World > Structures.
+
+Every structure of the game and its mods, grouped by type, with their spacing, pieces, weathering, modifiers and tags.
+
+What you can do here
+- Edit a structure's biomes and the mobs that spawn inside it.
+- Spacing: how far apart its set places it (spacing, separation, salt).
+- Off: it is never placed again.
+- Custom structures: your own .nbt builds, placed by the world like a village.
+
+Custom structures
+- Save a build with a structure block, then type the path of the .nbt file.
+- At most 48 blocks on each side, and 1 MB.
+- Biomes: a biome tag or biome ids. Spacing and Separation in chunks. Land around it: none, beard_thin, beard_box, bury or encapsulate. Height: surface, or a Y level.
+
+Examples
+- Villages twice as far apart: raise their spacing.
+- No ocean ruins: Off.
+- Your own tower in every forest, one in about 40 chunks.
+- Witches and more spawn inside swamp huts: edit its spawns.
+
+When it applies: in land made after the next world load. Land already made keeps what it has.

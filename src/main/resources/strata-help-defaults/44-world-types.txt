@@ -1,0 +1,16 @@
+# World types
+@screen OverridesScreen:world_types
+Where: Options > World types.
+
+The world types and superflat layouts a new world can be made as, and their tags.
+
+What you can do here
+- A world type's dimensions and generators.
+- A superflat layout's layers, biome and structures.
+- The tags decide which types and layouts the create-world screen shows.
+
+Examples
+- A superflat layout of 60 stone and a grass layer.
+- Hide the Amplified world type.
+
+When it applies: to worlds made after the change.

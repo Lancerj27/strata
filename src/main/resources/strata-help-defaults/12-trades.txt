@@ -1,0 +1,21 @@
+# Trades
+@screen TradesScreen
+@screen TradeEntryScreen
+Where: the mob editor of a villager or the wandering trader, Trades.
+
+One list per profession level (Novice to Master), and the wandering trader's common and rare lists.
+At each level the game picks 2 trades from that level's list.
+
+What you can do here
+- + Add trade adds a trade to the selected list.
+- Edit a trade: cost A and its count, cost B (0 for none), the result and its count, max uses, the XP the trader earns, and the price multiplier.
+- Remove takes trades out. Restore takes back this scope's change.
+- A game trade with a random part (an enchanted book, a map) can be removed. Editing it makes it a fixed trade.
+
+Examples
+- A librarian that sells Mending for 30 emeralds.
+- A farmer that buys pumpkins only at Master.
+- A wandering trader that sells your item variant.
+
+When it applies: to the next trader that reaches a level. Trades a trader already has stay.
+Your first edit turns Options > Trade changes On, which takes effect at the next launch.

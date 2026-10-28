@@ -1,0 +1,22 @@
+# Chest loot
+@screen ChestsScreen:chests
+@screen ChestLootScreen
+@screen ChestPoolScreen
+@screen ChestEntryScreen
+Where: Items > Chest loot.
+
+The loot in the chests of villages, dungeons, shipwrecks, bastions and every other structure, grouped by structure.
+
+What you can do here
+- Edit opens a chest's entries, pool by pool.
+- + Add loot entry puts an item into the selected pool, with its weight and count.
+- Edit on a pool's row sets how many times it picks.
+- Remove: your entry goes; a game entry gets weight 0. Restore brings it back.
+- Restore all puts the whole table back.
+
+Examples
+- Diamonds in village blacksmith chests.
+- No enchanted golden apples in ruined portals.
+- Your item variant in end city chests.
+
+When it applies: from the next world load. Chests not yet opened get the new loot too.

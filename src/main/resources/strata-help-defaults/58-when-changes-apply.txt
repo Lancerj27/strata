@@ -1,0 +1,10 @@
+# When changes apply
+At once: mob stats, abilities, scaling, curves, loot entries, block values, mob caps, special spawns, game rules, world settings.
+To mobs that spawn next: equipment. Goal sets also reach every mob the next time it loads.
+At the next world load or /reload: recipes, tags, data maps, loot tables, chest loot, advancements, enchantments.
+In land made after the next world load: spawn lists, ores, vegetation, block replacements, structures, features.
+In a new world only: dimensions, terrain, world types.
+At the next game start: item values, block variants, Own entity variants.
+
+Regenerate (Profiles, or /strata regenerate) also updates what exists at the next start: mobs as they load, and each old chunk once.
+Ores turned off become stone. Builds stay.

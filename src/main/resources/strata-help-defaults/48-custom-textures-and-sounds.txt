@@ -1,0 +1,26 @@
+# Custom textures and sounds
+@screen CustomAssetsScreen
+@screen CustomAssetScreen
+Where: Options > Custom textures & sounds, or "+ Add custom..." in a texture or sound picker.
+
+Your own textures, sounds and models.
+
+What you can do here
+- + Add custom...: pick the kind (Texture, Sound or Model), Browse... for the file, and type a name (lowercase letters, digits and _).
+- A texture also takes a category (entity, item, block, misc). A sound can take a subtitle.
+- Re-import swaps the file and keeps the name, so every mob that uses it keeps working.
+- Remove deletes it.
+
+Files
+- Texture: PNG, each side 16 to 512 pixels and a multiple of 16, at most 256 KB.
+- Sound: Ogg Vorbis, mono or stereo, at most 20 seconds and 1 MB. Use mono for a sound that comes from a place.
+- Model: a block or item model, JSON, at most 64 KB.
+- A mob's texture must fit the mob's model: keep its size and layout.
+
+The library belongs to this machine (config/strata/assets_pack). A server sends its own files to players when they join.
+
+Examples
+- A red skin for your "Blood Zombie" variant.
+- A new roar for a boss variant.
+
+When it applies: at once.

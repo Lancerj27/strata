@@ -1,0 +1,18 @@
+# Block variants
+@screen BlockVariantScreen
+Where: Blocks > Blocks, + Add variant under a block.
+
+Your own block, a copy of the base block (a door stays a door), added at the next game start.
+
+What you can do here
+- Stats: the base block's numbers, yours in yellow.
+- Abilities: effects on whoever stands on or in it.
+- Give me one, or /give @s strata:name.
+
+A block with a block entity (a chest, a furnace, a sign) cannot be a base block yet.
+
+Examples
+- "Hard Stone": stone with hardness 10.
+- A healing stone that heals whoever stands on it.
+
+When it applies: the block at the next game start. Stats and abilities at once.

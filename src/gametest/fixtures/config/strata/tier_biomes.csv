@@ -1,0 +1,5 @@
+# The game tests' starting tier biomes: the desert is gt_replace's,
+# the badlands gt_empty's.
+tier,biome
+gt_replace,minecraft:desert
+gt_empty,minecraft:badlands

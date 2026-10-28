@@ -1,0 +1,15 @@
+# Game rules
+@screen GameRulesScreen
+Where: Options > Game rules.
+
+Every game rule of the game and its mods, grouped by the game's categories, its default beside a changed one.
+
+What you can do here
+- Select a rule, type its value, Set value.
+
+Examples
+- keepInventory true.
+- randomTickSpeed 6 for faster crops.
+- doInsomnia false: no phantoms.
+
+When it applies: each time a world starts, and when Strata reloads with a world open. The profile carries it to every world and server.

@@ -1,0 +1,16 @@
+# Ores
+@screen OreListScreen
+Where: Blocks > Ores, or the Blocks button of a tier or biome.
+
+Every ore, on or off, with its chance.
+The Global list is under every tier and biome. A biome's rule wins over its tier's, a tier's over Global.
+
+What you can do here
+- On / Off: the ore generates there or not.
+- Type a chance to make it more or less common.
+
+Examples
+- No diamonds above the deep tier.
+- Twice the coal in a mountain tier.
+
+When it applies: in land made after the next world load.

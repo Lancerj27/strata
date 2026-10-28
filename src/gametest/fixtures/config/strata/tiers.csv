@@ -1,0 +1,7 @@
+# The game tests' starting tiers. gt_replace replaces the
+# desert's spawns with a skeleton only, so the tests can read what the
+# strata:spawns modifier made of it. gt_empty replaces the
+# badlands' spawns with nothing.
+name,level,spawn_mode,coefficient,block_other_spawns
+gt_replace,0,replace,1.0,
+gt_empty,0,replace,1.0,

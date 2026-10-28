@@ -1,0 +1,30 @@
+# Build output
+build/
+.gradle/
+out/
+
+# Dev-run game directories (runClient / runServer write worlds, configs and
+# crash reports here — none of it is source)
+run/
+runs/
+
+# Runtime logs. 0.1 accumulated 307 of these in-tree plus a root debug.log
+# and latest.log, and two of them were shipped findings in its own audit.
+logs/
+*.log
+*.log.gz
+
+# IDE
+.idea/
+*.iml
+.vscode/
+.settings/
+.classpath
+.project
+
+# OS
+Thumbs.db
+.DS_Store
+
+# Third-party mod jars for the dev runs: not ours to publish
+libs/*.jar

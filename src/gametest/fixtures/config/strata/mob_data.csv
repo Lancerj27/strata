@@ -1,0 +1,4 @@
+# Game test fixture: a type's spawn placement and heightmap, set as the game starts. CoverageGameTests checks them.
+entity,variant_name,scope,scope_id,group,key,value
+minecraft:strider,,,,type,spawn_placement,on_ground
+minecraft:strider,,,,type,spawn_heightmap,WORLD_SURFACE

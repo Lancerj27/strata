@@ -1,0 +1,35 @@
+# Tiers
+@screen TierListScreen
+@screen TierEditScreen
+@screen RulesScreen
+Where: World > Tiers.
+
+A tier is a group of biomes that share one level, one mob list and one set of rules.
+Use tiers to make regions of the world easier or harder.
+
+What you can do here
+- + Add tier makes a new tier. Duplicate copies the selected tier.
+- Edit opens a tier: its name, level, biomes and settings.
+- + Add biomes opens the biomes with no tier. Click one to add it, or Add shown to add every biome the search shows.
+- Spawn mode: Add puts the tier's mobs on top of the game's spawns. Replace uses only the tier's list.
+- Scale mobs, Substitute spawns and Restrict ores switch those parts on or off for the tier.
+- Coefficient multiplies the scaling bonus of every mob in the tier.
+- Mobs, Blocks and Structures open the tier's own lists.
+- Rules holds the tier's spawn switches. Select one, then On, Off or Default.
+
+The rules:
+- Replace blocks other spawns.
+- Monsters take creature, ambient and water slots.
+- Monsters spawn outside of pure darkness.
+- Special mob spawns.
+A biome's own value wins over its tier's. With neither, the rule is on.
+
+Examples
+- A "Deep" tier at level 30 for the deep dark and the dripstone caves: mobs there spawn stronger.
+- A Replace tier for the Nether wastes that spawns only your mob list.
+- Coefficient 2.0 on an end-game tier doubles the scaling bonus there.
+
+When it applies
+- Level, coefficient and scaling: at once.
+- Spawn lists and ore rules: in land made after the next world restart.
+- The slot rules: from the next world load. The other rules: at once.

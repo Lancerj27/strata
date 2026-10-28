@@ -1,0 +1,29 @@
+# Spawn rules
+@screen SpawnRulesScreen
+Where: the mob editor, Spawn rules.
+
+Conditions a mob must meet to spawn here.
+
+What you can do here
+- + Add rule picks a condition and its value:
+  - Time of day: day, night, dusk, dawn, or a tick range.
+  - Light: 0 (dark) to 15, a number or a range like 0-7.
+  - Height: a number or a range like -64-0.
+  - Weather: clear, rain, thunder or not clear.
+  - Moon phase: 0 (full moon) to 7.
+  - Structure: only inside a structure.
+  - Surface or underground.
+  - Distance from the world spawn, like 100-500 or 500+.
+  - Days since a player last slept, the world's day, or the nearest player's level.
+- Remove takes a rule out.
+
+The game's own checks always hold too: a monster needs darkness, an animal grass and light, a fish water. A rule only narrows them.
+
+Examples
+- Zombies only below Y 0.
+- Phantoms only on a new moon.
+- Strong mobs only 1000 blocks or more from spawn.
+- Slimes only in rain.
+- Pillager patrols from day 1: change the pillager's World day rule from 5+ to 1+.
+
+When it applies: at once.
