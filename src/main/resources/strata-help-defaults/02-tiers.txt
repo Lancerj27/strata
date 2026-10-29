@@ -5,29 +5,46 @@
 Where: World > Tiers.
 
 A tier is a group of biomes that share one level, one mob list and one set of rules.
-Use tiers to make regions of the world easier or harder.
+Use tiers to make regions of the world easier or harder: a desert tier at level 5, a deep tier at level 30, an end tier at level 60.
+Every biome belongs to at most one tier. A biome with no tier takes the Global values.
 
-What you can do here
-- + Add tier makes a new tier. Duplicate copies the selected tier.
-- Edit opens a tier: its name, level, biomes and settings.
-- + Add biomes opens the biomes with no tier. Click one to add it, or Add shown to add every biome the search shows.
-- Spawn mode: Add puts the tier's mobs on top of the game's spawns. Replace uses only the tier's list.
-- Scale mobs, Substitute spawns and Restrict ores switch those parts on or off for the tier.
-- Coefficient multiplies the scaling bonus of every mob in the tier.
-- Mobs, Blocks and Structures open the tier's own lists.
+The tier list
+- + Add tier makes a new tier. Type its name.
+- Duplicate copies the selected tier with its biomes, mobs and rules.
+- Edit, or a double-click, opens a tier.
+- Remove deletes the picked tiers. Their biomes go back to no tier.
+
+The tier editor
+- Name: shown in the editor and in the Debug HUD.
+- Level: the area level of every biome in the tier. Mob scaling grows mob stats from it. See Mob scaling.
+- Coefficient: multiplies the scaling bonus of every mob in the tier. 1 is normal. 2 doubles the bonus. 0 removes it.
+- Spawn mode: Add puts the tier's mobs on top of the game's spawns. Replace uses only the tier's list, and the game's own spawns stop here.
+- Scale mobs: whether mobs in this tier scale at all.
+- Substitute spawns: whether the tier's mob list changes spawns here.
+- Restrict ores: whether the tier's ore rules apply here.
+- + Add biomes opens the biomes with no tier. Click one to add it. Add shown adds every biome the search shows.
+- Mobs, Blocks and Structures open the tier's own lists. See Mobs, Ores, Vegetation, Block replacements and Structures.
 - Rules holds the tier's spawn switches. Select one, then On, Off or Default.
 
-The rules:
-- Replace blocks other spawns.
-- Monsters take creature, ambient and water slots.
-- Monsters spawn outside of pure darkness.
-- Special mob spawns.
+The rules
+- Replace blocks other spawns: in a Replace tier, no mob from outside the list spawns.
+- Monsters take creature, ambient and water slots: monsters may use the slots the game keeps for animals, bats and fish.
+- Monsters spawn outside of pure darkness: a monster spawns in dim light too.
+- Special mob spawns: the game's special spawners (phantoms, patrols, the wandering trader) run here.
 A biome's own value wins over its tier's. With neither, the rule is on.
 
+Step by step: a hard region
+1. + Add tier. Name it "Deep". Level 30.
+2. + Add biomes. Search "deep", then "dripstone". Add shown each time.
+3. Mobs. + Add mob, pick the wither skeleton, weight 20.
+4. Rules. Turn Monsters spawn outside of pure darkness On.
+5. Save in Profiles.
+
 Examples
-- A "Deep" tier at level 30 for the deep dark and the dripstone caves: mobs there spawn stronger.
 - A Replace tier for the Nether wastes that spawns only your mob list.
 - Coefficient 2.0 on an end-game tier doubles the scaling bonus there.
+- A peaceful tier: Scale mobs Off, and Special mob spawns Off in Rules.
+- Levels that rise with distance: tiers for the near biomes, the far ones and the deep ones. Use the Debug HUD to see which tier you stand in.
 
 When it applies
 - Level, coefficient and scaling: at once.

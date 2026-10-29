@@ -3,15 +3,29 @@
 Where: Blocks > Block replacements, or the Blocks button of a tier or biome.
 
 Where the world would make the From block, it makes the To block, or nothing (air) when To is Disabled.
-A biome's rule wins over its tier's, a tier's over Global. Rules never chain.
+A biome's rule wins over its tier's, a tier's over Global. Rules never chain: Stone to Deepslate and Deepslate to Tuff leaves the stone as deepslate.
 
-What you can do here
-- + Add, then pick From and To.
-- Remove takes rules out.
+The list
+- One row per rule: From, To, and the scope the rule comes from.
+- + Add, then pick From and To. Your block variants are listed first in To.
+- Edit changes a rule. Remove takes rules out.
+- Disabled as To removes the block from new land.
+
+What it covers
+- The land itself: stone, dirt, sand, the surface.
+- Ores and features the world places.
+- Structures, as they are placed.
+- Not builds, and not blocks a player places.
+
+Step by step: a deepslate underworld
+1. World > Tiers. Edit the "Deep" tier. Blocks. Block replacements tab.
+2. + Add. From Stone. To Deepslate.
+3. Save in Profiles. New deep chunks are deepslate.
 
 Examples
 - Grass Block to Dirt in Plains.
-- Stone to Deepslate in a deep tier.
 - No gravel anywhere: Gravel to Disabled.
+- Your block variant as the ground: Stone to strata:hard_stone.
+- Sand to red sand in a tier.
 
-When it applies: to chunks made from now on. Land already made keeps its blocks.
+When it applies: to chunks made from now on. Land already made keeps its blocks. A regenerate (Profiles) applies it to old chunks too.

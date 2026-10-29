@@ -2,28 +2,40 @@
 @screen SpawnRulesScreen
 Where: the mob editor, Spawn rules.
 
-Conditions a mob must meet to spawn here.
+Conditions a mob must meet to spawn here. Every rule on the list must hold. The game's own checks always hold too.
 
-What you can do here
-- + Add rule picks a condition and its value:
-  - Time of day: day, night, dusk, dawn, or a tick range.
-  - Light: 0 (dark) to 15, a number or a range like 0-7.
-  - Height: a number or a range like -64-0.
-  - Weather: clear, rain, thunder or not clear.
-  - Moon phase: 0 (full moon) to 7.
-  - Structure: only inside a structure.
-  - Surface or underground.
-  - Distance from the world spawn, like 100-500 or 500+.
-  - Days since a player last slept, the world's day, or the nearest player's level.
-- Remove takes a rule out.
+The list
+- + Add rule picks a condition and its value.
+- Edit changes a rule's value. Remove takes a rule out.
+- The rules are for the scope you opened: Global, a tier or a biome.
 
-The game's own checks always hold too: a monster needs darkness, an animal grass and light, a fish water. A rule only narrows them.
+The conditions
+- Time of day: day, night, dusk, dawn, or a tick range like 13000-23000.
+- Light: 0 (dark) to 15, a number or a range like 0-7.
+- Height: a Y level, or a range like -64-0.
+- Weather: clear, rain, thunder or not clear.
+- Moon phase: 0 (full moon) to 7 (waning crescent). 4 is the new moon.
+- Structure: only inside a structure. Pick the structure.
+- Surface or underground: open sky above, or none.
+- Distance from the world spawn, in blocks: a range like 100-500, or a minimum like 500+.
+- Days since a player last slept: a number or a minimum like 3+. The game's phantom check.
+- World day: the world's day count, like 5+. The game's patrol check.
+- Player level: the nearest player's XP level, a number, a range or a minimum.
+
+How the checks combine
+The game's own checks always hold: a monster needs darkness, an animal grass and light, a fish water. A rule only narrows them.
+Monsters spawn outside of pure darkness in Rules (a tier or a biome) relaxes the darkness check. Add a Light rule to set your own limit.
+
+Step by step: deep zombies only
+1. Edit the zombie at Global. Spawn rules.
+2. + Add rule. Height. Type -64-0.
+3. Save. Zombies spawn only below sea level.
 
 Examples
-- Zombies only below Y 0.
-- Phantoms only on a new moon.
-- Strong mobs only 1000 blocks or more from spawn.
-- Slimes only in rain.
+- Phantoms only on a new moon: Moon phase 4.
+- Strong mobs only 1000 blocks or more from spawn: Distance 1000+.
+- Slimes only in rain: Weather rain.
 - Pillager patrols from day 1: change the pillager's World day rule from 5+ to 1+.
+- A boss that appears for players above level 30: Player level 30+.
 
 When it applies: at once.

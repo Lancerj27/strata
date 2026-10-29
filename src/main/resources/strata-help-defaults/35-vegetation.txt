@@ -2,14 +2,25 @@
 @screen VegetationScreen
 Where: Blocks > Vegetation, or the Blocks button of a tier or biome.
 
-The plants, trees and flowers, on or off.
+The plants, trees, flowers, mushrooms and other growth the world places, on or off.
 A biome's rule wins over its tier's, a tier's over Global.
 
-What you can do here
-- On / Off for each plant, tree or flower.
+The list
+- One row per vegetation feature, grouped by kind: trees, flowers, grass, mushrooms, crops, water plants and a mod's.
+- On / Off for each.
+- Default: the row takes the scope beneath.
+- Search finds one by name.
+
+Step by step: a dead land
+1. World > Tiers. Edit the "Wasteland" tier. Blocks. Vegetation tab.
+2. Select every tree and flower row (Shift-click a run). Off.
+3. Save in Profiles.
 
 Examples
 - No tall grass in a desert-like tier.
 - No cherry trees in one biome.
+- Mushrooms everywhere: brown and red mushrooms On at Global.
+
+For how many and how big, see Features. For one biome's own list, see Biomes, Climate & looks.
 
 When it applies: in land made after the next world load.

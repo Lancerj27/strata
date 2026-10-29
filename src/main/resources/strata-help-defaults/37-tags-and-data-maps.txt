@@ -2,20 +2,40 @@
 @screen OverridesScreen
 Where: the Data... menu of Items, Blocks, Mobs and Biomes.
 
-Tags are lists the game uses for its rules: what a tool mines, what burns, what a mob eats or is tamed with.
-Data maps hold values per item or block: fuel time, compost chance, waxed and oxidized forms.
+Tags are lists the game uses for its rules: what a tool mines, what burns, what a mob eats or is tamed with, what a biome is.
+Data maps hold values per item or block: fuel time, compost chance, waxed and oxidized forms, a parrot's imitation.
 A tag holds the game's members and every mod's together.
 
-What you can do here
+The screen
+- Grouped by theme. Search finds a tag by name or by a member.
 - Select an entry to see its fields. Data map values read as "Copper Block: Next Oxidation Stage", sorted by name.
 - Select a field, type a value, Set value. Restore puts it back.
-- Duplicate element adds a member: type its id in Value first.
+- Duplicate element adds a member: type its id in Value first, then Set value.
 - Remove element takes one out.
-- On / Off empties a tag.
+- On / Off empties a tag. Restore brings its members back.
+- Restore all puts the whole group back.
+
+Tags worth knowing
+- Items: needs_stone_tool, needs_iron_tool, needs_diamond_tool. swords, pickaxes, axes. logs, planks. wool. fishes. meat. enchantable/*: what each enchantment goes on.
+- Blocks: mineable/pickaxe, mineable/axe, mineable/shovel, mineable/hoe. logs_that_burn. climbable. infiniburn_overworld. wither_immune, dragon_immune.
+- Mobs: see Mob tags.
+- Biomes: is_forest, is_ocean, has_structure/*: where each structure may be placed.
+
+Data maps worth knowing
+- Furnace fuels: ticks an item burns.
+- Compostables: the chance an item fills a composter.
+- Oxidizables and Waxables: the next copper stage, and the waxed form.
+- Parrot imitations: the sound a parrot makes for a mob.
+
+Step by step: stone pickaxes mine diamond
+1. Blocks > Data... > Block tags. Search "needs_iron_tool".
+2. Select the tag. Select minecraft:diamond_ore. Remove element. Repeat for deepslate diamond ore.
+3. Search "needs_stone_tool". Duplicate element. Type minecraft:diamond_ore. Set value.
+4. /reload.
 
 Examples
-- Stone pickaxes mine diamond ore: add it to needs_stone_tool.
-- Sticks burn for 10 seconds: item data, furnace fuels.
+- Sticks burn for 10 seconds: item data, furnace fuels, stick, 200.
 - Copper oxidizes to your own block: block data, oxidizables.
+- Your variant as a log: add it to logs and logs_that_burn.
 
 When it applies: at the next world load or /reload.

@@ -83,6 +83,8 @@ public final class OptionsOps {
     public static final String MOB_XP_PER_LEVEL = "mobXpPerLevel";
     public static final String MOB_XP_EXPONENT = "mobXpExponent";
     public static final String CHUNK_SCALE = "chunkScale";
+    public static final String PLAYER_LEVEL_SCALE = "playerLevelScale";
+    public static final String WORLD_STAGE_SCALE = "worldStageScale";
     public static final String CHUNK_SCALING = "enableChunkScaling";
 
     /** ONE SCREEN PER SETTING. */
@@ -149,7 +151,7 @@ public final class OptionsOps {
     }
 
     public static final List<String> SCALING_KEYS = List.of(MOB_SCALING, PLAYER_SCALING, MOB_XP_PER_LEVEL,
-            MOB_XP_EXPONENT, CHUNK_SCALE, CHUNK_SCALING);
+            MOB_XP_EXPONENT, CHUNK_SCALE, CHUNK_SCALING, PLAYER_LEVEL_SCALE, WORLD_STAGE_SCALE);
     /** Where players spawn: its own screen, Options > Player spawn. */
     public static final String DEBUG_PLAYER_SPAWN = "debugPlayerSpawn";
     /** How far the player spawn search goes. */
@@ -175,6 +177,12 @@ public final class OptionsOps {
         out.add(number(CHUNK_SCALE, "Chunk scale",
                 "How much local difficulty compounds area level: area level = level * (1 + chunkScale * localDifficulty). 0 = off.",
                 "At once.", StrataConfig.CHUNK_SCALE, 0.0, 2.0));
+        out.add(number(PLAYER_LEVEL_SCALE, "Player level scale",
+                "Levels a mob gains at spawn for each XP level of the nearest player: 0.5 is half a level per XP level. 0 = off.",
+                "At once, for new mobs.", StrataConfig.PLAYER_LEVEL_SCALE, 0.0, 10.0));
+        out.add(number(WORLD_STAGE_SCALE, "World stage scale",
+                "Levels a mob gains at spawn for each World level stage reached, on top of the stage's own offset. 0 = off.",
+                "At once, for new mobs.", StrataConfig.WORLD_STAGE_SCALE, 0.0, 100.0));
         return out;
     }
 
@@ -384,6 +392,8 @@ public final class OptionsOps {
                 case MOB_XP_PER_LEVEL -> save(StrataConfig.MOB_XP_PER_LEVEL, Double.parseDouble(t));
                 case MOB_XP_EXPONENT -> save(StrataConfig.MOB_XP_EXPONENT, Double.parseDouble(t));
                 case CHUNK_SCALE -> save(StrataConfig.CHUNK_SCALE, Double.parseDouble(t));
+                case PLAYER_LEVEL_SCALE -> save(StrataConfig.PLAYER_LEVEL_SCALE, Double.parseDouble(t));
+                case WORLD_STAGE_SCALE -> save(StrataConfig.WORLD_STAGE_SCALE, Double.parseDouble(t));
                 case "editorKey" -> save(StrataConfig.EDITOR_KEY,
                         StrataConfig.EditorKey.valueOf(t.toUpperCase(Locale.ROOT)));
                 default -> throw new IllegalArgumentException(key);

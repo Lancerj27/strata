@@ -2,17 +2,33 @@
 @screen OverridesScreen:features
 Where: World > Features.
 
-What biomes place: ores, trees, lakes, geodes, flowers. Grouped by the biome that places them.
-A feature several biomes place is listed under each. A change changes it everywhere.
+What biomes place: ores, trees, lakes, geodes, flowers, springs, and a mod's additions. Grouped by the biome that places them.
+A feature several biomes place is listed under each. A change changes it everywhere. To change one biome alone, use that biome's Climate & looks.
+
+Two kinds of entry
+- A placed feature says where and how often: its lowest and highest Y, how many times per chunk, its rarity, and whether it needs air or water.
+- Its configured feature says what: the vein size and the block it places, the tree's trunk and leaves, the lake's fluid. Settings (the button beside Edit) opens it.
 
 What you can do here
-- An ore's lowest and highest Y, times per chunk and rarity.
-- Settings (the button beside Edit): vein size and the block it places.
+- Select a feature, then a field. Type a value, Set value. Restore puts it back.
+- Count: times per chunk. A range like 4-8 picks between.
+- Height: the lowest and highest Y, flat (uniform) or peaked (trapezoid) between them.
+- Rarity: 1 in so many chunks.
 - Off: it is placed zero times.
+- Restore all puts a feature back.
+
+Step by step: diamonds higher up
+1. Search "diamond". Select ore_diamond.
+2. Height. Set the top to 32.
+3. Count. Raise it for more veins.
+4. Save in Profiles. New chunks carry the change.
 
 Examples
-- Iron veins of 20 blocks.
-- Diamonds from Y -64 to Y 32.
+- Iron veins of 20 blocks: Settings on ore_iron, size 20.
 - No amethyst geodes: Off.
+- Twice the trees in forests: raise the forest tree feature's count.
+- Emerald ore everywhere: add ore_emerald to a biome in its Climate & looks.
+
+For a plain on-or-off per ore, with a chance, see Ores. For a biome's own list, see Biomes.
 
 When it applies: in land made after the next world load.

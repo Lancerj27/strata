@@ -2,14 +2,27 @@
 @screen AssetMasterScreen:Texture
 Where: Options > Textures.
 
-Every texture the game loaded, grouped by mod and folder.
+Every texture the game loaded, grouped by mod and folder: blocks, items, entities, GUI, particles and the rest.
+Replace a game texture with one of yours, everywhere the game draws it.
 
 What you can do here
-- Replace... puts one of your custom textures in its place. Keep the original's size.
+- Search finds a texture by its path.
+- Select one to see it and its size.
+- Replace... puts one of your custom textures in its place. Keep the original's size. + Add custom... in the picker imports a new one.
 - Restore puts the game's texture back.
+- A replaced texture shows in yellow.
+
+Replacing against one mob
+To change the skin of one variant alone, use Mob data > Visuals in its editor. Here changes every mob of the type.
+
+Step by step: a new diamond ore
+1. Search "diamond_ore". Select block/diamond_ore.
+2. Replace... + Add custom... Texture, category block. Browse... to a 16 by 16 PNG. Name "my_diamond_ore".
+3. The block draws your texture, at once.
 
 Examples
-- A new texture for diamond ore.
-- A different zombie skin for every zombie.
+- A different zombie skin for every zombie: entity/zombie/zombie.
+- A new sword look: item/diamond_sword.
+- A custom hotbar: gui/sprites/hud/hotbar.
 
 Replacements are saved in the profile. Load active profile to server (in Profiles) sends them to every player.

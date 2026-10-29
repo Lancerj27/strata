@@ -3,22 +3,42 @@
 @screen EquipmentItemScreen
 Where: the mob editor, Equipment.
 
-What the mob wears and holds, slot by slot.
+What the mob wears and holds, slot by slot: main hand, off hand, head, chest, legs and feet.
 
-What you can do here
-- Add an item to a slot with a chance on Normal and on Hard. A blank Hard is the Normal chance.
-- Drop %: the chance it drops when a player kills the mob. Enchant %: the chance it is enchanted.
-- Deny empties a slot. A slot with no row keeps the game's equipment.
-- Local difficulty Yes: the chances drop in new or easy areas, as the game's armor does.
-- Restore all removes your rows.
+The list
+- One row per item in a slot. A slot may hold several rows: the game picks one by chance.
+- + Add adds a row. Pick the slot, then the item. Your item variants are listed first.
+- Edit opens a row. Remove deletes the picked rows.
+- Deny empties a slot: the mob never holds anything there.
+- Restore all removes your rows. The game's equipment comes back.
+- Local difficulty Yes: the chances drop in new or easy areas, as the game's armor does. No: the chance is the same everywhere.
 
+A row
+- Item: what it holds or wears.
+- Chance on Normal: the percent chance the row is used.
+- Chance on Hard: the chance on Hard difficulty. A blank Hard is the Normal chance.
+- Drop %: the chance it drops when a player kills the mob.
+- Enchant %: the chance the item is enchanted. The level follows local difficulty.
+- Scaled: the chance grows with the area level.
+- Player level: a range of player XP levels the row counts for, like 10-20 or 30+.
+
+How rows add up
 A slot you give a row is yours: a bow at 25% is a 25% bow and a 75% empty hand.
+A slot with no row keeps the game's equipment.
 A tier's mob takes the global rows, and a variant its base mob's, until you save its own.
 Worn armor adds to the mob's own armor. Scaling raises the mob's own stat, not the armor.
 
+Step by step: armored zombies on Hard
+1. Edit the zombie. Equipment.
+2. + Add. Slot Head. Diamond helmet. Normal 0, Hard 50.
+3. Repeat for Chest, Legs and Feet.
+4. Edit each row. Drop % 5.
+5. Save in Profiles.
+
 Examples
 - Skeletons with a 10% chance of an iron sword.
-- Zombies in full diamond armor on Hard only.
 - A boss variant whose helmet always drops: Drop % 100.
+- Zombies with no armor at all: Deny on each armor slot.
+- Your "Frostbite" sword on a stray: + Add, Main hand, pick the variant.
 
 When it applies: to mobs that spawn after the save.

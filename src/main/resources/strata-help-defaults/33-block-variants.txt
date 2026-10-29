@@ -2,17 +2,34 @@
 @screen BlockVariantScreen
 Where: Blocks > Blocks, + Add variant under a block.
 
-Your own block, a copy of the base block (a door stays a door), added at the next game start.
-
-What you can do here
-- Stats: the base block's numbers, yours in yellow.
-- Abilities: effects on whoever stands on or in it.
-- Give me one, or /give @s strata:name.
-
+Your own block, a copy of the base block (a door stays a door, a stair a stair), added at the next game start.
 A block with a block entity (a chest, a furnace, a sign) cannot be a base block yet.
+
+Making one
+- Select the base block. + Add variant. Type a name of lowercase letters, digits and _.
+- Edit opens it. Remove deletes it. Blocks already placed turn to air at the next start.
+- The variant is strata:<name>. It appears in the creative tabs beside its base.
+
+The editor
+- Display name: what the player sees.
+- Stats: the base block's numbers, yours in yellow. Hardness, blast resistance, light, friction and the rest. See Blocks.
+- Texture: one of your custom textures, or the base's. See Custom textures and sounds.
+- Abilities: effects on whoever stands on or in it. Permanent runs while they stand. See Abilities.
+- Give me one, or /give @s strata:<name>.
+
+Using it
+- Place it by hand. Use it in Block replacements (Stone to your block). Put it in a recipe, loot or a chest.
+- A tier's or a biome's Block replacements turns a world block into yours where land is made.
+
+Step by step: a healing stone
+1. Search "stone". Select it. + Add variant. Name "healing_stone".
+2. Display name "Healing Stone". Stats, hardness 3.
+3. Abilities. + Add. Apply effect, regeneration, permanent, Duration 40.
+4. Restart the game. Give me one. Stand on it.
 
 Examples
 - "Hard Stone": stone with hardness 10.
-- A healing stone that heals whoever stands on it.
+- A lava-colored block that burns: Damage over time with the fire damage type.
+- A glowing deepslate: light level 12, your own texture.
 
 When it applies: the block at the next game start. Stats and abilities at once.

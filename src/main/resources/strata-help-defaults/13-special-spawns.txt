@@ -4,18 +4,34 @@
 Where: World > Mobs, Special spawns. Also in a tier's or biome's editor.
 
 The game's special spawners: phantoms, pillager patrols, village sieges, the wandering trader, village cats and villagers (iron golems, breeding, type and profession).
+These mobs do not come from spawn lists. Each has its own spawner with its own timing and conditions.
 
-What you can do here
-- Each value says what it does and shows the game's number. Set value types yours.
+The list
+- One group per spawner. Each value says what it does and shows the game's number.
+- Select a value, type yours, Set value. Restore puts the game's number back.
 - Pick... picks a mob, or a villager's type or profession. A double-click turns a switch.
 - Special mob spawns Off, at the top, stops every special spawner here.
 - Spawn as in the mob editor makes a mob Normal (from spawn lists) or Special (from its spawner).
 
+The spawners
+- Phantoms: the mob, how many, the sleep-less days a player needs, and the height above sea level.
+- Patrols: the mob, the leader, the group size, the first day, and how often a patrol tries.
+- Sieges: the mob, how many, and the chance a night brings one.
+- Wandering trader: the trader, its llamas, how often it tries, and how long it stays.
+- Village cats: the cat, and how many a village holds.
+- Villagers: iron golem summons, breeding, the villager type by biome, and the profession by workstation.
+
+Scopes
 A biome's value wins, then its tier's, then Global's. How often each spawner tries is set on Global only.
 
+Step by step: no phantoms in a tier
+1. World > Tiers. Edit the tier. Rules. Special mob spawns Off.
+2. Or: open the tier's Special spawns. Set the phantom count to 0.
+
 Examples
-- No phantoms in a peaceful tier: Special mob spawns Off.
-- Patrols of your own variant in place of pillagers.
-- Phantoms as Normal mobs that spawn only where your lists put them.
+- Patrols of your own variant in place of pillagers: Patrols, Pick... the mob, choose the variant.
+- Phantoms as Normal mobs that spawn only where your lists put them: edit the phantom, Mob data, Spawn as Normal.
+- A wandering trader every day: raise its chance on Global.
+- Bigger sieges: raise the siege count.
 
 When it applies: at once. Your first edit turns Options > Special spawners On, which takes effect at the next world load.

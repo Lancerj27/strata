@@ -19,12 +19,6 @@ public final class Paths {
     /** config/strata/profiles/ — exported profile bundles. */
     public static final Path PROFILES = ROOT.resolve("profiles");
 
-    /** config/strata/exports/ — a profile written as one.zip file. */
-    public static final Path EXPORTS = ROOT.resolve("exports");
-
-    /** config/strata/imports/ —.zip files to import as profiles. */
-    public static final Path IMPORTS = ROOT.resolve("imports");
-
     /** config/strata/datapack/ — generated output, never hand-edited. */
     public static final Path DATAPACK = ROOT.resolve("datapack");
 

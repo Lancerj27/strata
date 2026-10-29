@@ -5,24 +5,43 @@
 Where: World > Mobs > Goal sets, or the Goal set button in the mob editor.
 
 The AI of a mob: what it attacks, how it moves, when it flees.
-A mob runs two lists: target goals (who it attacks) and goals (what it does). A lower priority runs first.
-A goal set is a whole goal list that many mobs can share. The game's families (zombie, skeleton, creeper and dozens more) each have one.
+A mob runs two lists: target goals (who it attacks) and goals (what it does). A lower priority runs first. Two goals that use the same body part (legs, eyes) cannot run at once. The lower priority wins.
+A goal set is a whole goal list that many mobs can share. The game's families (zombie, skeleton, creeper and dozens more) each have one. Your own sets are under "Your own".
 
-What you can do here
-- Use for this mob: pick the goal set the mob runs.
+The goal sets screen
+- One row per set. The game's family sets, then yours.
+- Edit opens a set's goals. Duplicate copies a set as your own. Remove deletes your own set.
+- A set names the mobs that run it.
+
+The goals screen
+- Use for this mob: pick the goal set the mob runs. The mob drops its own list.
 - Edit this mob's goals: the mob's list, with the game's real values.
+- + Add goal adds one. Pick the type: melee attack, ranged attack, shoots a projectile, flee, panic, tempt, follow, wander, look, swim, breed, avoid, hurt by target, nearest attackable target and the rest. A type the mob cannot run (a bow goal on a cow) is grey.
 - Edit a goal: speed, range, who it hunts or flees, how often, which items tempt it.
-- Add, remove or switch off goals.
-- Give a goal a condition: day, night, health, rain, water or target distance.
+- Remove deletes a goal. Off switches it off and keeps it.
+- Priority: type a number. Lower runs first.
 - Copy from mob starts a list from any mob's goals.
 - Save as goal set turns a mob's list into a goal set by name.
 
+Conditions
+Give a goal a condition. The goal runs only while the condition holds.
+- Always, Day, Night, Raining, In water.
+- Health below or Health above a percent.
+- Target within a distance in blocks.
+
+Step by step: cowardly zombies
+1. Edit the zombie. Goal set. Edit this mob's goals.
+2. + Add goal. Flee. Priority 1. From players. Speed 1.2.
+3. Edit the goal. Condition Health below 25.
+4. Save. A zombie under a quarter health runs.
+
 Examples
-- Zombies that flee from players below 25% health.
-- Cows that attack players who hit them.
-- Skeletons that only hunt at night.
-- Every zombie-family mob faster at once: edit the zombie goal set.
+- Cows that attack players who hit them: + Add goal, Hurt by target, and Melee attack.
+- Skeletons that only hunt at night: condition Night on the attack goal.
+- Every zombie-family mob faster at once: edit the zombie goal set's wander and attack speeds.
+- A whole mob family on your own set: Save as goal set, then Use for this mob on each.
 
 Villagers, piglins and other Brain mobs keep the game's Brain. Your goals run beside it.
+A mob the game gives no attack damage needs Extra mob attributes On (Options > Settings) before an attack goal hurts.
 
 When it applies: to mobs that spawn, and to every mob the next time it loads.

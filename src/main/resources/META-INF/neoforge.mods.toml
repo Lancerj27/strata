@@ -31,10 +31,11 @@ config = "strata.mixins.json"
     ordering = "NONE"
     side = "BOTH"
 
-# Required on the client: Configured shows Strata's options. A dedicated server does not need it.
+# Optional on the client: with Configured installed, it also shows Strata's options as a raw config screen.
+# Strata's own screens edit every setting, so nothing needs it.
 [[dependencies.${mod_id}]]
     modId = "configured"
-    type = "required"
+    type = "optional"
     versionRange = "[2.0,)"
     ordering = "AFTER"
     side = "CLIENT"

@@ -2,19 +2,55 @@
 @screen AbilitiesScreen
 Where: the mob editor, Abilities. Item variants (Effects) and block variants (Abilities) use the same screen.
 
-Special powers that run on a trigger.
+Special powers that run on a trigger. A mob may hold many rows. Each row is one ability on one trigger.
 
-What you can do here
-- Add an ability: apply an effect, damage, life steal, an aura, healing, an immunity, spawn a mob, explode, and more.
-- Each ability has a trigger: on spawn, on death, on deal damage, on take damage, on flee, in sunlight, and the rest of the game's own triggers.
-- Chance %: how often it lands when the trigger fires.
+The list
+- + Add ability adds a row. Pick the ability, then its trigger.
+- Edit opens a row. Remove deletes the picked rows.
+- Turn off switches one off and keeps it. Turn on brings it back.
 - Hover a field for what it means. 20 ticks are 1 second.
-- Turn off switches one off without removing it.
+
+The abilities
+- Apply effect: gives itself a game effect, with its level and length.
+- Damage over time: so much damage every so often for a total time. Poison, wither, fire and bleed are all this. Can kill lets it finish the target.
+- Life steal: the damage it deals heals it.
+- Attribute change: raises or lowers an attribute for a time. A cure item ends it.
+- Explode: damage in a radius, the same at the edge as at the center.
+- Explode and die: explodes, then the mob is gone, as a creeper is. It drops nothing.
+- Spawn: a creature appears beside it.
+- Heal: exact health back, so much every so often.
+- Aura: a game effect on the creatures near it, not on itself. One kind of creature, a #tag of them, or all but players.
+- Kill: the target dies outright.
+- Sun immune: daylight never burns it.
+- Sun weakness: it burns in daylight under open sky, as a zombie does.
+- Damage immunity: it takes no damage of one kind, a damage type or a #tag of them.
+
+The triggers
+- On spawn: once, when it joins the world.
+- On death: when it dies.
+- On hit: when it hurts a creature. The effect lands on the creature.
+- On hurt: when a creature hurts it. The effect lands on the attacker.
+- On take damage: when it is hurt. The effect lands on itself.
+- On flee: when it starts to flee.
+- In sunlight: while it stands in daylight.
+- Permanent: all the time. With Ticks, it repeats on that timer.
+- On impact: for a projectile, where it lands. See Projectiles.
+
+The fields
+- Chance %: how often it lands when the trigger fires. Blank is 100.
+- Amount, Ticks, Radius, Damage, Duration: what the ability needs. A field the ability does not read stays hidden.
+- Damage type, Particle, HUD icon, Cure, Entity: extras some abilities take.
+
+Step by step: a poison spider
+1. Edit the spider. Abilities.
+2. + Add ability. Apply effect. Trigger on hit.
+3. Effect poison. Amount 0 (level I). Duration 100 (5 seconds). Chance 100.
+4. Save in Profiles. The next spider poisons on hit.
 
 Examples
-- A spider that poisons on hit: Apply effect, poison, on deal damage.
-- A zombie that heals 2 health every 5 seconds.
-- A creeper that spawns silverfish on death.
-- A block variant that burns whoever stands on it.
+- A zombie that heals 2 health every 5 seconds: Heal, permanent, Amount 2, Ticks 100.
+- A creeper that spawns silverfish on death: Spawn, on death, Entity silverfish.
+- A block variant that burns whoever stands on it: Damage over time with the fire damage type.
+- A helmet variant that gives night vision while worn: Apply effect, permanent, night vision.
 
 When it applies: at once, to every mob that has it.

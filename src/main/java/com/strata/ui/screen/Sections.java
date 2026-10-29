@@ -21,7 +21,7 @@ public final class Sections {
 
     private static Map<String, List<String>> entries() {
         Map<String, List<String>> out = new LinkedHashMap<>();
-        out.put(WORLD, List.of("Tiers", "Biomes", "Mobs", "Structures", "Dimensions", "Terrain", "Features"));
+        out.put(WORLD, List.of("Tiers", "Biomes", "Mobs", "Structures", "Dimensions", "Terrain", "Features", "World level"));
         out.put(ITEMS, List.of("Items", "Loot tables", "Chest loot"));
         out.put(BLOCKS, List.of("Blocks", "Ores", "Vegetation", "Replacements"));
         out.put(OPTIONS, List.of("Settings", "World settings", "Game rules", "Damage types", "Player spawn",

@@ -1,17 +1,38 @@
 # Commands
+Every command starts with /strata. Operator means permission level 2.
+
+Help and the editor
 /strata help  prints this list.
-/strata ui  opens the editor (single player host only).
-/strata reload  reads the config again. Operator.
-/strata regenerate  updates mobs and existing land at the next start. Operator.
-/strata validate  checks the tables and lists any problems. Operator.
-/strata selftest  runs Strata's own tests. Operator.
-/strata assets reload  imports files put in config/strata/custom/import/ on the server. Operator.
-/strata profile list | export <name> | activate <name> | delete <name>  manages profiles. Operator.
-/strata level get [player]  shows the power level and the biome's level range; another player needs operator.
+/strata ui  opens the editor. Single player host only. Operator.
+
+Looking at the world
+/strata level get [player]  shows the power level and the biome's level range. Another player needs operator.
 /strata mob get  shows the nearest mob's level, health and attack.
 /strata mob goals  shows the nearest mob's AI, with * on the goal running now.
+/strata stage  shows the world's stage. See World stages.
+/strata stage <number>  sets the world's stage. Operator.
 /strata list <registry>  lists one of entity, item, attribute, ore, biome, structure, goal_set.
 /strata ore list  lists every known ore.
 /strata item list  lists every item variant.
-/strata item give <players> <variant> [count]  gives an item variant. Operator.
-/strata test spawn <mob> <level>  spawns a test mob at a level. Operator.
+
+Changing the world
+/strata item give <players> <variant> [count]  gives an item variant, 1 to 6400. Operator.
+/strata test spawn <mob> <level>  spawns a test mob at a level, 0 or more. Operator.
+
+The config
+/strata reload  reads the config again. Operator.
+/strata regenerate  updates mobs and existing land at the next start. Operator.
+/strata validate  checks the tables and lists any problems. Operator.
+/strata selftest  runs Strata's own tests and prints the result. Operator.
+/strata assets reload  imports files put in config/strata/custom/import/ on the server. Operator.
+
+Profiles
+/strata profile list  lists the profiles and marks the active one. Operator.
+/strata profile export <name>  saves the current config as the profile <name>. Operator.
+/strata profile activate <name>  makes a profile active and loads it. Operator.
+/strata profile delete <name>  deletes a profile. Operator.
+
+Examples
+- Check a tier: stand in it, /strata level get.
+- Debug a mob that stands still: /strata mob goals beside it.
+- A server with no editor: /strata profile activate hard-mode, then restart.

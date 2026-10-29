@@ -3,12 +3,25 @@
 Where: Items > Data... > Banner patterns.
 
 The banner patterns and their tags in one list, a group each.
+A pattern is a shape dyed onto a banner at a loom. The loom offers the plain ones always, and the others from a banner pattern item.
 
-What you can do here
-- A pattern's texture and name.
-- Banner pattern tags: which patterns each pattern item gives.
+Banner patterns
+- Asset id: the texture the banner shows.
+- Translation key: the name.
+- Select a field, type a value, Set value.
+
+Banner pattern tags
+- One tag per banner pattern item: globe, creeper, skull, flower, mojang, piglin, flow, guster.
+- no_item_required: the patterns the loom always offers.
+- Duplicate element adds a pattern to a tag: type its id in Value first. Remove element takes one out.
+
+Step by step: every pattern without an item
+1. Select the no_item_required tag.
+2. Duplicate element. Type minecraft:creeper. Set value.
+3. Repeat for the others. /reload.
 
 Examples
 - Add a pattern to the globe banner pattern item.
+- Your own pattern texture: a custom texture as the asset id. See Custom textures and sounds.
 
 When it applies: at the next world load or /reload.

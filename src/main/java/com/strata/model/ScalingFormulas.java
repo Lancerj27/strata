@@ -13,9 +13,10 @@ public final class ScalingFormulas {
 
     public enum Kind {
         AREA_LEVEL("area_level", "Area level",
-                "The level a mob spawns at. local_difficulty is the game's, 0.75 to 6.75 (0 on Peaceful).",
+                "The level a mob spawns at. local_difficulty is the game's, 0.75 to 6.75 (0 on Peaceful)."
+                        + " player_level is the nearest player's XP level, world_stage the World level stage, world_level the world level.",
                 "level * (1 + chunk_scale * local_difficulty)",
-                "level", "local_difficulty", "chunk_scale"),
+                "level", "local_difficulty", "chunk_scale", "player_level", "world_stage", "world_level"),
         MOB_ATTRIBUTE("mob_attribute", "Mob attribute bonus",
                 "The bonus as a fraction of the base value: 0.5 adds half. Each row of Mob scaling runs it. Divide by base for a flat bonus.",
                 "if(level - start_level + 1, per_level * (level - start_level + 1) ^ exponent, 0) * coefficient",

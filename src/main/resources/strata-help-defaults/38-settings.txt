@@ -2,23 +2,46 @@
 @screen StrataOptionsScreen
 Where: Options > Settings.
 
-Strata's own switches and this machine's preferences.
+Strata's own switches and this machine's preferences. Each shows its value, its shipped value, and when a change applies.
+Select a setting, then type or pick a value, or double-click a switch. Restore puts the shipped value back.
 
-What you can do here
-- Spawn substitution, ore restriction and loot overrides: switch each part of Strata on or off.
-- Editor key: the key that opens Strata.
+The parts of Strata
+- Spawn substitution: tiers and biomes change which mobs spawn.
+- Ore restriction: the Ores screen's rules apply.
+- Loot overrides: your loot entries and loot table changes apply.
+- Mob scaling and Player scaling: the curves run. See Mob scaling and Player scaling.
+- Chunk scaling and Chunk scale: the area level also follows the game's local difficulty, by this much.
+- Player level scale: levels a mob gains at spawn for each XP level of the nearest player. 0.5 is half a level per XP level.
+- World stage scale: levels a mob gains at spawn for each World level stage reached. See World level.
+- Mob XP per level and Mob XP exponent: how much more XP a scaled mob drops, and the curve's shape.
+Turn one off to test with the game's own behavior, and on again after.
+
+The game's own systems, Strata's version
+- Special spawners: Strata runs the special spawners (phantoms, patrols, the trader). Ships Off. A Special spawns edit turns it On.
+- Trade changes: Strata builds the trade lists. Ships Off. A Trades edit turns it On.
+- Extra mob attributes: attack damage and flying speed on mobs the game gives none. Needed for attack goals and Flying on such mobs.
+While a switch is Off, the game is its own there.
+
+Spawn rules
+- Replace blocks other spawns, Monsters take creature slots, Monsters take ambient slots, Monsters take water slots, Monsters spawn outside darkness: the Global values of the Rules every tier and biome has. See Tiers.
+
+This machine
+- Editor key: K, P or O opens Strata. Or none.
 - GUI scale: Auto, Game, or a size.
-- Show locked values: lists values Strata cannot change, greyed.
-- Show duplicate editors: lists things another screen edits too.
-- Server textures & sounds: Ask, Always or Never.
+- Show locked values: lists values Strata cannot change, greyed. Off: each list holds only what you can edit.
+- Show duplicate editors: lists things another screen edits too. Off: each thing is listed once, where it is edited.
+- Server textures & sounds: Ask, Always or Never, when a server offers its custom files.
 - Debug HUD: shows the biome, tier, area level and your XP level in the corner.
-- Special spawners, Trade changes and Extra mob attributes: Strata's own versions of the game's spawners,
-  trade lists and mob attributes. They ship Off, so the game is its own until you edit. A Special spawns or
-  Trades edit turns its switch On. Turn Extra mob attributes On for attack goals and Flying on mobs the game
-  gives no attack damage or flying speed.
+- Player spawn and Search radius: see Player spawn.
+
+Step by step: test without ore rules
+1. Options > Settings. Ore restriction. Double-click it to Off.
+2. Make a new world. The game's ores are back.
+3. Turn it On again after.
 
 Examples
-- Turn off ore restriction to test with the game's ores.
 - The Debug HUD to check which tier you stand in.
+- Server textures & sounds Always, so a server's skins load without a prompt.
+- Extra mob attributes On, then give a cow attack damage and a melee goal.
 
-When it applies: at once.
+When it applies: at once, unless the setting says otherwise. Special spawners and Trade changes at the next launch.

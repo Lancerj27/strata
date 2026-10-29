@@ -657,8 +657,8 @@ public final class ListScreenLayouts {
 
     /**
      * ProfileScreen: the profiles; the name to save as, and the last result beside it; Save, Activate (which
-     * loads the profile here and, for an operator on a server, onto the server), Delete, and, as one file,
-     * Export file and Import, then Regenerate on next start and Reload server config.
+     * loads the profile here and, for an operator on a server, onto the server), Delete, Open folder (the
+     * profiles folder: copy one in or out), then Regenerate on next start and Reload server config.
      *
      * @param serverLines the status lines ("hint" plus the number), at most HELP_LINES
      */
@@ -670,8 +670,7 @@ public final class ListScreenLayouts {
                 List.of(ListLayout.Action.of("save", "Save").asMain(),
                         ListLayout.Action.of("activate", "Activate"),
                         ListLayout.Action.of("delete", "Remove"),
-                        ListLayout.Action.of("export", "Export file"),
-                        ListLayout.Action.of("import", "Import..."),
+                        ListLayout.Action.of("folder", "Open folder"),
                         // The old Server screen's two actions: Activate itself loads the profile onto the
                         // server.
                         ListLayout.Action.of("regenerate", "Regenerate on next start"),
@@ -782,6 +781,73 @@ public final class ListScreenLayouts {
      *
      * @param valueW the value field's width
      */
+    /** The page of stage tabs the World level screen shows: the first tab's index, how many, and their words. */
+    public record StageTabs(int first, int count, List<String> labels) {
+    }
+
+    /**
+     * Which stage tabs fit on one line, with "+ Stage" always last and an arrow at each end when they do not all
+     * fit: a page that holds the selected tab, starting at {@code wanted} when it can (MAX_VALUE: the last page).
+     */
+    public static StageTabs stageTabs(Frame frame, TextFit.Measure m, List<String> labels, int selected, int wanted) {
+        int room = frame.contentWidth() - Grid.buttonW("+ Stage") - Grid.GAP;
+        int all = 0;
+        for (String l : labels) {
+            all += Grid.buttonW(l) + Grid.GAP;
+        }
+        if (all <= room) {
+            return new StageTabs(0, labels.size(), labels);
+        }
+        room -= 2 * (Grid.buttonW(">") + Grid.GAP);
+        int first = Math.max(0, Math.min(wanted, labels.size() - 1));
+        for (int tries = 0; tries < 3; tries++) {
+            int count = fit(labels, first, room);
+            if (first + count >= labels.size() && wanted == Integer.MAX_VALUE) {
+                // The last page: as many as fit, ending at the last tab.
+                first = Math.max(0, labels.size() - fitBack(labels, room));
+                count = labels.size() - first;
+            }
+            if (selected >= 0 && selected < first) {
+                first = selected;
+                continue;
+            }
+            if (selected >= first + count) {
+                first = Math.max(0, selected - fitBack(labels.subList(0, selected + 1), room) + 1);
+                continue;
+            }
+            return new StageTabs(first, Math.max(1, count), labels);
+        }
+        return new StageTabs(first, Math.max(1, fit(labels, first, room)), labels);
+    }
+
+    /** How many tabs from {@code first} fit in {@code room}. */
+    private static int fit(List<String> labels, int first, int room) {
+        int used = 0;
+        int count = 0;
+        for (int i = first; i < labels.size(); i++) {
+            used += Grid.buttonW(labels.get(i)) + Grid.GAP;
+            if (used > room) {
+                break;
+            }
+            count++;
+        }
+        return count;
+    }
+
+    /** How many tabs, ending at the last, fit in {@code room}. */
+    private static int fitBack(List<String> labels, int room) {
+        int used = 0;
+        int count = 0;
+        for (int i = labels.size() - 1; i >= 0; i--) {
+            used += Grid.buttonW(labels.get(i)) + Grid.GAP;
+            if (used > room) {
+                break;
+            }
+            count++;
+        }
+        return count;
+    }
+
     public static Layout valueSheet(Frame frame, TextFit.Measure m, String title, int valueW, String help,
                                     String footer, String empty) {
         return valueSheet(frame, m, title, valueW, help, footer, empty, false);

@@ -443,6 +443,40 @@ public final class Schema {
         public static final String VALUE = "value";
     }
     /** The user's mob caps: one row per changed value of a mob category. */
+    /** The world's stages: the designer's ladder of progress, one row per stage, in order. */
+    public static final class WorldStages {
+        private WorldStages() {}
+        public static final String FILE = "world_stages.csv";
+        /** 1, 2, 3... in order; a stage 0 row holds the start's offset and coefficient, before any stage. */
+        public static final String STAGE = "stage";
+        public static final String NAME = "name";
+        /** any: one player meeting a condition counts. all: every online player must. */
+        public static final String PLAYERS = "players";
+        /** all: every condition of the stage must be met. any: one is enough. */
+        public static final String CONDITIONS = "conditions";
+        /** Added to the level mobs get at spawn while this is the current stage. */
+        public static final String MOB_LEVEL_OFFSET = "mob_level_offset";
+        /** World level per XP level of the most advanced player, while this is the current stage: 0.25 is one per four. */
+        public static final String PLAYER_LEVEL_COEFFICIENT = "player_level_coefficient";
+        /** How the offset and coefficient reach a spawn level: add, subtract or multiply (runtime.WorldLevel#MODES). */
+        public static final String MODE = "mode";
+        /** keep: a reached stage stays. while_met: it is held only while its conditions are met now (runtime.WorldLevel#HOLDS). */
+        public static final String HOLD = "hold";
+        /** On the start row: which player figure the coefficients multiply (runtime.WorldLevel#LEVEL_SOURCES). */
+        public static final String LEVEL_SOURCE = "level_source";
+    }
+
+    /** A stage's conditions and locks, one per row (runtime.WorldLevel#KINDS). */
+    public static final class WorldStageRules {
+        private WorldStageRules() {}
+        public static final String FILE = "world_stage_rules.csv";
+        public static final String STAGE = "stage";
+        public static final String KIND = "kind";
+        public static final String VALUE = "value";
+        /** lock_tier, lock_biome: the effect given there before the stage, "effect_id amplifier". */
+        public static final String EXTRA = "extra";
+    }
+
     public static final class MobCaps {
         private MobCaps() {}
         public static final String FILE = "mob_caps.csv";

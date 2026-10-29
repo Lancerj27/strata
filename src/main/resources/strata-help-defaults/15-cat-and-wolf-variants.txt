@@ -3,15 +3,26 @@
 Where: World > Mobs > Data... > Cat and wolf variants.
 
 The wolf variants and the cat variant tags in one list, a group each.
+These are the game's own looks for cats and wolves, not Strata variants. For your own mob, see Mob editor.
 
-What you can do here
-- Wolf variants: each variant's wild, tame and angry textures, and the biomes it spawns in.
-- Cat variant tags: which cat looks the game picks, for example full_moon_spawns.
+Wolf variants
+- One entry per variant: pale, ashen, black, chestnut, rusty, snowy, spotted, striped, woods, and a mod's.
+- Each has its wild, tame and angry textures, and the biomes it spawns in (a biome tag or ids).
 - Select an entry, select a field, type a value, Set value.
-- Duplicate element and Remove element add or take out list members.
+- A texture may be one of your custom textures. See Custom textures and sounds.
+
+Cat variant tags
+- Each tag is a list of cat looks the game picks from.
+- full_moon_spawns: the looks a cat spawned on a full moon may have.
+- Duplicate element adds a member: type its id in Value first. Remove element takes one out.
+
+Step by step: snowy wolves in a modded tundra
+1. Select the snowy wolf variant.
+2. Select its biomes field.
+3. Duplicate element. Type the modded biome's id. Set value.
 
 Examples
-- Snowy wolves in a modded tundra biome: add the biome to the snowy wolf's biomes.
 - Only black cats on a full moon: leave only all_black in full_moon_spawns.
+- Your own wolf skin: pick a custom texture for the pale wolf's wild texture.
 
 When it applies: from the next world load or /reload.

@@ -6,21 +6,34 @@ Where: Items > Items.
 Every item of the game and its mods, by kind: weapons, armor, tools, food, blocks and the rest.
 Your item variants sit under their item.
 
-What you can do here
-- Edit opens the item's values, each with what it does and the game's number: stack size, durability, rarity, fire resistance, food, mining speed, attack and armor.
-- Every other component is a value too (lore, repair cost, potion contents and more), shown as JSON.
-- + Add component gives the item any component the game or a mod has.
-- The crafting grid on the item's page shows the recipes that make it. + Add recipe makes your own. Shaped: the pattern counts. Shapeless: only the items count.
-- On / Off disables the picked items: they leave the creative tabs, recipes that make them switch off, and no loot drops them.
-- + Add variant, under an item, makes your own item from it.
+The item list
+- Search finds an item by name or id.
+- Edit, or a double-click, opens the item's values.
+- On / Off disables the picked items: they leave the creative tabs, recipes that make them switch off, and no loot drops them. Stacks a player holds stay.
+- + Add variant, under an item, makes your own item from it. See Item variants.
 - Data... opens recipes, brewing, enchantments, armor trims, banner patterns, jukebox songs, paintings, item tags and item data.
+
+The item editor
+- Each value says what it does and shows the game's number: stack size, durability, rarity, fire resistance, food (nutrition, saturation, always edible), mining speed, attack damage and speed, armor and toughness.
+- Every other component is a value too (lore, repair cost, potion contents, enchantments, attribute modifiers and more), shown as JSON.
+- + Add component gives the item any component the game or a mod has. Pick it, then type its JSON.
+- Select a value, type yours, Set value. Restore puts it back. Restore all puts the item back.
+- The crafting grid on the item's page shows the recipes that make it. Click one to see it.
+- + Add recipe makes your own. Shaped: the pattern counts. Shapeless: only the items count. Pick each slot's item. Type the result count.
+
+Step by step: a saddle recipe
+1. Search "saddle". Edit the saddle.
+2. + Add recipe. Shaped.
+3. Fill the top row with leather, the middle row leather, iron ingot, leather, and the bottom corners with iron ingots.
+4. Result count 1. Save.
+5. The recipe works at the next world load or /reload.
 
 Examples
 - Swords with 3000 durability.
 - Ender pearls that stack to 64.
-- Bread that fills more hunger.
-- A recipe for saddles from leather and iron.
-- Disable the elytra.
+- Bread that fills more hunger: Food, nutrition 8.
+- Disable the elytra: select it, Off.
+- A fire-proof diamond: Fire resistant, true.
 
 When it applies
 - Item values: at the next game start. The server and each player need the same profile.

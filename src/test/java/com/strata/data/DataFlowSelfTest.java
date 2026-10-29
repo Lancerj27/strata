@@ -3112,7 +3112,7 @@ public final class DataFlowSelfTest {
                     .equals(List.of("advancement", "chat_type", "damage_tag", "damage_type", "flat_preset", "flat_preset_tag",
                             "game_rule", "world_preset", "world_preset_tag"));
             var world = com.strata.ui.screen.Sections.ENTRIES.get("World");
-            boolean worldOk = new java.util.HashSet<>(world).size() == world.size() && world.size() == 7
+            boolean worldOk = new java.util.HashSet<>(world).size() == world.size() && world.size() == 8
                     && !world.contains("World types") && com.strata.ui.screen.Sections.ENTRIES.get("Options").contains("World types");
             boolean roots = com.strata.ui.TitlePath.rootOfKind("entity_tag").equals("World")
                     && com.strata.ui.TitlePath.rootOfKind("cat_variant_tag").equals("World")
@@ -3530,48 +3530,6 @@ public final class DataFlowSelfTest {
                     && mob.get("name").kind() == com.strata.ui.Layout.Kind.FIELD;
             boolean goalSetHas = goalSet.get("name") != null && goalSet.get("saveAs") == null;
             return mobHas && goalSetHas;
-        });
-
-        SelfTestHarness.check(lines, tally,
-                "PI1 a profile goes out as one file and comes back in under the file's name; a bad file is refused", () -> {
-            Path root = Files.createTempDirectory("strata-profile-file");
-            try {
-                Path profiles = root.resolve("profiles");
-                Path exports = root.resolve("exports");
-                Path imports = root.resolve("imports");
-                Files.createDirectories(profiles.resolve("p1"));
-                Files.writeString(profiles.resolve("p1").resolve("tiers.csv"), "name,level\nt1,3\n");
-                boolean out = ProfileManager.exportFile(profiles, exports, "p1") == ProfileManager.Result.OK
-                        && Files.isRegularFile(exports.resolve("p1.zip"))
-                        && ProfileManager.exportFile(profiles, exports, "nope") == ProfileManager.Result.NOT_FOUND;
-                Files.createDirectories(imports);
-                Files.copy(exports.resolve("p1.zip"), imports.resolve("p2.zip"));
-                boolean listed = ProfileManager.importable(imports).equals(List.of("p2.zip"));
-                boolean in = ProfileManager.importProblem(imports, "p2.zip") == null
-                        && ProfileManager.importFile(imports, profiles, "p2.zip") == ProfileManager.Result.OK
-                        && Files.readString(profiles.resolve("p2").resolve("tiers.csv")).equals("name,level\nt1,3\n");
-                try (var zip = new java.util.zip.ZipOutputStream(Files.newOutputStream(imports.resolve("evil.zip")))) {
-                    zip.putNextEntry(new java.util.zip.ZipEntry("tiers.csv"));
-                    zip.write("name\n".getBytes());
-                    zip.putNextEntry(new java.util.zip.ZipEntry("run.exe"));
-                    zip.write(new byte[]{1});
-                }
-                Files.writeString(imports.resolve("text.zip"), "not a zip");
-                Files.copy(exports.resolve("p1.zip"), imports.resolve("bad..zip"));
-                String stray = ProfileManager.importProblem(imports, "evil.zip");
-                boolean refused = stray != null && stray.contains("run.exe")
-                        && ProfileManager.importProblem(imports, "text.zip") != null
-                        && ProfileManager.importProblem(imports, "bad..zip") != null
-                        && ProfileManager.importFile(imports, profiles, "evil.zip") != ProfileManager.Result.OK
-                        && !Files.exists(profiles.resolve("evil"));
-                if (!(out && listed && in && refused)) {
-                    lines.add("    PI1 out " + out + " listed " + listed + " in " + in + " refused " + refused
-                            + " (" + stray + ")");
-                }
-                return out && listed && in && refused;
-            } finally {
-                deleteRec(root);
-            }
         });
 
         SelfTestHarness.check(lines, tally,
@@ -5174,11 +5132,9 @@ public final class DataFlowSelfTest {
                 Files.createDirectories(profiles.resolve("old/overrides"));
                 ProfileManager.copyTables(profiles.resolve("old"), working);
                 boolean cleared = !Files.exists(working.resolve("overrides/recipe.json"));
-                Path exports = root.resolve("exports");
-                Files.createDirectories(exports);
-                ProfileManager.exportFile(profiles, exports, "pvp");
-                var back = ProfileManager.readZip(exports.resolve("pvp.zip"));
-                boolean zipped = back != null && "{\"a\":1}".equals(back.get("overrides/recipe.json"))
+                // The stored profile's files, as the upload would read them back.
+                var back = ProfileManager.filesIn(profiles.resolve("pvp"), "pvp");
+                boolean zipped = "{\"a\":1}".equals(back.get("overrides/recipe.json"))
                         && ProfileManager.uploadProblem("pvp", back) == null;
                 return names && stored && switched && kept && cleared && zipped;
             } finally {
@@ -8598,6 +8554,79 @@ public final class DataFlowSelfTest {
                 lines.add("    A75.16 list=" + list + " map=" + map + " offs=" + offs);
             }
             return list && map && offs;
+        });
+
+        SelfTestHarness.check(lines, tally,
+                "WL1 world level: stages climb in order by any/all players and all/any conditions; locks hold below their stage", () -> {
+            var s1 = new com.strata.runtime.WorldLevel.Stage(1, "Iron", false, true, 2, 0.25, "add");
+            var s2 = new com.strata.runtime.WorldLevel.Stage(2, "Diamond", true, false, 0.5, 0.5, "multiply");
+            var s3 = new com.strata.runtime.WorldLevel.Stage(3, "End", false, true, 0.5, 0.01, "scale_level");
+            var s4 = new com.strata.runtime.WorldLevel.Stage(4, "Peak", false, true, 1, 0, "add", "while_met", "");
+            var stages = new java.util.TreeMap<Integer, com.strata.runtime.WorldLevel.Stage>();
+            stages.put(1, s1);
+            stages.put(2, s2);
+            stages.put(3, s3);
+            stages.put(4, s4);
+            var rules = new com.strata.runtime.WorldLevel.Rules(stages, List.of(
+                    new com.strata.runtime.WorldLevel.Rule(1, "advancement", "minecraft:story/iron_tools", ""),
+                    new com.strata.runtime.WorldLevel.Rule(1, "xp_level", "10", ""),
+                    new com.strata.runtime.WorldLevel.Rule(2, "mob_kill_level", "20", ""),
+                    new com.strata.runtime.WorldLevel.Rule(2, "tier", "Mountains", ""),
+                    new com.strata.runtime.WorldLevel.Rule(2, "lock_recipe", "minecraft:diamond_pickaxe", ""),
+                    new com.strata.runtime.WorldLevel.Rule(1, "lock_block", "minecraft:iron_ore", ""),
+                    new com.strata.runtime.WorldLevel.Rule(3, "days", "1", ""),
+                    new com.strata.runtime.WorldLevel.Rule(4, "xp_level", "30", "")));
+            var a = new com.strata.runtime.WorldLevel.Facts(List.of("advancement:minecraft:story/iron_tools"), 3, 0);
+            var b = new com.strata.runtime.WorldLevel.Facts(List.of(), 12, 25, 40, 3, 9);
+            var c = new com.strata.runtime.WorldLevel.Rule(9, "area_level", "30", "");
+            var d = new com.strata.runtime.WorldLevel.Rule(9, "kill_count", "5", "");
+            var e = new com.strata.runtime.WorldLevel.Rule(9, "days", "9", "");
+            boolean facts = b.meets(c) && !a.meets(c) && !b.meets(d) && b.meets(e)
+                    && com.strata.runtime.WorldLevel.apply("add", 10, 2) == 12
+                    && com.strata.runtime.WorldLevel.apply("subtract", 10, 2) == 8
+                    && com.strata.runtime.WorldLevel.apply("multiply", 10, 0.5) == 5
+                    && com.strata.runtime.WorldLevel.KINDS.size() == 20;
+            // Stage 1: any player, all conditions: a has the advancement, b the level.
+            boolean one = rules.reached(0, List.of(a, b)) && !rules.reached(0, List.of(a)) && !rules.reached(0, List.of());
+            // Stage 2: all players, any condition: b alone reaches it, a and b together do not.
+            boolean two = rules.reached(1, List.of(b)) && !rules.reached(1, List.of(a, b));
+            // Stage 4 holds while met: b at XP 35 now reaches it, b back at 12 falls to 3; a kept stage stays.
+            b.now(35, 0, List.of());
+            int up = rules.settle(3, List.of(b));
+            b.now(12, 0, List.of());
+            int down = rules.settle(up, List.of(b));
+            boolean hold = up == 4 && down == 3 && rules.settle(3, List.of(b)) == 3
+                    && rules.levelSource().equals("highest_ever");
+            two &= hold;
+            // Totals: the start 0/0; stage 1 adds 2 and 0.25; stage 2 multiplies both by 0.5; stage 3 scales levels.
+            var t3 = rules.totals(3, 10);
+            boolean offsets = rules.mobLevelOffset(0) == 0 && rules.mobLevelOffset(1) == 2 && rules.mobLevelOffset(2) == 1
+                    && rules.mobLevelOffset(9) == 2 && rules.playerLevelCoefficient(0) == 0
+                    && rules.playerLevelCoefficient(1) == 0.25 && rules.playerLevelCoefficient(2) == 0.125
+                    && rules.totals(2, 10).factor() == 1 && Math.abs(t3.factor() - 1.6) < 1e-9
+                    && Math.abs(t3.extra(10) - 2.25) < 1e-9 && facts;
+            boolean locks = rules.locks("lock_recipe", 1).size() == 1 && rules.locks("lock_recipe", 2).isEmpty()
+                    && rules.locks("lock_block", 0).size() == 1 && rules.locks("lock_block", 1).isEmpty();
+            var parsed = com.strata.domain.WorldLevelOps.parseRule(3, "lock_tier Mountains minecraft:weakness 1");
+            var ops = com.strata.domain.WorldLevelOps.class;
+            boolean parse = parsed != null && parsed.kind().equals("lock_tier") && parsed.value().equals("Mountains")
+                    && parsed.extra().equals("minecraft:weakness 1")
+                    && com.strata.domain.WorldLevelOps.ruleProblem(com.strata.domain.WorldLevelOps.rule(3, "xp_level", "ten", "", "")) != null
+                    && com.strata.domain.WorldLevelOps.ruleProblem(com.strata.domain.WorldLevelOps.rule(3, "xp_level", "20", "", "")) == null
+                    && com.strata.domain.WorldLevelOps.ruleProblem(com.strata.domain.WorldLevelOps.rule(3, "bogus", "x", "", "")) != null
+                    && com.strata.domain.WorldLevelOps.ruleProblem(com.strata.domain.WorldLevelOps.rule(3, "lock_biome", "minecraft:plains", "", "0")) != null
+                    && com.strata.domain.WorldLevelOps.ruleProblem(com.strata.domain.WorldLevelOps.rule(3, "lock_biome", "minecraft:plains", "minecraft:weakness", "1")) == null
+                    && com.strata.domain.WorldLevelOps.rule(3, "lock_biome", "minecraft:plains", "minecraft:weakness", "1").extra().equals("minecraft:weakness 1")
+                    && com.strata.domain.WorldLevelOps.valueType("xp_level").shape() == com.strata.model.ValueType.Shape.WHOLE
+                    && com.strata.domain.WorldLevelOps.valueType("lock_recipe").kind() == com.strata.model.ValueType.Registry.RECIPE
+                    && com.strata.domain.WorldLevelOps.stageProblem(new com.strata.domain.WorldLevelOps.StageForm("Iron", "any", "all", "2", "0.25", "add")) == null
+                    && com.strata.domain.WorldLevelOps.stageProblem(new com.strata.domain.WorldLevelOps.StageForm("Iron", "any", "all", "2", "x", "add")) != null
+                    && com.strata.game.RegistryQuery.forKind(com.strata.model.ValueType.Registry.RULE_KIND, null).size() == 20
+                    && ops != null;
+            if (!(one && two && offsets && locks && parse)) {
+                lines.add("    WL1 one=" + one + " two=" + two + " offsets=" + offsets + " locks=" + locks + " parse=" + parse);
+            }
+            return one && two && offsets && locks && parse;
         });
     }
 

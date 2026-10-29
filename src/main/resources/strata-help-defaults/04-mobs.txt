@@ -6,34 +6,53 @@
 @screen ReplacementsScreen
 Where: World > Mobs.
 
-Every mob of the game and its mods, grouped by category: Monster, Creature, Ambient, Water creature and the rest.
+Every mob of the game and its mods, grouped by category: Monster, Creature, Ambient, Water creature, Water ambient, Underground water creature, Axolotls and Misc.
 The tabs show the Global list, a tier's list or a biome's list.
 Your variants sit under their base mob.
 
-What you can do here
-- Edit opens the mob editor.
-- + Add mob puts a mob on this tier's or biome's spawn list.
+The mob list
+- Edit, or a double-click, opens the mob editor. See Mob editor.
+- + Add mob puts a mob on this tier's or biome's spawn list. Pick the mob, then type its weight and group size.
 - Edit picked changes every picked mob at once: spawning, scaling, mob griefing, category, loot, spawn rules, abilities or equipment.
 - Remove takes mobs off this list. On a mob the game spawns here it reads Restore: the game's own spawn comes back.
-- Add default mobs adds the mobs the game spawns here as rows, with the game's numbers.
+- Add default mobs adds the mobs the game spawns here as rows, with the game's numbers. Edit the rows to change the game's own spawns.
+- On / Off stops the picked mobs spawning here, and keeps their rows.
 - Replace mob swaps one mob for another where it spawns.
-- Mob caps: how many mobs of each kind an area holds, and how far away one may despawn.
-- Special spawns opens the game's special spawners.
-- Goal sets opens the shared AI lists.
+- Mob caps: how many mobs of each category an area holds, and how far away one may despawn.
+- Special spawns opens the game's special spawners. See Special spawns.
+- Goal sets opens the shared AI lists. See Goals and goal sets.
 - Data... opens projectiles, cat and wolf variants, mob tags and mob data maps.
-- Click a column heading to show health, damage, speed or another stat.
+- Click a column heading to show health, damage, speed, weight or another stat.
+
+Scopes
+- The Global tab is every mob in the world.
+- A tier tab is the tier's own spawn list. In a Replace tier, only this list spawns.
+- A biome tab is the biome's own list, over its tier's.
+- A yellow value at a scope is the scope's own. A white value is inherited.
 
 Replace mob
 - Replace: the mob that would spawn. With: the mob that spawns.
 - Share %: how many change. Blank is 100. At 50, half the zombies are husks.
 - Sources natural: only the biome's own spawns. Sources all: structures, spawners and patrols too.
 - Eggs and commands are never changed.
+- Replacements never chain: a mob a replacement made is not replaced again.
+
+Mob caps
+- One row per category: the cap and the despawn distances.
+- The cap is per player, counted in the chunks around the player, as the game does.
+- Lower a cap for fewer mobs. Raise it for more. Blank is the game's number.
+
+Step by step: a desert full of husks
+1. World > Tiers. Make a "Desert" tier with the desert biomes.
+2. World > Mobs. Open the tier's tab.
+3. + Add mob. Pick the husk. Weight 80, Min 2, Max 4.
+4. Save in Profiles. Walk into a desert after the next world load.
 
 Examples
-- Add the husk to a desert tier's list with weight 80.
 - Replace 30% of zombies with your "Brute" variant in a dark forest.
 - Lower the monster cap so fewer monsters crowd the night.
 - Set many mobs to the Monster category at once with Edit picked.
+- Stop bats everywhere: pick the bat on Global, Off.
 
 When it applies
 - Stats and mob caps: at once.

@@ -5,16 +5,35 @@ Where: Scaling > Mob scaling.
 
 How mobs grow stronger with the area level.
 scaled = base x (1 + per_level x level^exponent x coefficient)
+The area level comes from the biome's level, or its tier's. Chunk scaling adds the game's local difficulty. The coefficient is the tier's, the biome's or the mob's. See Formulas to change the math itself.
 
-What you can do here
-- One curve per attribute: health, damage, armor, speed and more. Edit sets its per-level, exponent and start level.
+The screen
 - The switch at the top turns mob scaling on or off.
-- Chunk scaling: the area level also follows the game's local difficulty.
-- XP: how much more XP a scaled mob drops.
+- One row per attribute: health, damage, armor, armor toughness, speed, knockback resistance, follow range and more. Each shows its per-level, exponent and start level.
+- Edit opens a row. Restore puts the game's curve back (no growth).
+- Chunk scaling: the area level also follows the game's local difficulty. Chunk scale is how much.
+- XP: how much more XP a scaled mob drops. Per level and exponent, as a curve.
+
+A curve
+- Per level: the bonus per level, as a fraction of base. 0.05 is +5% per level.
+- Exponent: 1 is straight. Above 1 grows faster at high levels. Below 1 flattens.
+- Start level: the first level with a bonus. Below it the mob is its base self.
+- A mob's own Scaling, Coefficient and Start level in its editor override these for that mob.
+
+Worked example
+A zombie has 20 health. Health per_level 0.05, exponent 1. In a level 30 tier with coefficient 1:
+20 x (1 + 0.05 x 30) = 50 health.
+With coefficient 2: 20 x (1 + 0.05 x 30 x 2) = 80.
+
+Step by step: gentle growth
+1. Scaling > Mob scaling. Switch On.
+2. Edit health. Per level 0.04. Exponent 1. Start level 1.
+3. Edit damage. Per level 0.02.
+4. Options > Test mode. Zombie, level 25. The preview reads 40 health and 3.5 damage.
 
 Examples
-- +5% health per level: per_level 0.05.
 - Damage that grows slowly at first: exponent 1.5.
 - Scaling only from level 10: start level 10.
+- Tanks, not hitters: health 0.1, damage 0.
 
 When it applies: at once, after Save.

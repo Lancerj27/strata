@@ -2,14 +2,25 @@
 @screen OverridesScreen:advancement
 Where: Options > Advancements.
 
-Every advancement of the game and its mods.
+Every advancement of the game and its mods, grouped by tab (Minecraft, Nether, End, Adventure, Husbandry) and by mod.
+Recipe advancements (the ones that unlock recipes) are here too.
 
 What you can do here
-- Its title, icon, rewards and criteria.
-- Off: it cannot be earned.
+- Display: title, description, icon, frame (task, goal, challenge), whether it shows a toast and announces in chat, and whether it is hidden.
+- Parent: where it hangs in the tree.
+- Criteria: what earns it, as JSON triggers. Requirements: which criteria together.
+- Rewards: experience, loot tables, recipes and a function.
+- Off: it cannot be earned. Its children stay but hang loose.
+- Select a field, type a value, Set value. Restore puts it back.
+
+Step by step: XP for diamonds
+1. Search "diamonds". Select the Diamonds! advancement.
+2. Rewards. Experience 100. Set value.
+3. /reload.
 
 Examples
-- 100 XP for Diamonds!
-- Hide the "How Did We Get Here?" advancement.
+- Hide the "How Did We Get Here?" advancement: Display, hidden true.
+- A challenge frame on Stone Age.
+- Your item variant as a reward: a loot table that gives it.
 
-When it applies: at the next world load or /reload.
+When it applies: at the next world load or /reload. Advancements already earned stay earned.

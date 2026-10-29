@@ -123,6 +123,8 @@ public abstract class StrataScreen extends Screen implements com.strata.client.n
     private Button backButton;
     /** The "?" at the top right, or null on a screen with no help to open. */
     private Button helpButton;
+    /** Whether a "?" was pressed this game run: until then it glows, with "Need help?" under it. */
+    private static boolean helpSeen;
     private Button optionsButton;
     private Button scalingButton;
     private Button profilesButton;
@@ -916,7 +918,10 @@ public abstract class StrataScreen extends Screen implements com.strata.client.n
         if (helpScreen() != null) {
             com.strata.ui.Box help = frame().help();
             helpButton = addRenderableWidget(Button.builder(Component.literal("?"),
-                            b -> ScreenNavigator.get().jumpTo(helpScreen()))
+                            b -> {
+                                helpSeen = true;
+                                ScreenNavigator.get().jumpTo(helpScreen());
+                            })
                     .pos(help.x(), help.y()).size(help.w(), help.h())
                     .tooltip(Tooltip.create(Component.literal("Help for this screen"))).build());
         }
@@ -973,6 +978,23 @@ public abstract class StrataScreen extends Screen implements com.strata.client.n
             pick.getWidget().setRectangle(w, CTRL_H, frame().titleX(), frame().goTo().y());
             addRenderableWidget(pick.getWidget());
         }
+    }
+
+    /** THE FIRST TIME: the "?" glows and says "Need help?" under it, until any "?" is pressed this game run. */
+    private void drawHelpHint(GuiGraphics graphics) {
+        if (helpSeen || helpButton == null || !helpButton.visible) {
+            return;
+        }
+        // A slow pulse between the hint grey and the heading orange.
+        float t = (float) (0.5 + 0.5 * Math.sin(System.currentTimeMillis() / 400.0));
+        int color = net.minecraft.util.FastColor.ARGB32.lerp(t, net.minecraft.util.FastColor.ARGB32.opaque(Palette.HINT),
+                net.minecraft.util.FastColor.ARGB32.opaque(Palette.GROUP));
+        int x = helpButton.getX();
+        int y = helpButton.getY();
+        graphics.renderOutline(x - 1, y - 1, helpButton.getWidth() + 2, helpButton.getHeight() + 2, color);
+        String words = "Need help?";
+        graphics.drawString(this.font, words, x + helpButton.getWidth() - this.font.width(words),
+                y + helpButton.getHeight() + 3, color, false);
     }
 
     /**
@@ -1114,6 +1136,7 @@ public abstract class StrataScreen extends Screen implements com.strata.client.n
             }
         } else {
             super.render(graphics, mouseX, mouseY, partialTick);
+            drawHelpHint(graphics);
         }
         if (queuedNav != null) {
             Runnable nav = queuedNav;

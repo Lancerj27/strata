@@ -60,6 +60,18 @@ public final class Defaults {
         // The user's mob caps.
         out.put(Schema.MobCaps.FILE, "# Your mob caps. key: max, despawn_distance, friendly, persistent. value replaces the game's.\n"
                 + "category,key,value\n");
+        // The world's stages and their rules.
+        out.put(Schema.WorldStages.FILE, "# The world's stages, in order; stage 0 is the start. players: any or all. conditions: all or any.\n"
+                + "# mob_level_offset: put on spawn levels. player_level_coefficient: times the players' level figure. mode: add, subtract, multiply or scale_level.\n"
+                + "# hold: keep (a reached stage stays) or while_met (held only while its conditions are met now). level_source, on stage 0: highest_ever, highest_online, average_online or total_online.\n"
+                + String.join(",", Schema.WorldStages.STAGE, Schema.WorldStages.NAME, Schema.WorldStages.PLAYERS,
+                        Schema.WorldStages.CONDITIONS, Schema.WorldStages.MOB_LEVEL_OFFSET,
+                        Schema.WorldStages.PLAYER_LEVEL_COEFFICIENT, Schema.WorldStages.MODE, Schema.WorldStages.HOLD,
+                        Schema.WorldStages.LEVEL_SOURCE) + "\n");
+        out.put(Schema.WorldStageRules.FILE, "# A stage's conditions and locks, one per row (kind: see runtime.WorldLevel#KINDS, or the World level help page).\n"
+                + "# A lock holds until the world reaches its stage. extra: for lock_tier and lock_biome, the effect given there, as \"effect_id amplifier\".\n"
+                + String.join(",", Schema.WorldStageRules.STAGE, Schema.WorldStageRules.KIND, Schema.WorldStageRules.VALUE,
+                        Schema.WorldStageRules.EXTRA) + "\n");
         // The user's item stats.
         out.put(Schema.ItemStats.FILE, "# Your item stats. key: the game's component name (game/items.csv). value replaces the game's at the next game start.\n"
                 + "item,key,value\n");

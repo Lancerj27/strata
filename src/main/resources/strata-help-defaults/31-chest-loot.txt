@@ -5,18 +5,33 @@
 @screen ChestEntryScreen
 Where: Items > Chest loot.
 
-The loot in the chests of villages, dungeons, shipwrecks, bastions and every other structure, grouped by structure.
+The loot in the chests of villages, dungeons, shipwrecks, bastions, ancient cities and every other structure, grouped by structure. A mod's chests are here too.
 
-What you can do here
-- Edit opens a chest's entries, pool by pool.
-- + Add loot entry puts an item into the selected pool, with its weight and count.
-- Edit on a pool's row sets how many times it picks.
-- Remove: your entry goes; a game entry gets weight 0. Restore brings it back.
+How a chest table works
+- A table has pools. Each pool rolls so many times. Each roll picks one entry by weight.
+- An entry's share is its weight over the pool's total. A weight of 10 among 100 is 10%.
+- A chest is filled the first time a player opens it. Unopened chests get the new loot.
+
+The list
+- Grouped by structure. Search finds a chest by its id or structure.
+- Edit, or a double-click, opens a chest's entries, pool by pool.
 - Restore all puts the whole table back.
 
+The chest editor
+- + Add loot entry puts an item into the selected pool, with its weight and count. Your item variants are listed first.
+- Edit opens an entry: item, weight, count (a number or a range like 1-3), and its functions.
+- Edit on a pool's row sets how many times it rolls.
+- Remove: your entry goes. A game entry gets weight 0. Restore brings it back.
+- Loot table opens every raw value as JSON.
+
+Step by step: diamonds in a blacksmith chest
+1. Search "weaponsmith". Edit the village weaponsmith chest.
+2. Select the main pool. + Add loot entry. Diamond. Weight 5. Count 1-3.
+3. Save in Profiles. Villages made or opened from the next world load hold diamonds.
+
 Examples
-- Diamonds in village blacksmith chests.
-- No enchanted golden apples in ruined portals.
-- Your item variant in end city chests.
+- No enchanted golden apples in ruined portals: Remove on the entry.
+- Your item variant in end city chests: + Add loot entry, pick the variant, weight 2.
+- Richer dungeons: Edit the pool's row, rolls 3-5.
 
 When it applies: from the next world load. Chests not yet opened get the new loot too.

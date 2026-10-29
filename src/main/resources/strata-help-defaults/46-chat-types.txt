@@ -2,13 +2,22 @@
 @screen OverridesScreen:chat_type
 Where: Options > Chat types.
 
-How chat messages are formatted.
+How chat messages are formatted: a player's chat, /say, /me, /msg, /teammsg and a mod's.
 
 What you can do here
-- The text form and style of each chat type.
+- Chat: the text form and its style. The form is a translation key with %s slots, or a literal with %s for the sender and the content.
+- Narration: what the narrator says.
+- Parameters: which parts fill the slots (sender, content, target).
+- Style: color, bold, italic, as JSON.
+- Select a field, type a value, Set value. Restore puts it back.
+
+Step by step: square brackets
+1. Select the chat type.
+2. Chat, translation key. Type [%s]: %s. Set value.
+3. /reload. Messages read "[name]: message".
 
 Examples
-- Grey whispers.
-- "[name]: message" in place of "<name> message".
+- Grey whispers: the msg type's style, color gray.
+- Italic /me.
 
 When it applies: at the next world load or /reload.

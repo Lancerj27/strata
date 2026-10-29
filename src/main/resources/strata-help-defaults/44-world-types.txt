@@ -2,15 +2,32 @@
 @screen OverridesScreen:world_types
 Where: Options > World types.
 
-The world types and superflat layouts a new world can be made as, and their tags.
+The world types (world presets) and superflat layouts a new world can be made as, and their tags.
 
-What you can do here
-- A world type's dimensions and generators.
-- A superflat layout's layers, biome and structures.
-- The tags decide which types and layouts the create-world screen shows.
+World types
+- Default, Flat, Large biomes, Amplified, Single biome, and a mod's.
+- Dimensions: each dimension's type and generator. The generator names the biome source and the terrain settings.
+- Select a field, type a value, Set value.
+
+Superflat layouts (flat level generator presets)
+- Layers: the blocks from the bottom up, each with a height.
+- Biome: the one biome the world is.
+- Structures: the structure sets it places (villages, strongholds).
+- Features: whether it places lakes and trees.
+- Duplicate element copies a layer. Remove element takes one out.
+
+Tags
+- normal: the types the create-world screen shows.
+- extended: the types shown with Alt held.
+- visible (flat presets): the layouts the superflat screen offers.
+
+Step by step: a stone superflat
+1. Select the Classic flat layout.
+2. Layers. Change the dirt layer to minecraft:stone, height 60. Keep the grass layer.
+3. Make a new world with Flat, pick the layout.
 
 Examples
-- A superflat layout of 60 stone and a grass layer.
-- Hide the Amplified world type.
+- Hide the Amplified world type: remove it from the normal tag.
+- A Nether-only Overworld: the Default type's Overworld generator, the Nether's settings.
 
 When it applies: to worlds made after the change.

@@ -3,15 +3,27 @@
 Where: World > Terrain.
 
 How the land is made: terrain settings, terrain shape, noises, and caves and canyons.
+This is the game's own world generation data, open for editing. Small changes go far.
+
+The groups
+- Terrain settings (noise settings): one per dimension, and a mod's. Sea level, default block and fluid, aquifers, ore veins, and the surface rules that pick grass, sand and snow.
+- Terrain shape (density functions): the math that makes hills, valleys, and the Nether's caves.
+- Noises: the random fields the shape reads. Each has a first octave and amplitudes.
+- Caves and canyons (carvers): how often and how big they carve, and at what heights.
 
 What you can do here
-- Terrain settings: sea level, default block and fluid, surface rules.
-- Terrain shape and noises: the math that makes hills and valleys.
-- Caves and canyons: how often and how big they carve.
+- Select an entry, then a field. Type a value, Set value. Restore puts a field back. Restore all puts the entry back.
+- A nested value shows as JSON. Edit the part you need.
+
+Step by step: a flooded world
+1. Select the Overworld terrain settings.
+2. Sea level. Type 80. Set value.
+3. Make a new world.
 
 Examples
-- Sea level at 80 for a flooded world.
-- Deepslate as the default block.
-- Fewer canyons: lower their chance.
+- Deepslate as the default block: Default block, minecraft:deepslate.
+- Fewer canyons: open the canyon carver, lower its probability.
+- No aquifers: Aquifers enabled, false.
+- Lava oceans in the Overworld: Default fluid, minecraft:lava.
 
-When it applies: in a new world, or land not made yet.
+When it applies: in a new world, or land not made yet. Old land next to new land shows a seam.

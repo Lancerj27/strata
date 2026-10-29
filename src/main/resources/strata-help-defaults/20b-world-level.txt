@@ -1,0 +1,90 @@
+# World level
+@screen WorldLevelScreen
+Where: World > World level.
+
+The world climbs a ladder of stages as its players progress. A stage is a tab. Each stage says what reaches it,
+what stays locked until then, and how much harder mobs spawn.
+
+The screen
+- Tabs: Start, then each stage by its name. + Stage adds one to the right. Arrows page the tabs.
+- Under the tabs: the stage's form. Change it, then Save stage.
+- Over the list: the rule row. Fill it, then + Add rule.
+- The list: the stage's rules. Edit loads one into the row. Remove takes out the picked ones.
+- Remove stage takes out the open stage with its rules.
+
+How to: make mobs grow with the players
+1. Open Start. Set Coefficient to 0.1. Save stage.
+2. Every mob now spawns one level higher for every ten XP levels the top player has.
+3. Want it to follow the players down too? Set Level source to highest_online.
+
+How to: unlock the iron pickaxe at a stage
+1. + Stage. Name it "Iron". Save stage.
+2. In the rule row pick lock_recipe, click the value button, pick Iron Pickaxe. + Add rule.
+3. Pick xp_level, type 10. + Add rule.
+4. Until a player reaches XP 10, the iron pickaxe recipe makes nothing.
+
+How to: a stage that switches off again
+1. On the stage set Hold to while_met. Save stage.
+2. Give it xp_level 20 as a condition.
+3. The stage is on while the top player is at XP 20 or more, and off again below it.
+
+How to: a dangerous region before its time
+1. On a stage pick lock_tier, choose the tier, click Effect and pick Weakness, Amplifier 1. + Add rule.
+2. Players in that tier get Weakness II every second until the stage is reached.
+
+The stage form
+- Name: told to the players when the stage is reached. It is the tab's label.
+- Players: any, one player meeting a condition counts. all, every player online must.
+- Conditions: all, every condition must be met. any, one is enough.
+- Offset: flat levels put on every spawn. 2 means two levels higher, whoever is playing.
+- Coefficient: levels per player level. 0.1 is one level per ten. 0.25 is one per four.
+- Mode: how this stage changes the totals. See The modes.
+- Hold: keep, a reached stage stays. while_met, it holds only while its conditions hold now.
+- Level source (Start only): whose level the coefficient uses. See Level source.
+
+The modes
+- The world keeps two totals: an offset and a coefficient. Start sets them. Every spawn gains the total offset
+  plus the total coefficient times the player level.
+- add: the stage puts its offset and coefficient on the totals. Start 0.25 plus a stage adding 0.05 is 0.30.
+- subtract: the stage takes them off.
+- multiply: the stage scales the totals by its numbers. Coefficient 2 doubles the total.
+- scale_level: the totals are left alone. Every spawn level is multiplied by 1 + offset + coefficient x player
+  level. Here 0.5 is "half again" and 0.01 is "one percent per level". Use it for a percentage boost.
+
+Level source (on Start)
+- highest_ever: the highest XP level any player has ever reached. Never falls.
+- highest_online: the highest XP level among the players online now.
+- average_online: their average.
+- total_online: their XP levels added up.
+
+Conditions
+- advancement: a player earned it.
+- xp_level: a player's XP level reached the number.
+- tier, biome, dimension, structure: a player entered it.
+- area_level: a player entered an area whose Strata level is the number or more.
+- item: a player carried the item.
+- kill_entity: a player killed that kind of mob.
+- mob_kill_level: a player killed a mob of that Strata level or more.
+- kill_count: a player's kills reached the number.
+- days: the world's day reached the number.
+
+Locks
+- lock_block: the block does not break. A tag works too, typed as #minecraft:logs in world_stage_rules.csv.
+- lock_recipe: the recipe makes nothing.
+- lock_item: the item does nothing when used.
+- lock_tier, lock_biome, lock_dimension, lock_structure: being there gives the effect, at its amplifier.
+- lock_area_level: areas of that Strata level or more give the effect.
+- Locks are silent. Creative players break and use anything; a locked recipe makes nothing for them too.
+
+Where it is kept
+- The stages and rules are in the profile: world_stages.csv and world_stage_rules.csv.
+- The stage reached and each player's progress are saved in the world. A new world starts at Start.
+
+Commands
+- /strata stage: the stage, the world level and the player level figure.
+- /strata stage <n>: sets the stage (operator). A while_met stage settles again on the next second.
+
+More scaling (Options > Settings)
+- World stage scale: levels per stage reached, on top of the totals.
+- Player level scale: levels per XP level of the nearest player, so each player's own surroundings.
+- Scaling > Formulas > Area level names player_level, world_stage and world_level too.

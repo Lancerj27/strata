@@ -57,7 +57,7 @@ public final class FormulaOps {
     /** What the preview assumes for the variables that are not the level. */
     public static String sampleText(Kind kind) {
         return switch (kind) {
-            case AREA_LEVEL -> "Preview: the resolved level is the level shown, local_difficulty 3, chunk_scale 0.13.";
+            case AREA_LEVEL -> "Preview: the resolved level is the level shown, local_difficulty 3, chunk_scale 0.13, player_level 10, world_stage 1, world_level 3.5.";
             case MOB_ATTRIBUTE, PLAYER_ATTRIBUTE ->
                     "Preview: base 20, start_level 2, per_level 0.15, exponent 0.6, coefficient 1.";
             case MOB_XP -> "Preview: per_level 0.15, exponent 1.";
@@ -66,7 +66,7 @@ public final class FormulaOps {
 
     private static Map<String, Double> sample(Kind kind, int level) {
         return switch (kind) {
-            case AREA_LEVEL -> ScalingFormulas.vars("level", level, "local_difficulty", 3.0, "chunk_scale", 0.13);
+            case AREA_LEVEL -> ScalingFormulas.vars("level", level, "local_difficulty", 3.0, "chunk_scale", 0.13, "player_level", 10, "world_stage", 1, "world_level", 3.5);
             case MOB_ATTRIBUTE, PLAYER_ATTRIBUTE -> ScalingFormulas.vars("base", 20, "level", level,
                     "start_level", 2, "per_level", 0.15, "exponent", 0.6, "coefficient", 1.0);
             case MOB_XP -> ScalingFormulas.vars("level", level, "per_level", 0.15, "exponent", 1.0);

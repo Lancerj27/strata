@@ -3,19 +3,34 @@
 @screen TradeEntryScreen
 Where: the mob editor of a villager or the wandering trader, Trades.
 
-One list per profession level (Novice to Master), and the wandering trader's common and rare lists.
-At each level the game picks 2 trades from that level's list.
+One list per profession level (Novice, Apprentice, Journeyman, Expert, Master), and the wandering trader's common and rare lists.
+At each level the game picks 2 trades from that level's list. The wandering trader picks 5 common and 1 rare.
 
-What you can do here
+The list
+- Pick a profession at the top (for a villager), then a level.
 - + Add trade adds a trade to the selected list.
-- Edit a trade: cost A and its count, cost B (0 for none), the result and its count, max uses, the XP the trader earns, and the price multiplier.
-- Remove takes trades out. Restore takes back this scope's change.
+- Edit opens a trade. Remove takes trades out.
+- Restore takes back this scope's change on a game trade.
+
+A trade
+- Cost A and its count: what the player pays.
+- Cost B and its count: a second price. 0 for none.
+- Result and its count: what the player gets. Your item variants are listed first.
+- Max uses: how many times before the trade locks until restock.
+- XP: the XP the trader earns.
+- Price multiplier: how much demand and reputation move the price.
 - A game trade with a random part (an enchanted book, a map) can be removed. Editing it makes it a fixed trade.
 
+Step by step: a Mending librarian
+1. World > Mobs. Edit the villager. Trades.
+2. Profession librarian. Level Master.
+3. + Add trade. Cost A emerald, 30. Result enchanted book with Mending, 1. Max uses 3.
+4. Save in Profiles.
+
 Examples
-- A librarian that sells Mending for 30 emeralds.
-- A farmer that buys pumpkins only at Master.
-- A wandering trader that sells your item variant.
+- A farmer that buys pumpkins only at Master: remove the pumpkin trade at the lower levels.
+- A wandering trader that sells your item variant: the rare list, + Add trade.
+- Cheaper diamond tools: edit the toolsmith's trades, lower Cost A's count.
 
 When it applies: to the next trader that reaches a level. Trades a trader already has stay.
 Your first edit turns Options > Trade changes On, which takes effect at the next launch.

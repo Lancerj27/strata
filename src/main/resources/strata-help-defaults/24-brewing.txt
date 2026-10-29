@@ -6,12 +6,21 @@ Every brewing stand mix of the game and its mods: from which potion, with which 
 Bottle mixes turn a potion into a splash potion, and a splash potion into a lingering one.
 
 What you can do here
-- Change a mix's input, ingredient or output.
+- Select a mix to see its input, ingredient and output.
+- Change a mix's input, ingredient or output: select the field, pick or type an id, Set value.
 - Duplicate element copies a mix. Change the copy for a new mix.
 - Remove element takes a mix out.
+- Restore all puts the game's mixes back.
+
+Step by step: a potion of luck
+1. Select the mix from awkward to swiftness (awkward + sugar).
+2. Duplicate element.
+3. On the copy: Ingredient minecraft:emerald. Output minecraft:luck. Set value each.
+4. Save. From the next world load, an awkward potion and an emerald brew luck.
 
 Examples
-- A potion of luck from an awkward potion and an emerald.
 - No potions of weakness: remove the mixes that make them.
+- Strength from blaze powder and a thick potion: a new mix with input thick.
+- Your own ingredient: an item variant as the ingredient.
 
 When it applies: at the next world load.

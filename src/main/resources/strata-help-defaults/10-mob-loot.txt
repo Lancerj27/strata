@@ -5,16 +5,32 @@ Where: the mob editor, Loot.
 
 What the mob drops, at this scope, on top of its own loot table.
 
-What you can do here
-- + Add loot entry adds an item with its chance and count.
-- Remove on one of the game's drops denies it here.
+The list
+- The game's drops first, from the mob's loot table, then your entries.
+- + Add loot entry adds an item with its chance and count. Your item variants are listed first.
+- Edit opens an entry. Remove takes it out.
+- Remove on one of the game's drops denies it here. Restore brings it back.
 - Loot table opens every value of the mob's own loot table: rolls, items, weights, counts, looting bonus and chances.
-- Remove takes entries out. Restore all clears this scope's changes.
+- Restore all clears this scope's changes.
+
+An entry
+- Item and count: a number, or a range like 1-3.
+- Chance %: how often it drops.
+- Condition: Random chance, Looting level, Player level (a number, a range like 3-10, or a minimum like 5+), and the rest.
+- Looting bonus: extra count per level of Looting.
+
+Scopes
+An entry at Global drops everywhere. An entry on a tier drops in the tier's biomes. An entry on a biome drops there only. The scopes add up: a zombie in a biome drops its Global, tier and biome entries.
+
+Step by step: emeralds from hard zombies
+1. World > Mobs. Open the hard tier's tab. Edit the zombie.
+2. Loot. + Add loot entry. Emerald. Count 1. Chance 5.
+3. Save in Profiles.
 
 Examples
-- Zombies drop an emerald 5% of the time in a hard tier.
-- Creepers stop dropping gunpowder in one biome.
-- A boss variant that always drops a diamond.
+- Creepers stop dropping gunpowder in one biome: open the biome's tab, edit the creeper, Loot, Remove on gunpowder.
+- A boss variant that always drops a diamond: Chance 100.
+- Skeletons that drop more arrows: Loot table, raise the arrow count.
 
 When it applies
 - Your loot entries: at once.

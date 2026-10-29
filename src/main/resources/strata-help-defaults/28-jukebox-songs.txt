@@ -2,13 +2,23 @@
 @screen OverridesScreen:jukebox_song
 Where: Items > Data... > Jukebox songs.
 
-Every music disc's song.
+Every music disc's song: what plays, how long, and what a comparator reads.
 
 What you can do here
-- A song's sound, length, name and the redstone signal it gives.
+- Sound event: the sound that plays. Pick the game's or one of your custom sounds.
+- Length in seconds: how long the jukebox is busy, and when it drops the disc's particles.
+- Description: the name on the disc.
+- Comparator output: the redstone signal, 1 to 15.
+- Select a field, type a value, Set value. Restore puts it back.
+
+Step by step: your own song on a disc
+1. Options > Custom textures & sounds. + Add custom... Sound. Browse... to your .ogg (at most 20 seconds). Name it.
+2. Items > Data... > Jukebox songs. Select a disc's song, for example 13.
+3. Sound event, pick your sound. Length in seconds, type its length. Set value.
+4. /reload. The disc plays your song.
 
 Examples
-- A disc that plays your own sound (add it in Options > Custom textures & sounds first).
 - A comparator signal of 15 for one disc.
+- A different name for a disc.
 
 When it applies: at the next world load or /reload.

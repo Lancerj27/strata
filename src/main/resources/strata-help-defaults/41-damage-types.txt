@@ -3,13 +3,31 @@
 Where: Options > Damage types.
 
 Every kind of damage, and the damage tags, in one list.
+A damage type is what a hit is: fall, lava, an arrow, a mob attack, the wither effect. The tags say how armor, shields and effects treat it.
 
-What you can do here
-- A damage type's exhaustion and how it scales with difficulty.
-- Damage tags: what armor blocks, what bypasses shields, what burns.
+Damage types
+- Message id: the death message it writes.
+- Exhaustion: hunger spent when hit.
+- Scaling: never, always, or when caused by a living non-player (the game's difficulty scaling).
+- Effects: the hurt sound and look (hurt, thorns, drowning, burning, poking, freezing).
+- Death message type: default, fall variants, or intentional game design.
+
+Damage tags
+- bypasses_armor: armor does not reduce it. Fall, drowning, starving, the void.
+- bypasses_shield: a shield does not block it.
+- bypasses_invulnerability, bypasses_effects, bypasses_resistance, bypasses_enchantments.
+- is_fire, is_explosion, is_fall, is_drowning, is_freezing, is_lightning, is_projectile.
+- no_knockback, no_impact, always_hurts_ender_dragons, witch_resistant_to.
+- Duplicate element adds a type: type its id in Value first. Remove element takes one out.
+
+Step by step: armor against falls
+1. Search "bypasses_armor". Select the tag.
+2. Select minecraft:fall. Remove element.
+3. /reload. Armor now reduces fall damage.
 
 Examples
-- Fall damage that armor reduces.
-- Arrows that ignore shields.
+- Arrows that ignore shields: add minecraft:arrow to bypasses_shield.
+- No hunger from hits: each type's exhaustion 0.
+- Fire that shields block: remove the fire types from bypasses_shield.
 
 When it applies: at the next world load or /reload.

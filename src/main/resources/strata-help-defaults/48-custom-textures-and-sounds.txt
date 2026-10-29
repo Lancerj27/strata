@@ -3,24 +3,37 @@
 @screen CustomAssetScreen
 Where: Options > Custom textures & sounds, or "+ Add custom..." in a texture or sound picker.
 
-Your own textures, sounds and models.
+Your own textures, sounds and models, in one library. Everything that picks a texture or a sound offers them: a variant's skin, a boss's roar, a disc's song, a painting.
 
-What you can do here
+The library
+- One row per file, with its kind, name and size.
 - + Add custom...: pick the kind (Texture, Sound or Model), Browse... for the file, and type a name (lowercase letters, digits and _).
 - A texture also takes a category (entity, item, block, misc). A sound can take a subtitle.
-- Re-import swaps the file and keeps the name, so every mob that uses it keeps working.
-- Remove deletes it.
+- Edit opens an entry. Re-import swaps the file and keeps the name, so every mob that uses it keeps working.
+- Remove deletes it. Anything that used it goes back to the game's own.
+- Preview plays a sound, or shows a texture.
 
 Files
 - Texture: PNG, each side 16 to 512 pixels and a multiple of 16, at most 256 KB.
-- Sound: Ogg Vorbis, mono or stereo, at most 20 seconds and 1 MB. Use mono for a sound that comes from a place.
-- Model: a block or item model, JSON, at most 64 KB.
-- A mob's texture must fit the mob's model: keep its size and layout.
+- Sound: Ogg Vorbis, mono or stereo, at most 20 seconds and 1 MB. Use mono for a sound that comes from a place. Stereo plays everywhere at once.
+- Model: a block or item model, JSON, at most 64 KB. The textures it names must exist.
+- A mob's texture must fit the mob's model: keep the original's size and layout. Export the game's texture first and paint over it.
 
-The library belongs to this machine (config/strata/assets_pack). A server sends its own files to players when they join.
+Where they live
+- The library belongs to this machine: config/strata/assets_pack.
+- A profile names the files it uses. When you share a profile folder, copy those files from assets_pack too.
+- A server sends its own files to players when they join. Server textures & sounds in Settings asks, always takes, or never takes them.
+- /strata assets reload imports files dropped into config/strata/custom/import/ on a server. Operator.
+
+Step by step: a red zombie
+1. Find the zombie texture (64 by 64) in the game's jar or a resource pack. Paint it red. Save as PNG.
+2. Options > Custom textures & sounds. + Add custom... Texture. Browse... to the file. Category entity. Name "blood_zombie".
+3. World > Mobs. Edit your variant. Mob data > Visuals. Texture, pick blood_zombie.
+4. Options > Test mode. Spawn it.
 
 Examples
-- A red skin for your "Blood Zombie" variant.
-- A new roar for a boss variant.
+- A new roar for a boss variant: a Sound, then Mob data > Sounds, pick it for the ambient sound.
+- Your own disc song. See Jukebox songs.
+- A new ore texture: Options > Textures, Replace... on diamond ore. See Textures.
 
 When it applies: at once.

@@ -339,7 +339,43 @@ public final class RegistryQuery {
                 RegistryAccess regs = worldRegistries != null ? worldRegistries : com.strata.data.Config.boundRegistries();
                 yield regs == null ? List.of() : options(biomes(regs), id -> Labels.pretty(ResourceLocation.tryParse(id)));
             }
+            case RECIPE -> jsonIds(com.strata.data.JsonOverrides.RECIPE);
+            case ADVANCEMENT -> jsonIds(com.strata.data.JsonOverrides.ADVANCEMENT);
+            case RULE_KIND -> ruleKinds();
+            case DIMENSION -> {
+                RegistryAccess regs = worldRegistries != null ? worldRegistries : com.strata.data.Config.boundRegistries();
+                if (regs == null) {
+                    yield List.of();
+                }
+                List<ResourceLocation> keys = new ArrayList<>();
+                regs.registry(Registries.LEVEL_STEM).ifPresent(r -> r.keySet().forEach(keys::add));
+                keys.sort(null);
+                yield options(keys, id -> Labels.pretty(ResourceLocation.tryParse(id)));
+            }
         };
+    }
+
+    /** The World level rule kinds, the conditions then the locks, each with its words. */
+    private static List<Option> ruleKinds() {
+        List<Option> out = new ArrayList<>();
+        for (String kind : com.strata.runtime.WorldLevel.KINDS) {
+            String group = com.strata.runtime.WorldLevel.LOCKS.contains(kind) ? "lock" : "condition";
+            out.add(new Option(kind, kind + " — " + com.strata.domain.WorldLevelOps.KIND_WORDS.getOrDefault(kind, ""), group));
+        }
+        return List.copyOf(out);
+    }
+
+    /** The ids of one kind of datapack JSON the game layer read (recipes, advancements), sorted. */
+    private static List<Option> jsonIds(com.strata.data.JsonOverrides.Kind kind) {
+        List<ResourceLocation> ids = new ArrayList<>();
+        for (String id : com.strata.data.JsonOverrides.game(kind).keySet()) {
+            ResourceLocation rl = ResourceLocation.tryParse(id);
+            if (rl != null) {
+                ids.add(rl);
+            }
+        }
+        ids.sort(null);
+        return options(ids, id -> Labels.pretty(ResourceLocation.tryParse(id)));
     }
 
     /** The question a picker of this kind asks in its header ("Pick an item"). */
@@ -358,6 +394,10 @@ public final class RegistryQuery {
             case DAMAGE_TYPE -> "Pick a damage type";
             case STRUCTURE -> "Pick a structure";
             case BIOME -> "Pick a biome";
+            case RECIPE -> "Pick a recipe";
+            case ADVANCEMENT -> "Pick an advancement";
+            case DIMENSION -> "Pick a dimension";
+            case RULE_KIND -> "Pick a kind of rule";
         };
     }
 

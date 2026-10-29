@@ -2,15 +2,29 @@
 @screen OverridesScreen:dimensions
 Where: World > Dimensions.
 
-The game's dimension types and the dimensions a mod or a pack adds.
+The game's dimension types (Overworld, Nether, End) and the dimensions a mod or a pack adds.
 
 What you can do here
-- Height and lowest Y, light, ceiling, sky, and whether beds and respawn anchors work.
-- Select a field, type a value, Set value. Restore puts it back.
+- Select a dimension type to see its fields. Select a field, type a value, Set value. Restore puts it back.
+- Height and Min Y: how tall the world is and where its bottom is. Height is a multiple of 16. Min Y plus Height is at most 2032.
+- Logical height: the highest Y a portal or chorus fruit may take a player.
+- Ambient light: 0 is dark nights. 0.1 is the Nether's glow.
+- Has skylight, Has ceiling: the Nether has a ceiling and no skylight.
+- Bed works, Respawn anchor works: whether each explodes.
+- Piglin safe, Natural, Ultrawarm: zombified piglins, compass and clock, lava flow and water.
+- Fixed time: a tick of the day the dimension always shows. Blank for a day cycle.
+- Coordinate scale: the Nether's 8.
+- Monster spawn light level: the light a monster may spawn in.
+- Infiniburn: the blocks fire burns on forever.
+
+Step by step: beds in the Nether
+1. Select the Nether dimension type.
+2. Bed works. Type true. Set value.
+3. Make a new world, or visit Nether land not made yet.
 
 Examples
-- Beds that work in the Nether.
-- A taller Overworld with a lower bottom.
-- Ambient light in the End.
+- A taller Overworld with a lower bottom: Min Y -128, Height 512.
+- Ambient light in the End: Ambient light 0.1.
+- An Overworld that is always noon: Fixed time 6000.
 
-When it applies: in a new world, or land not made yet.
+When it applies: in a new world, or land not made yet. A height change on an old world can tear its land.

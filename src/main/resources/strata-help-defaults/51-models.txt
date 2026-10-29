@@ -2,14 +2,27 @@
 @screen AssetMasterScreen:Model
 Where: Options > Models.
 
-Every block and item model the game loaded. A mob's model is code, not a file, so it is not here.
+Every block and item model the game loaded, grouped by mod. A model is the shape: its cubes, faces and the textures on them.
+A mob's model is code, not a file, so it is not here.
 
 What you can do here
-- Replace... puts one of your custom models in its place. The textures it names must exist.
+- Search finds a model by its path.
+- Replace... puts one of your custom models in its place. The textures it names must exist, in the game or in your library.
 - Restore puts the game's model back.
+- A replaced model shows in yellow.
+
+Making a model
+- Use a model tool (Blockbench and the like). Export a Java block or item model, JSON.
+- Name its textures as the game does (minecraft:block/stone), or import yours first and name them (strata:my_texture).
+- At most 64 KB.
+
+Step by step: a taller torch
+1. Export the torch model from the game's jar. Raise its cube in a model tool. Save as JSON.
+2. Options > Models. Search "block/torch". Replace... + Add custom... Model. Browse... to the file.
+3. Torches draw taller at once.
 
 Examples
-- A taller torch.
 - A sword model from a resource pack you made.
+- A flat item as a 3D block: replace its item model.
 
 Replacements are saved in the profile. Load active profile to server (in Profiles) sends them to every player.

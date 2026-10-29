@@ -3,17 +3,28 @@
 Where: Items > Data... > Recipes.
 
 Every recipe of the game and its mods: crafting table, furnace, blast furnace, smoker, campfire, stonecutter, smithing table and each mod's own.
-Search finds a recipe by its id, what it makes, or its type ("smelting", "stonecutter").
+Grouped by the mod, then by type. Search finds a recipe by its id, what it makes, or its type ("smelting", "stonecutter").
 
 What you can do here
-- Select a field, type a value, Set value: cook time, XP, result count, ingredients.
-- Off: the recipe is not loaded.
+- Select a recipe to see its fields. Select a field, type a value, Set value.
+- Cooking time (ticks) and Experience, for a furnace, smoker, blast furnace or campfire recipe.
+- Result and its count.
+- Ingredients: an item id, or a #tag. Duplicate element adds an alternative. Remove element takes one out.
+- Pattern and Key, for a shaped recipe: the rows, and what each letter is.
+- Category: where the recipe book lists it.
+- Off: the recipe is not loaded. The item stays, and loot and trades still give it.
 - Restore puts one field back. Restore all puts the whole recipe back.
-- Your own crafting recipes are made on the item's page in Items.
+- Your own crafting recipes are made on the item's page in Items. See Items.
+
+Step by step: faster smelting
+1. Search "smelting iron". Select the iron ingot smelting recipe.
+2. Cooking time. Type 100. Set value.
+3. /reload. Iron smelts in 5 seconds.
 
 Examples
-- Smelting iron in 100 ticks.
-- 4 torches become 8.
+- 4 torches become 8: the torch recipe's result count 8.
 - No recipe for TNT: Off.
+- Diamond armor from emeralds: change each ingredient to minecraft:emerald.
+- Any log for a chest: the chest recipe's key, #minecraft:logs.
 
 When it applies: at the next world load or /reload.

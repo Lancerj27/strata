@@ -1,8 +1,29 @@
 # Moving a config to a server
-1. In Profiles, save your config as a profile.
-2. Join the server as an operator. In Profiles, pick the profile and press Activate. It becomes the server's active profile too.
-3. Restart the server when asked, or ask the host. At the next start the regenerate brings mobs and existing land in line.
+The server runs the config. Players connect with Strata installed and need no files of their own.
 
-Players need no Strata files. The server sends names and textures when they join.
-A server with Own entity variants asks a player's game to restart once, the first time it joins.
-Without the editor: copy config/strata/profiles/<name> to the server, run /strata profile activate <name>, and restart.
+With the editor
+1. In single player, build your config. In Profiles, Save it as a profile.
+2. Join the server as an operator. Open Strata (/strata ui works for the host only, so use the Mods list or your editor key).
+3. In Profiles, pick the profile and press Activate. It becomes the server's active profile too. Or press Load active profile to server.
+4. Restart the server when asked, or ask the host. At the next start the regenerate brings mobs and existing land in line.
+
+Without the editor
+1. Copy config/strata/profiles/<name> from your machine to the server's config/strata/profiles/.
+2. Copy config/strata/assets_pack if the profile uses custom textures or sounds.
+3. On the server, run /strata profile activate <name>.
+4. Restart the server.
+
+What players get
+- Players need no Strata files. The server sends names, textures, sounds and models when they join.
+- Server textures & sounds in each player's Settings asks, always takes, or never takes them.
+- A server with Own entity variants asks a player's game to restart once, the first time it joins.
+- Item values (Items) need the same profile on the server and each player: they are set at game start.
+
+Keeping it in step
+- /strata reload on the server reads the config again without a restart. Most things apply then. See When changes apply.
+- Edit on the server as an operator and press Save, as in single player. Activate pushes it live.
+- /strata validate lists problems in the tables.
+
+Examples
+- A hard-mode server: Save "hard-mode", join as operator, Activate.
+- A quick fix: edit the trade on the server, Save, /strata reload.

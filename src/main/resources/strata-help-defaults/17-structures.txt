@@ -5,22 +5,38 @@
 Where: World > Structures.
 
 Every structure of the game and its mods, grouped by type, with their spacing, pieces, weathering, modifiers and tags.
+A tier's or a biome's Structures button opens the same list for that scope.
 
-What you can do here
-- Edit a structure's biomes and the mobs that spawn inside it.
-- Spacing: how far apart its set places it (spacing, separation, salt).
+The structure list
+- Select a structure to see its fields. Select a field, type a value, Set value.
+- Biomes: the biome tag or ids it may be placed in.
+- Spawns: the mobs that spawn inside it, with weights and group sizes. Add a mob with Duplicate element.
+- Spacing: how far apart its structure set places it. Spacing is the most chunks apart. Separation is the least. Salt changes where.
 - Off: it is never placed again.
-- Custom structures: your own .nbt builds, placed by the world like a village.
+- Restore puts a field back. Restore all puts the structure back.
+- Structure tags: which structures count for maps, for eyes of ender, for cats and so on.
 
 Custom structures
-- Save a build with a structure block, then type the path of the .nbt file.
+Your own .nbt builds, placed by the world like a village.
+- Save a build in the game with a structure block (Save mode). The file is in the world's generated/ folder. Or use any .nbt from a tool.
+- + Add, then Browse... for the .nbt file, or type its path.
 - At most 48 blocks on each side, and 1 MB.
-- Biomes: a biome tag or biome ids. Spacing and Separation in chunks. Land around it: none, beard_thin, beard_box, bury or encapsulate. Height: surface, or a Y level.
+- Biomes: a biome tag like #minecraft:is_forest, or biome ids.
+- Spacing and Separation: in chunks. Spacing 40, separation 10 is about one every 40 chunks.
+- Land around it: none, beard_thin, beard_box, bury or encapsulate. Beard fills the ground under it. Bury sinks it. Encapsulate wraps it in ground.
+- Height: surface, or a Y level.
+- Off stops placing it. Remove deletes the entry.
+
+Step by step: a tower in every forest
+1. Build a tower. Place a structure block, Save mode, name "tower". Press Save.
+2. World > Structures > Custom structures. + Add. Browse... to the world's generated/minecraft/structures/tower.nbt.
+3. Biomes #minecraft:is_forest. Spacing 40. Separation 10. Land around it beard_thin. Height surface.
+4. Save in Profiles. New forest chunks hold towers.
 
 Examples
 - Villages twice as far apart: raise their spacing.
 - No ocean ruins: Off.
-- Your own tower in every forest, one in about 40 chunks.
 - Witches and more spawn inside swamp huts: edit its spawns.
+- Your variant inside pillager outposts: add it to the outpost's spawns.
 
 When it applies: in land made after the next world load. Land already made keeps what it has.

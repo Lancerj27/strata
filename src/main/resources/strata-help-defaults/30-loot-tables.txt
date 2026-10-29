@@ -3,20 +3,34 @@
 @screen LootTableScreen
 Where: Items > Loot tables.
 
-Every loot table that is not a chest's, a mob's or a block's: fishing, archaeology, gifts, bartering, and each mod's own.
-
-What you can do here
-- Edit opens the table's entries, pool by pool, each with its count and share of the picks.
-- + Add loot entry, Edit and Remove change the entries.
-- Edit on a pool's row sets how many times it picks.
-- Loot table opens every raw value: conditions, enchantments and the rest.
-- Restore all puts the whole table back.
-
+Every loot table that is not a chest's, a mob's or a block's: fishing, archaeology, gifts (the hero of the village), bartering, the sniffer's digging, and each mod's own.
 Mob and block tables are on their own Loot screens. Options > Show duplicate editors lists them here too.
 
+How a loot table works
+- A table has pools. Each pool rolls so many times. Each roll picks one entry by weight.
+- An entry is an item with a weight, a count, and conditions and functions (enchant, set damage).
+- Fishing has three pools: fish, junk and treasure.
+
+The list
+- Grouped by mod, then by kind. Search finds a table by its id.
+- Edit, or a double-click, opens the table's entries, pool by pool, each with its count and share of the picks.
+- Restore all puts the whole table back.
+
+The table editor
+- + Add loot entry puts an item into the selected pool, with its weight and count. Your item variants are listed first.
+- Edit opens an entry. Remove takes it out. On a game entry, Remove gives it weight 0, and Restore brings it back.
+- Edit on a pool's row sets how many times it rolls.
+- Loot table opens every raw value: conditions, functions, enchantments and the rest, as JSON.
+
+Step by step: more treasure when fishing
+1. Search "fishing". Edit the fishing table.
+2. Select the treasure pool's row. Edit. Rolls 1-2.
+3. Or: Loot table, raise the treasure pool's chance.
+4. Save in Profiles.
+
 Examples
-- Fishing gives more treasure.
-- Piglins barter netherite scrap at 1%.
-- A sniffer egg in suspicious sand.
+- Piglins barter netherite scrap at 1%: the bartering table, + Add loot entry, netherite scrap, weight 1 among the rest.
+- A sniffer egg in suspicious sand: the archaeology table, + Add loot entry.
+- Your item variant from the hero of the village: a gift table, + Add loot entry.
 
 When it applies: from the next world load.

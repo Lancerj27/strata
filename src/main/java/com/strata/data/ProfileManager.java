@@ -80,6 +80,16 @@ public final class ProfileManager {
         return last != '.' && last != ' ';
     }
 
+    /** The profiles folder, made when missing, for the designer to open and drop a profile folder into. */
+    public static Path profilesFolder() {
+        try {
+            Files.createDirectories(Paths.PROFILES);
+        } catch (IOException e) {
+            Strata.LOGGER.warn("Could not make the profiles folder: {}", e.toString());
+        }
+        return Paths.PROFILES;
+    }
+
     public static List<Profile> listProfiles() {
         List<Profile> out = new ArrayList<>();
         Path dir = Paths.PROFILES;
@@ -471,7 +481,7 @@ public final class ProfileManager {
     }
 
     /** A profile folder's table files and common config, as name to text. */
-    private static java.util.Map<String, String> filesIn(Path dir, String name) {
+    static java.util.Map<String, String> filesIn(Path dir, String name) {
         java.util.Map<String, String> out = new java.util.LinkedHashMap<>();
         if (!Files.isDirectory(dir)) {
             return out;
@@ -536,145 +546,6 @@ public final class ProfileManager {
             total += length;
         }
         return total > MAX_UPLOAD_CHARS ? "The profile is too large to " + (upload ? "send" : "import") : null;
-    }
-
-    // ---- ONE FILE: export as one file, and import as a named profile ----
-
-    /** A profile file's extension. */
-    public static final String ZIP = ".zip";
-
-    /** Writes a profile as one file, config/strata/exports/{name}.zip. */
-    public static Result exportFile(String name) {
-        return exportFile(Paths.PROFILES, Paths.EXPORTS, name);
-    }
-
-    static Result exportFile(Path profilesDir, Path exportsDir, String name) {
-        if (!isSafeName(name)) {
-            return Result.INVALID_NAME;
-        }
-        java.util.Map<String, String> files = filesIn(profilesDir.resolve(name), name);
-        if (files.isEmpty()) {
-            return Result.NOT_FOUND;
-        }
-        Path target = exportsDir.resolve(name + ZIP);
-        Path tmp = exportsDir.resolve(name + ZIP + ".tmp");
-        try {
-            Files.createDirectories(exportsDir);
-            try (var zip = new java.util.zip.ZipOutputStream(Files.newOutputStream(tmp))) {
-                for (var entry : files.entrySet()) {
-                    zip.putNextEntry(new java.util.zip.ZipEntry(entry.getKey()));
-                    zip.write(entry.getValue().getBytes(java.nio.charset.StandardCharsets.UTF_8));
-                    zip.closeEntry();
-                }
-            }
-            Files.move(tmp, target, java.nio.file.StandardCopyOption.REPLACE_EXISTING);
-            Strata.LOGGER.info("Exported profile '{}' to {}", name, target);
-            return Result.OK;
-        } catch (IOException e) {
-            Strata.LOGGER.error("Could not export profile '{}' to a file: {}", name, e.toString());
-            return Result.IO_ERROR;
-        }
-    }
-
-    /** The imports folder, made when missing, for the designer to drop files in. */
-    public static Path importsFolder() {
-        try {
-            Files.createDirectories(Paths.IMPORTS);
-        } catch (IOException e) {
-            Strata.LOGGER.warn("Could not make the imports folder: {}", e.toString());
-        }
-        return Paths.IMPORTS;
-    }
-
-    /** The.zip files in the imports folder, by name, sorted. */
-    public static List<String> importable() {
-        return importable(Paths.IMPORTS);
-    }
-
-    static List<String> importable(Path importsDir) {
-        List<String> out = new ArrayList<>();
-        if (!Files.isDirectory(importsDir)) {
-            return out;
-        }
-        try (DirectoryStream<Path> stream = Files.newDirectoryStream(importsDir, "*" + ZIP)) {
-            for (Path file : stream) {
-                if (Files.isRegularFile(file)) {
-                    out.add(file.getFileName().toString());
-                }
-            }
-        } catch (IOException e) {
-            Strata.LOGGER.warn("Could not list the imports folder: {}", e.toString());
-        }
-        out.sort(String::compareTo);
-        return out;
-    }
-
-    /** The profile name an import file becomes: its name without.zip. */
-    public static String importName(String fileName) {
-        String f = fileName == null ? "" : fileName.strip();
-        return f.endsWith(ZIP) ? f.substring(0, f.length() - ZIP.length()) : f;
-    }
-
-    /** Why this file cannot be imported, or null when it can. */
-    public static String importProblem(String fileName) {
-        return importProblem(Paths.IMPORTS, fileName);
-    }
-
-    static String importProblem(Path importsDir, String fileName) {
-        if (fileName == null || !fileName.endsWith(ZIP)) {
-            return "Pick a .zip file";
-        }
-        java.util.Map<String, String> files = readZip(importsDir.resolve(fileName));
-        if (files == null) {
-            return "The file could not be read as a .zip";
-        }
-        return filesProblem(importName(fileName), files, false);
-    }
-
-    /**
-     * Imports a file as the profile its name gives, replacing that profile if it exists (the screen asks
-     * first).
-     */
-    public static Result importFile(String fileName) {
-        return importFile(Paths.IMPORTS, Paths.PROFILES, fileName);
-    }
-
-    static Result importFile(Path importsDir, Path profilesDir, String fileName) {
-        if (importProblem(importsDir, fileName) != null) {
-            return Result.INVALID_NAME;
-        }
-        return storeUpload(profilesDir, importName(fileName), readZip(importsDir.resolve(fileName)));
-    }
-
-    /** A.zip's files as name to text: each entry by its own name, a folder inside the zip dropped. */
-    static java.util.Map<String, String> readZip(Path file) {
-        java.util.Map<String, String> out = new java.util.LinkedHashMap<>();
-        long total = 0;
-        try (var zip = new java.util.zip.ZipInputStream(Files.newInputStream(file))) {
-            java.util.zip.ZipEntry entry;
-            boolean any = false;
-            while ((entry = zip.getNextEntry()) != null) {
-                any = true;
-                if (entry.isDirectory()) {
-                    continue;
-                }
-                String full = entry.getName().replace('\\', '/');
-                String name = full.substring(full.lastIndexOf('/') + 1);
-                // An override sheet keeps its folder: overrides/{kind}.json (filesProblem checks the name).
-                if (full.endsWith("/" + name) && full.substring(0, full.length() - name.length() - 1).endsWith(OVERRIDES)) {
-                    name = OVERRIDES + "/" + name;
-                }
-                byte[] bytes = zip.readNBytes(MAX_UPLOAD_CHARS + 1);
-                total += bytes.length;
-                if (total > MAX_UPLOAD_CHARS) {
-                    return null;
-                }
-                out.put(name, new String(bytes, java.nio.charset.StandardCharsets.UTF_8));
-            }
-            return any ? out : null;
-        } catch (IOException | IllegalArgumentException e) {
-            return null;
-        }
     }
 
     /** Stores an uploaded profile in config/strata/profiles/{name}, replacing what that folder held. */

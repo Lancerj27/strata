@@ -56,7 +56,25 @@ public class MobScalingHandler {
             }
         }
 
-        applyTo(mob, resolution, areaLevel(mob, resolution, resolution.level()), allowed);
+        applyTo(mob, resolution, progressLevel(mob, areaLevel(mob, resolution, resolution.level())), allowed);
+    }
+
+    /**
+     * A SPAWN LEVEL WITH THE PLAYERS' PROGRESS ON IT, by the World level stage's mode: the stage's offset, its
+     * player level coefficient times the highest XP level any player reached, World stage scale per stage, and
+     * Player level scale per XP level of the nearest player (Options > Settings).
+     */
+    public static int progressLevel(Mob mob, int level) {
+        double more = com.strata.data.StrataConfig.read(com.strata.data.StrataConfig.WORLD_STAGE_SCALE) * WorldLevel.stage()
+                + com.strata.data.StrataConfig.read(com.strata.data.StrataConfig.PLAYER_LEVEL_SCALE) * nearestPlayerLevel(mob);
+        double out = WorldLevel.applyToSpawn(level, more);
+        return Double.isFinite(out) ? Math.max(0, (int) Math.round(out)) : level;
+    }
+
+    /** The nearest player's XP level within 128 blocks, 0 with none. */
+    private static int nearestPlayerLevel(Mob mob) {
+        net.minecraft.world.entity.player.Player near = mob.level().getNearestPlayer(mob, 128);
+        return near == null ? 0 : near.experienceLevel;
     }
 
     /** THE CHUNK'S LOCAL DIFFICULTY COMPOUNDS THE AREA LEVEL. */
@@ -68,7 +86,10 @@ public class MobScalingHandler {
         double local = server.getCurrentDifficultyAt(mob.blockPosition()).getEffectiveDifficulty();
         double area = com.strata.model.ScalingFormulas.eval(com.strata.model.ScalingFormulas.Kind.AREA_LEVEL,
                 com.strata.model.ScalingFormulas.vars("level", level, "local_difficulty", local,
-                        "chunk_scale", resolution.chunkScale()));
+                        "chunk_scale", resolution.chunkScale(),
+                        "player_level", nearestPlayerLevel(mob),
+                        "world_stage", WorldLevel.stage(),
+                        "world_level", WorldLevel.level()));
         return Double.isFinite(area) ? Math.max(0, (int) Math.round(area)) : level;
     }
 

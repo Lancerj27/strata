@@ -3,26 +3,51 @@
 Where: World > Mobs, Edit on a mob.
 
 One mob, or one of your variants, at the scope you opened it from: Global, a tier or a biome.
+The title names the mob and the scope.
 
-What you can do here
-- Spawn weight: its share when the game picks among its category's mobs (not a chance).
-- Min count and Max count: the group size.
-- Spawn chance %: how often it then spawns. Blank is 100.
-- Scaling, Coefficient and Start level: whether and how strongly it scales, and the first level with a bonus.
-- Display name, for a variant.
-- Goal set: which AI it runs.
-- Mob data, Biomes, Spawn rules, Loot, Equipment, Abilities and Trades open their own screens.
+Spawning
+- Spawn weight: its share when the game picks among its category's mobs. Not a chance. A zombie at 100 beside a skeleton at 100 is a 50% zombie.
+- Min count and Max count: the group size when it spawns.
+- Spawn chance %: how often a picked spawn then happens. Blank is 100.
+
+Scaling
+- Scaling: whether this mob scales with the area level.
+- Coefficient: multiplies its scaling bonus. Blank is 1.
+- Start level: the first level with a bonus. Below it the mob is its base self.
+
+Identity
+- Display name, for a variant. The game shows it over the mob and in death messages.
+- Goal set: which AI list it runs. See Goals and goal sets.
+
+The sub-screens
+- Mob data: every value the game holds for it. See Mob data.
+- Biomes: which biomes this mob's row counts in, when the row is on a tier.
+- Spawn rules: conditions for a spawn. See Spawn rules.
+- Loot: extra drops and its loot table. See Mob loot.
+- Equipment: what it wears and holds. See Equipment.
+- Abilities: special powers on a trigger. See Abilities.
+- Trades: for villagers and the wandering trader. See Trades.
 - Category, Mob griefing and Spawn as are in Mob data, at the top of Attributes.
 - Restore all puts the mob back as the game makes it, in every scope. A list of what goes comes first.
 
 Variants
 - A variant is your own mob made from a base mob, with its own name, look and values.
+- + Add variant on the mob list, under a mob, makes one. Type a name of lowercase letters, digits and _.
 - It uses its base mob's values for anything it does not set itself.
 - Give the skeleton a sword and its variants carry it too.
+- A variant spawns only where you put it on a list. It has no spawns of its own.
+
+Step by step: a frost zombie
+1. World > Mobs. Select the zombie. + Add variant. Name "frost_zombie".
+2. Edit the variant. Display name "Frost Zombie".
+3. Mob data > Visuals. Tint, pick a blue. Or Texture, pick one of your custom textures.
+4. Mob data > Attributes. Max health 40.
+5. Abilities. + Add. Apply effect, slowness, on hit, 100%.
+6. Back on the mob list, open a cold tier's tab. + Add mob, pick frost_zombie, weight 50.
 
 Examples
-- A "Frost Zombie" variant: blue tint, slowness on hit, double health.
 - Zombies that spawn in groups of 4 to 6.
 - A rare golden skeleton: a variant with weight 2 and better loot.
+- A zombie that does not scale: Scaling Off.
 
 When it applies: at once, after Save. Spawn weight and counts reach the spawn lists from the next world load.

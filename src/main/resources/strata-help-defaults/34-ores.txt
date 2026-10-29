@@ -2,15 +2,33 @@
 @screen OreListScreen
 Where: Blocks > Ores, or the Blocks button of a tier or biome.
 
-Every ore, on or off, with its chance.
+Every ore of the game and its mods, on or off, with its chance.
 The Global list is under every tier and biome. A biome's rule wins over its tier's, a tier's over Global.
 
-What you can do here
+The list
+- One row per ore. Columns show its state and chance at this scope, and where the value comes from.
 - On / Off: the ore generates there or not.
-- Type a chance to make it more or less common.
+- Default: the row takes the scope beneath (a tier takes Global, a biome its tier).
+- Type a chance to make it more or less common. 100 is the game's amount. 50 is half. 200 is double.
+- Search finds an ore by name or id.
+- Ore restriction in Options > Settings switches this whole part on or off.
+
+Scopes
+- Global: the whole world. Turn an ore Off here and it is gone everywhere, unless a tier turns it On.
+- A tier: its biomes. A deep tier with diamonds On and a surface tier with diamonds Off.
+- A biome: that biome alone.
+
+Step by step: diamonds only in the deep
+1. Blocks > Ores. Diamond ore, Off.
+2. World > Tiers. Edit the "Deep" tier. Blocks. Ores tab. Diamond ore, On.
+3. Save in Profiles. New chunks carry the change.
 
 Examples
-- No diamonds above the deep tier.
-- Twice the coal in a mountain tier.
+- Twice the coal in a mountain tier: coal ore, chance 200.
+- No ancient debris anywhere: Off on Global.
+- A modded ore only in one biome: Off on Global, On on the biome.
+
+For the exact Y range, vein size and count, see Features.
+An ore turned off becomes the stone around it. A regenerate (Profiles) applies it to old chunks too.
 
 When it applies: in land made after the next world load.

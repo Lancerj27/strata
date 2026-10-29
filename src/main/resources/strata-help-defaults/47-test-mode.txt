@@ -2,15 +2,24 @@
 @screen TestModeScreen
 Where: Options > Test mode.
 
-Spawn a mob at a level, to see what scaling does.
+Spawn a mob at a level, to see what scaling does. A world must be open.
 
 What you can do here
-- Pick a mob and type an area level.
-- The preview shows its scaled stats.
-- Spawn test mob spawns it beside you.
+- Pick a mob. Your variants are in the list.
+- Type an area level, 0 or more.
+- The preview shows its scaled stats at that level: health, damage, armor, speed and the rest, from your curves.
+- Spawn test mob spawns it beside you, at that level.
+- A line says why the button is off: no mob picked, no level, or not a whole number.
+
+Step by step: check a curve
+1. Scaling > Mob scaling. Edit health, per_level 0.05.
+2. Options > Test mode. Zombie. Level 50.
+3. The preview reads 70 health (20 x (1 + 0.05 x 50)).
+4. Spawn test mob. /strata mob get beside it confirms.
 
 Examples
 - A level 50 zombie, to check your curves.
 - Your variant at level 1, to check its look.
+- A boss at level 100, to check its bar.
 
-/strata test spawn <mob> <level> does the same.
+/strata test spawn <mob> <level> does the same. Operator.

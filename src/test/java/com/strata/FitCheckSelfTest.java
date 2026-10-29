@@ -653,6 +653,12 @@ public final class FitCheckSelfTest {
                 found.addAll(atEverySize(f -> com.strata.ui.screen.HelpLayout.build(f, font, title, section, 0)));
                 found.addAll(atEverySize(f -> com.strata.ui.screen.HelpLayout.build(f, font, title, section,
                         com.strata.ui.screen.HelpLayout.maxScroll(f, font, section))));
+                // Every block closed: the page as it opens.
+                java.util.Set<Integer> closed = new java.util.HashSet<>();
+                for (int b = 0; b < com.strata.ui.screen.HelpLayout.blocks(section); b++) {
+                    closed.add(b);
+                }
+                found.addAll(atEverySize(f -> com.strata.ui.screen.HelpLayout.build(f, font, title, section, 0, closed)));
             }
             return none(lines, "fit.29", found);
         });
@@ -845,6 +851,35 @@ public final class FitCheckSelfTest {
             found.addAll(atEverySize(f -> com.strata.ui.screen.ListScreenLayouts.valueSheet(f, font, longTitle,
                     180, longText("Game value: 0.23. Applies from the next world load.", 30), longFooter,
                     longEmpty, true)));
+            // The World level screen: its stage tabs (one, and forty paged to the end), the stage form, and the
+            // rule row with each kind of value cell.
+            List<String> one = List.of("Start");
+            List<String> forty = new ArrayList<>(one);
+            for (int i = 1; i < 40; i++) {
+                forty.add(i % 7 == 0 ? "An Extremely Long Stage Name " + i : String.valueOf(i));
+            }
+            var kinds = com.strata.runtime.WorldLevel.KINDS;
+            var startForm = new com.strata.ui.screen.WorldLevelLayout.Form(true, kinds, "xp_level",
+                    com.strata.ui.screen.WorldLevelLayout.ValueCell.FIELD, "", List.of(), false, "", "+ Add rule");
+            var fieldForm = new com.strata.ui.screen.WorldLevelLayout.Form(false, kinds, "xp_level",
+                    com.strata.ui.screen.WorldLevelLayout.ValueCell.FIELD, "", List.of(), false, "", "+ Add rule");
+            var pickForm = new com.strata.ui.screen.WorldLevelLayout.Form(false, kinds, "lock_biome",
+                    com.strata.ui.screen.WorldLevelLayout.ValueCell.BUTTON, "Some Mod: An Extremely Long Biome Name",
+                    List.of(), true, "Some Mod: An Extremely Long Effect Name", "Save rule");
+            var tierForm = new com.strata.ui.screen.WorldLevelLayout.Form(false, kinds, "lock_tier",
+                    com.strata.ui.screen.WorldLevelLayout.ValueCell.CHOICE, "An Extremely Long Tier Name",
+                    List.of("An Extremely Long Tier Name", "Deep"), true, "Weakness", "+ Add rule");
+            for (var form : List.of(startForm, fieldForm, pickForm, tierForm)) {
+                found.addAll(atEverySize(f -> com.strata.ui.screen.WorldLevelLayout.build(f, font, longTitle,
+                        com.strata.ui.screen.ListScreenLayouts.stageTabs(f, font, forty, 39, Integer.MAX_VALUE), form,
+                        com.strata.domain.WorldLevelOps.HINT, longFooter, longEmpty)));
+            }
+            found.addAll(atEverySize(f -> com.strata.ui.screen.WorldLevelLayout.build(f, font, longTitle,
+                    com.strata.ui.screen.ListScreenLayouts.stageTabs(f, font, one, 0, 0), startForm,
+                    com.strata.domain.WorldLevelOps.HINT, longFooter, longEmpty)));
+            found.addAll(atEverySize(f -> com.strata.ui.screen.WorldLevelLayout.build(f, font, longTitle,
+                    com.strata.ui.screen.ListScreenLayouts.stageTabs(f, font, forty, 17, 0), fieldForm,
+                    com.strata.domain.WorldLevelOps.HINT, longFooter, longEmpty)));
             return none(lines, "fit.36", found);
         });
 

@@ -2,35 +2,47 @@
 @screen MobDataScreen
 Where: the mob editor, Mob data.
 
-Every value Strata reads from the game for the mob, in tabs.
-At the top of Attributes:
+Every value Strata reads from the game for the mob, in tabs. Each value shows what it does and the game's number.
+
+At the top of Attributes
 - Category: which mob cap it counts toward. Misc: the game never spawns it by itself.
-- Mob griefing: Off, On or Default, for this mob alone.
-- Passive and Converts.
-- Spawn as: Normal (from spawn lists) or Special (from its special spawner).
-The tabs:
-- Attributes: health, armor, damage, speed, follow range and every mod's attribute.
-- Type: size, fire immunity, blocks it ignores, tracking range.
-- Fields: the values of its class.
-- Tags: true or false for each mob tag.
-- Visuals: model, texture, glowing texture, tint, scale, shadow and particles.
-- Sounds: each sound with its volume and pitch.
+- Mob griefing: Off, On or Default, for this mob alone. Off stops a creeper breaking blocks and an enderman taking them.
+- Passive: it never attacks.
+- Converts: whether it turns into another mob (a zombie drowning, a villager struck by lightning).
+- Spawn as: Normal (from spawn lists) or Special (from its special spawner). See Special spawns.
+
+The tabs
+- Attributes: health, armor, armor toughness, damage, attack speed, attack knockback, knockback resistance, speed, follow range and every mod's attribute. Attack damage and flying speed on a mob the game gives none need Extra mob attributes On in Settings.
+- Type: size (width and height), fire immunity, blocks it ignores, tracking range, update interval.
+- Fields: the values of its class, for example a slime's size or a creeper's fuse.
+- Tags: true or false for each mob tag. See Mob tags.
+- Visuals: model, texture, glowing texture, tint, scale, shadow and particles. Pick... lists the game's and your custom files. + Add custom... imports a file.
+- Sounds: each sound with its volume and pitch. Pick... lists the game's and your custom sounds.
 - Body: gravity, immunities, burning in daylight, item pickup, despawning, climbing, swimming, flying, Boss, scoreboard tags, and how much it avoids each kind of terrain.
-- Combat: reach, attack cooldown, sweep hits, ranged range and interval, and the projectile it fires.
+- Combat: reach, attack cooldown, sweep hits, ranged range and interval, and the projectile it fires. See Projectiles.
 - Loot & XP: its loot table, XP range, gear that always drops, and each slot's drop chance.
-- Boss (when Boss is on): the bar's colour, style, name and range, dark sky, fog and boss music.
+- Boss (when Boss is on): the bar's color, style, name and range, dark sky, fog and boss music.
 
 What you can do here
 - Select a value, type yours, Set value. Restore puts back the value beneath.
 - Blank is the game's own value.
-- Grey values are locked. The line under the list says why.
+- Grey values are locked. The line under the list says why. Show locked values in Settings lists or hides them.
+- Yellow values are yours at this scope. A value set at Global shows white at a tier.
+
+Step by step: a boss
+1. Body. Boss, true.
+2. Boss tab. Bar color, pick one. Boss music, pick a sound.
+3. Attributes. Max health 300. Armor 10.
+4. Visuals. Scale 1.5.
+5. Loot & XP. XP range 100-150.
 
 Examples
 - A zombie with 40 health and 0.3 speed.
-- A spider twice as big: Type, size.
-- A mob that never burns in daylight: Body.
+- A spider twice as big: Visuals, scale 2.
+- A mob that never burns in daylight: Body, Burns in daylight, false.
 - Creepers that break nothing: Mob griefing Off.
-- A skeleton that fires your own projectile: Combat.
+- A skeleton that fires your own projectile: Combat, Projectile.
+- A silent mob: Sounds, each volume 0.
 
 When it applies: each time the mob joins the world, and on loaded mobs when you save.
 Type values and tags are for the whole mob type. Tags apply from the next world load.

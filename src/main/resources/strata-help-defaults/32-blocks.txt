@@ -6,16 +6,36 @@ Where: Blocks > Blocks.
 Every block of the game and its mods, by kind: ores, stone and metal, wood, plants, liquids and the rest.
 The tabs at the top open Ores, Vegetation and Block replacements.
 
-What you can do here
-- Edit opens a block's values: hardness, blast resistance, the correct-tool rule, friction, speed and jump, light level, flammability, sound, map colour, collision and more.
-- On / Off disables the picked blocks: they cannot be placed, leave the creative tabs, and stop generating.
-- + Add variant, under a block, makes your own block from it.
+The block list
+- Search finds a block by name or id.
+- Edit, or a double-click, opens a block's values.
+- On / Off disables the picked blocks: they cannot be placed, leave the creative tabs, and stop generating. Blocks already in the world stay.
+- + Add variant, under a block, makes your own block from it. See Block variants.
 - Data... opens block tags, block data (waxing, oxidizing), fluid tags, game event tags and workstation tags.
 
+The block editor
+Each value says what it does and shows the game's number.
+- Hardness: how long it takes to break. 0 breaks at once. -1 cannot be broken.
+- Blast resistance: how well it stands an explosion. Obsidian is 1200.
+- Requires correct tool: whether the wrong tool drops nothing.
+- Friction: 0.6 is normal. Ice is 0.98.
+- Speed factor and Jump factor: soul sand is 0.4 speed. Honey is 0.5 jump.
+- Light level: 0 to 15.
+- Flammability and Fire spread: how fire takes it.
+- Sound type: the sounds it makes.
+- Map color: the color on a map.
+- Collision: whether it blocks movement.
+- Select a value, type yours, Set value. Restore puts it back. Restore all puts the block back.
+
+Step by step: soft obsidian
+1. Search "obsidian". Edit it.
+2. Hardness. Type 2. Set value.
+3. It breaks in about 2 seconds with a diamond pickaxe, at once.
+
 Examples
-- Obsidian that breaks in 2 seconds.
 - Ice that is not slippery: friction 0.6.
 - Glowstone with light level 10.
-- Disable the TNT block.
+- Disable the TNT block: select it, Off.
+- Unbreakable bedrock in reverse: bedrock hardness 50, so it can be mined.
 
 When it applies: at once. A new light level shows where light is worked out again.

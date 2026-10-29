@@ -93,6 +93,8 @@ public final class StrataConfig {
     public static final ModConfigSpec.DoubleValue MOB_XP_PER_LEVEL;
     public static final ModConfigSpec.DoubleValue MOB_XP_EXPONENT;
     public static final ModConfigSpec.DoubleValue CHUNK_SCALE;
+    public static final ModConfigSpec.DoubleValue PLAYER_LEVEL_SCALE;
+    public static final ModConfigSpec.DoubleValue WORLD_STAGE_SCALE;
     public static final ModConfigSpec.BooleanValue ENABLE_CHUNK_SCALING;
 
     // the tier/biome editor has no title-screen button any more.
@@ -250,6 +252,14 @@ public final class StrataConfig {
         CHUNK_SCALE = builder
                 .comment("How much local difficulty compounds area level: area level = level * (1 + chunkScale * localDifficulty).")
                 .defineInRange("chunkScale", 0.13, 0.0, 2.0);
+
+        PLAYER_LEVEL_SCALE = builder
+                .comment("Levels a mob gains at spawn for each XP level of the nearest player (within 128 blocks). 0 = off.")
+                .defineInRange("playerLevelScale", 0.0, 0.0, 10.0);
+
+        WORLD_STAGE_SCALE = builder
+                .comment("Levels a mob gains at spawn for each World level stage reached, on top of the stage's own offset. 0 = off.")
+                .defineInRange("worldStageScale", 0.0, 0.0, 100.0);
 
         builder.pop();
 

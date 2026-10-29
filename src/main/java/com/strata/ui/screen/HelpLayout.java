@@ -1,5 +1,6 @@
 package com.strata.ui.screen;
 
+import com.strata.ui.Box;
 import com.strata.ui.Frame;
 import com.strata.ui.Grid;
 import com.strata.ui.Layout;
@@ -7,18 +8,33 @@ import com.strata.ui.TextFit;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Set;
 
-/** HELP, LAID OUT: HelpScreen. */
+/** HELP, LAID OUT: HelpScreen. A page is its intro, then folding blocks, one per sub-heading. */
 public final class HelpLayout {
 
     private HelpLayout() {
     }
-    /** One wrapped line, and whether it is part of a heading. */
-    public record Line(String text, boolean heading) {
+
+    /**
+     * One wrapped line.
+     *
+     * @param heading part of the page's heading (the "# " line)
+     * @param subhead a block's title row, clicked to open or close the block
+     * @param block the block the line belongs to, -1 for the intro
+     */
+    public record Line(String text, boolean heading, boolean subhead, int block) {
     }
 
     /** The step from one line to the next: the font's height and 2. */
     public static final int LINE_STEP = 11;
+
+    /** The fold button's words. */
+    public static final String OPEN_ALL = "Open all";
+    public static final String CLOSE_ALL = "Close all";
+    /** A block's marker before its title: closed, open. */
+    public static final String CLOSED = "[+] ";
+    public static final String OPEN = "[-] ";
 
     // ---- ONE PAGE PER SECTION.
 
@@ -47,39 +63,130 @@ public final class HelpLayout {
         return com.strata.data.HelpText.sectionFor(screen);
     }
 
-    /** One section's text, wrapped to the content width. */
+    /**
+     * Whether a source line is a sub-heading: a short line after a gap that is not a bullet, a step or a
+     * sentence. The help files write their blocks this way ("The mob list", "Step by step: a hard region").
+     */
+    static boolean isSubhead(List<String> text, int i) {
+        String line = text.get(i);
+        if (line.isEmpty() || line.startsWith("# ") || line.startsWith("- ") || line.startsWith("  ")
+                || line.matches("^\\d+\\..*") || line.length() > 60 || line.endsWith(".") || line.endsWith(":")) {
+            return false;
+        }
+        if (i + 1 >= text.size() || text.get(i + 1).isEmpty()) {
+            return false;
+        }
+        // The first body line after the heading is the summary, not a block.
+        for (int j = i - 1; j >= 0; j--) {
+            if (text.get(j).isEmpty()) {
+                return true;
+            }
+            if (text.get(j).startsWith("# ")) {
+                return false;
+            }
+            return false;
+        }
+        return false;
+    }
+
+    /** How many blocks a section has. */
+    public static int blocks(String section) {
+        List<String> text = sectionText(section);
+        int n = 0;
+        for (int i = 0; i < text.size(); i++) {
+            if (isSubhead(text, i)) {
+                n++;
+            }
+        }
+        return n;
+    }
+
+    /** One section's text, wrapped to the content width, every block open. */
     public static List<Line> lines(Frame frame, TextFit.Measure measure, String section) {
+        return lines(frame, measure, section, Set.of());
+    }
+
+    /**
+     * One section's text, wrapped to the content width: the intro, then each block's title row, and the
+     * lines of the blocks not in {@code folded}.
+     */
+    public static List<Line> lines(Frame frame, TextFit.Measure measure, String section, Set<Integer> folded) {
         List<Line> out = new ArrayList<>();
-        for (String text : sectionText(section)) {
-            boolean heading = text.startsWith("# ");
-            String body = heading ? text.substring(2) : text;
+        List<String> text = sectionText(section);
+        int block = -1;
+        boolean hidden = false;
+        for (int i = 0; i < text.size(); i++) {
+            String raw = text.get(i);
+            boolean heading = raw.startsWith("# ");
+            if (isSubhead(text, i)) {
+                block++;
+                hidden = folded.contains(block);
+                String title = (hidden ? CLOSED : OPEN) + raw;
+                for (String part : TextFit.wrap(title, frame.contentWidth(), Integer.MAX_VALUE, measure)) {
+                    out.add(new Line(part, false, true, block));
+                }
+                continue;
+            }
+            if (hidden) {
+                // A closed block's lines are not shown; the gap after it is kept once.
+                if (raw.isEmpty() && (out.isEmpty() || !out.getLast().text().isEmpty())) {
+                    out.add(new Line("", false, false, block));
+                }
+                continue;
+            }
+            String body = heading ? raw.substring(2) : raw;
             if (body.isEmpty()) {
-                out.add(new Line("", false));
+                out.add(new Line("", false, false, block));
                 continue;
             }
             for (String part : TextFit.wrap(body, frame.contentWidth(), Integer.MAX_VALUE, measure)) {
-                out.add(new Line(part, heading));
+                out.add(new Line(part, heading, false, block));
             }
         }
         return out;
     }
 
+    /** Where the first line sits: under the fold button's row. */
+    public static int linesTop() {
+        return Grid.actionRowY() + Grid.CTRL_H + 6;
+    }
+
     /** How many lines fit above the footer. */
     public static int visibleLines(Frame frame) {
-        return Math.max(1, (frame.footerY() - (Grid.CONTENT_Y + 4)) / LINE_STEP);
+        return Math.max(1, (frame.footerY() - linesTop()) / LINE_STEP);
     }
 
     /** How far a section can scroll, in lines. */
     public static int maxScroll(Frame frame, TextFit.Measure measure, String section) {
-        return Math.max(0, lines(frame, measure, section).size() - visibleLines(frame));
+        return maxScroll(frame, measure, section, Set.of());
     }
 
-    /** A section's lines shown from the scroll (a line number), and "Scroll for more" while there is more. */
+    public static int maxScroll(Frame frame, TextFit.Measure measure, String section, Set<Integer> folded) {
+        return Math.max(0, lines(frame, measure, section, folded).size() - visibleLines(frame));
+    }
+
+    /** A section's lines shown from the scroll (a line number), every block open. */
     public static Layout build(Frame frame, TextFit.Measure measure, String title, String section, int scroll) {
+        return build(frame, measure, title, section, scroll, Set.of());
+    }
+
+    /**
+     * A section's lines shown from the scroll (a line number), the blocks in {@code folded} closed to their
+     * title rows, the fold button ("fold") at the right of the first row, and "Scroll for more" while there
+     * is more. A line's element is "line" plus its index in {@link #lines}.
+     */
+    public static Layout build(Frame frame, TextFit.Measure measure, String title, String section, int scroll,
+                               Set<Integer> folded) {
         Layout layout = Layout.framed(frame, measure, title);
-        List<Line> all = lines(frame, measure, section);
+        List<Line> all = lines(frame, measure, section, folded);
+        if (blocks(section) > 0) {
+            int w = Grid.buttonW(CLOSE_ALL);
+            layout.add(Layout.control("fold", Layout.Kind.BUTTON,
+                    new Box(frame.contentRight() - w, Grid.actionRowY(), w, Grid.CTRL_H),
+                    folded.isEmpty() ? CLOSE_ALL : OPEN_ALL));
+        }
         int shown = visibleLines(frame);
-        int y = Grid.CONTENT_Y + 4;
+        int y = linesTop();
         for (int i = scroll; i < all.size() && i < scroll + shown; i++) {
             layout.add(layout.text("line" + i, frame.contentLeft(), y, all.get(i).text(), frame.contentWidth()));
             y += LINE_STEP;

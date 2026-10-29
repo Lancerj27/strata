@@ -19,7 +19,7 @@ public record ValueType(Shape shape, List<String> choices, Registry kind, double
 
     /** The registries a REGISTRY value is picked from. */
     public enum Registry { ITEM, BLOCK, ENTITY, LIVING_MOB, EFFECT, ATTRIBUTE, PARTICLE, SOUND, BIOME, STRUCTURE,
-        DAMAGE_TYPE, ENCHANTMENT, TEXTURE }
+        DAMAGE_TYPE, ENCHANTMENT, TEXTURE, RECIPE, ADVANCEMENT, DIMENSION, RULE_KIND }
 
     public static final List<String> BOOLEANS = List.of("true", "false");
 

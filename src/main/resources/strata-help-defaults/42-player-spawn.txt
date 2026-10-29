@@ -3,13 +3,21 @@
 Where: Options > Player spawn.
 
 Move the world spawn to a biome or a tier, for testing a start.
+Strata searches around the current spawn for the nearest place of that biome or tier, moves the world spawn there, and moves you with it.
 
 What you can do here
-- Pick a biome or a tier: the world spawn moves to the nearest place of it, and you with it.
-- Off stops the moves.
+- Biome: pick a biome. The spawn moves to the nearest one.
+- Tier: pick a tier. The spawn moves to the nearest biome of it.
+- Off stops the moves. The spawn stays where it last moved.
+- Search radius (blocks), in Settings: how far Strata looks. A rare biome needs more.
+
+Step by step: start in your hardest tier
+1. Options > Player spawn.
+2. Tier. Pick "Deep".
+3. You and the world spawn move to the nearest deep biome. Die, and you respawn there.
 
 Examples
 - Start every test in a desert.
-- Start in your hardest tier.
+- Check a biome's looks fast: pick it, look, pick the next.
 
-When it applies: at once.
+When it applies: at once in an open world, and when any world starts.

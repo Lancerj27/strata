@@ -4,14 +4,31 @@ Where: Scaling > Player scaling.
 
 How players grow stronger with their XP level.
 scaled = base x (1 + per_level x level^exponent)
+The base is the player's base stat. See Player base stats. The level is the player's XP level.
 
-What you can do here
-- One curve per attribute. Edit sets its per-level, exponent and start level.
+The screen
 - The switch at the top turns player scaling on or off. It ships Off: the curves below grow players as soon as it is On.
-- Player base stats sets the values the curves grow from.
+- One row per attribute: max health, attack damage, attack speed, movement speed, armor, reach and more.
+- Edit opens a row: per-level, exponent and start level.
+- Player base stats opens the values the curves grow from.
+
+A curve
+- Per level: the bonus per level, as a fraction of base. 0.01 is +1% per level.
+- Exponent: 1 is straight. Below 1 flattens the growth at high levels.
+- Start level: the first level with a bonus.
+
+Worked example
+Max health 20. Per level 0.01, exponent 1. At XP level 50: 20 x (1 + 0.01 x 50) = 30 health, fifteen hearts.
+
+Step by step: a slow climb
+1. Scaling > Player scaling. Switch On.
+2. Edit max health. Per level 0.01.
+3. Edit attack damage. Per level 0.005. Start level 10.
+4. Save in Profiles. Earn a level and check with /strata level get.
 
 Examples
-- +1 health per 5 levels.
+- +1 health per 5 levels: max health per_level 0.01 (on a base of 20).
 - A little more attack speed per level, from level 20.
+- Faster players at high level only: movement speed, exponent 2, per_level 0.0001.
 
-When it applies: at once, after Save.
+When it applies: at once, after Save. Losing XP lowers the bonus again.

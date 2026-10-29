@@ -112,6 +112,16 @@ public class Strata {
         modBus.addListener(net.neoforged.bus.api.EventPriority.LOWEST,
                 com.strata.runtime.BlockVariants::onRegister);
         NeoForge.EVENT_BUS.addListener(com.strata.runtime.BlockVariants::onDrops);
+        // The world's level: what players do climbs it, and it gates blocks, recipes, areas and spawn levels.
+        NeoForge.EVENT_BUS.addListener(com.strata.runtime.WorldLevel::onServerStarted);
+        NeoForge.EVENT_BUS.addListener(com.strata.runtime.WorldLevel::onServerStopped);
+        NeoForge.EVENT_BUS.addListener(com.strata.runtime.WorldLevel::onAdvancement);
+        NeoForge.EVENT_BUS.addListener(com.strata.runtime.WorldLevel::onLevelChange);
+        NeoForge.EVENT_BUS.addListener(com.strata.runtime.WorldLevel::onDeath);
+        NeoForge.EVENT_BUS.addListener(com.strata.runtime.WorldLevel::onPlayerTick);
+        NeoForge.EVENT_BUS.addListener(com.strata.runtime.WorldLevel::onBreak);
+        NeoForge.EVENT_BUS.addListener(com.strata.runtime.WorldLevel::onUseItem);
+        NeoForge.EVENT_BUS.addListener(com.strata.runtime.WorldLevel::onUseItemOnBlock);
         // The designer's projectiles: where they land, and how they fall.
         NeoForge.EVENT_BUS.addListener(com.strata.runtime.Projectiles::onImpact);
         NeoForge.EVENT_BUS.addListener(com.strata.runtime.Projectiles::onTick);

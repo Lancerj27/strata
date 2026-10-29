@@ -4,19 +4,34 @@
 Where: World > Mobs > Data... > Projectiles.
 
 Your own projectiles, fired as one the game or a mod has: an arrow, a snowball, a fireball, a trident.
-
-What you can do here
-- Speed, gravity (0 flies straight, 1 falls as normal), damage, explosion power and seconds of fire.
-- Looks like item draws it as any item. Arrow texture draws an arrow with any texture.
-- Keep its own impact: Yes still does its own thing where it lands (a fireball's blast).
-- Abilities: what happens where it lands, the same abilities a mob has.
-- Off fires the plain projectile it is based on.
-
 A mob fires one with the Shoots a projectile goal, or Combat in Mob data.
 
+The list
+- + Add makes a projectile. Type a name of lowercase letters, digits and _. Pick the base projectile.
+- Edit opens it. Duplicate copies it. Remove deletes it.
+- Off fires the plain projectile it is based on.
+
+The editor
+- Base: the game projectile it flies as. Its own physics and looks are the start.
+- Speed: blocks per tick. Blank is the base's.
+- Gravity: 0 flies straight. 1 falls as normal. 0.5 falls slowly.
+- Damage: on a direct hit. Blank is the base's.
+- Explosion power: 0 for none. A creeper is 3.
+- Fire seconds: how long the target burns.
+- Looks like item: draws it as any item. Arrow texture: draws an arrow with any texture, the game's or yours.
+- Keep its own impact: Yes still does what the base does where it lands (a fireball's blast, a snowball's nothing).
+- Abilities: what happens where it lands, on the trigger On impact. The same abilities a mob has. See Abilities.
+
+Step by step: a slowing snowball
+1. + Add. Name "frost_ball". Base snowball.
+2. Damage 4.
+3. Abilities. + Add. Apply effect, slowness, on impact, Duration 60.
+4. Edit the stray. Mob data > Combat. Projectile frost_ball.
+
 Examples
-- A snowball that deals 4 damage and slows the target.
 - A straight-flying arrow with gravity 0.
 - A fireball that explodes with power 2 and sets fire for 5 seconds.
+- An arrow that looks like a trident: Looks like item, trident.
+- A poison cloud where it lands: Aura, on impact, poison, Radius 3.
 
 When it applies: from the next shot.

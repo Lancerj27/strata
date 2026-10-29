@@ -106,6 +106,9 @@ public final class Config {
                 Paths.table(Schema.BiomeOverrides.FILE)), "other-spawn blocks");
         // A tier's and a biome's spawn rules, after the old columns they take over.
         loadIndex(() -> com.strata.runtime.AreaRules.load(Paths.table(Schema.AreaRules.FILE)), "area rules");
+        // The world's stages and their rules.
+        loadIndex(() -> com.strata.runtime.WorldLevel.load(Paths.table(Schema.WorldStages.FILE),
+                Paths.table(Schema.WorldStageRules.FILE)), "world level");
         // Disabled blocks and items.
         loadIndex(com.strata.runtime.DisabledContent::load, "disabled blocks and items");
         // Mob replacements.

@@ -3,13 +3,28 @@
 Where: Items > Data... > Armor trims.
 
 The trim materials and trim patterns in one list, a group each.
+A trim is a pattern (the shape) in a material (the color), put on armor at a smithing table.
 
-What you can do here
-- A material's item, colour and name.
-- A pattern's template item and texture.
+Trim materials
+- Ingredient: the item the smithing table takes (an ingot, a gem).
+- Description: the name and its color, as JSON text.
+- Item model index: which texture layer the armor shows.
+- Override armor materials: a different texture when the trim matches the armor (gold on gold).
+- Select a field, type a value, Set value.
+
+Trim patterns
+- Template item: the smithing template that gives the pattern.
+- Asset id: the texture the armor shows.
+- Description: the name.
+- Decal: whether it draws over the armor's own color.
+
+Step by step: a trim from your own item
+1. Make an item variant (Items > Items, + Add variant).
+2. Select a trim material, for example amethyst. Ingredient, pick the variant. Set value.
+3. /reload. The smithing table takes the variant.
 
 Examples
-- A trim material made from your own item.
-- A different colour for the copper trim.
+- A different color for the copper trim: Description, change the color.
+- Trims from any ingot: an item tag as the ingredient.
 
 When it applies: at the next world load or /reload.

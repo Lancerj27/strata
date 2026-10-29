@@ -3,18 +3,45 @@
 @screen ItemVariantStatsScreen
 Where: Items > Items, + Add variant under an item.
 
-Your own items, made from a base item.
+Your own items, made from a base item. A variant is the base item with your name, look, stats and effects on it. It needs no new textures, and no client file.
 
-What you can do here
-- The look: display name, lore, rarity, glint, unbreakable, custom model data.
-- Stats: the base item's numbers, yours in yellow. + Add attribute and + Add enchantment add more.
-- Effects: abilities while worn or held, on deal damage or on take damage.
-- Use it anywhere an item is picked: mob equipment, loot, chest loot and trades. Variants are listed first.
-- /strata item give <player> <variant> [count] gives one.
+Making one
+- Select the base item on the item list. + Add variant. Type a name of lowercase letters, digits and _.
+- Edit opens it. Remove deletes it. Stacks already given keep working as the base item.
+
+The look
+- Display name: what the player sees.
+- Lore: lines under the name.
+- Rarity: common, uncommon, rare or epic. It colors the name.
+- Glint: the enchanted shine without an enchantment.
+- Unbreakable: it never loses durability.
+- Custom model data: a number a resource pack reads to show another model.
+
+Stats
+- The base item's numbers, yours in yellow: durability, attack, armor, food and the rest.
+- + Add attribute: a modifier, for example +2 max health while held, or +0.1 speed while worn.
+- + Add enchantment: an enchantment at a level, above the game's max too.
+
+Effects
+- Abilities while worn or held (Permanent), on hit (On hit) or on hurt (On hurt). See Abilities.
+- A sword that poisons: Apply effect, poison, on hit.
+- A helmet of night vision: Apply effect, night vision, permanent.
+
+Using it
+- Anywhere an item is picked: mob equipment, loot, chest loot, trades and recipes. Variants are listed first.
+- /strata item give <player> <variant> [count] gives one. Operator.
+- /strata item list lists every variant.
+
+Step by step: Frostbite
+1. Search "iron sword". Select it. + Add variant. Name "frostbite".
+2. Display name "Frostbite". Rarity rare. Glint on.
+3. Stats. Attack damage 8. + Add enchantment, Sharpness 3.
+4. Effects. + Add. Apply effect, slowness, on hit, Duration 60.
+5. Items > Chest loot. Edit a dungeon chest. + Add loot entry, frostbite, weight 1.
 
 Examples
-- "Frostbite", an iron sword that slows what it hits.
 - "Miner's Helmet", a helmet that gives night vision.
 - A rare loot sword with Sharpness 6.
+- A golden apple variant that gives Strength II for a minute.
 
 When it applies: at once. Stacks already made get the change too.

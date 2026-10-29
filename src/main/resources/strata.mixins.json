@@ -16,7 +16,8 @@
     "PanicFleeMixin",
     "AvoidEntityFleeMixin",
     "FleeSunFleeMixin",
-    "MobSunBurnMixin"
+    "MobSunBurnMixin",
+    "RecipeManagerMixin"
   ],
   "client": [
     "client.ArrowRendererMixin",

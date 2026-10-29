@@ -4,16 +4,40 @@
 Where: Items > Data... > Enchantments, and Enchantment rolls.
 
 The enchantments and their tags in one list, a group each.
-Enchantment rolls decide what enchantments mob gear, trades and loot can get.
+Enchantment rolls (providers) decide what enchantments mob gear, trades and loot can get.
 
-What you can do here
-- An enchantment's max level, weight, cost, the items it goes on, and what it does.
-- Enchantment tags: which enchantments are treasure, which go on tables, which clash.
-- Select a field, type a value, Set value.
+Enchantments
+- Max level: the highest level a table or a book gives. Raise it for stronger enchantments.
+- Weight: how often the table offers it against the others.
+- Min cost and Max cost: the level range the table offers it at.
+- Anvil cost: what it costs to combine.
+- Supported items and Primary items: an item tag it goes on.
+- Slots: where it works (hand, armor and so on).
+- Effects: what it does, as JSON. Damage, protection, speed and the rest.
+- Exclusive set: the enchantments it clashes with.
+- Select a field, type a value, Set value. Restore puts it back.
+
+Enchantment tags
+- in_enchanting_table: what the table offers.
+- treasure: never on the table, found only in loot and trades.
+- tradeable: what librarians sell.
+- on_mob_spawn_equipment, on_random_loot, on_traded_equipment: what each source draws from.
+- curse: the curses.
+- exclusive_set/*: what clashes with what.
+- Duplicate element adds a member: type its id in Value first. Remove element takes one out.
+
+Enchantment rolls
+- Each provider is one source: a mob's gear by biome, a villager's trade, a raid.
+- Its enchantments and level range. Change them for stronger or weaker gear.
+
+Step by step: Sharpness X
+1. Search "sharpness". Select it.
+2. Max level. Type 10. Set value.
+3. /reload. Books and the table go to X. An anvil combines two IX into X.
 
 Examples
-- Sharpness up to level 10.
-- Mending on the enchanting table: add it to the in_enchanting_table tag.
-- Protection that stacks with Fire Protection: remove the clash.
+- Mending on the enchanting table: add it to the in_enchanting_table tag, and remove it from treasure.
+- Protection that stacks with Fire Protection: remove the clash in exclusive_set/armor.
+- Stronger gear on hard mobs: raise the mob equipment provider's levels.
 
 When it applies: at the next world load or /reload.

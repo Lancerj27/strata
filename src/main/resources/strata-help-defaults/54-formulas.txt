@@ -2,18 +2,34 @@
 @screen FormulasScreen
 Where: Scaling > Formulas.
 
-The four formulas scaling uses. Each one is text.
+The four formulas scaling uses. Each one is text you can edit. The curves (Mob scaling, Player scaling) give the numbers the formulas read.
 
-What you can do here
-- Area level: names level, local_difficulty, chunk_scale. Runs only while Chunk scaling is on.
-- Mob attribute bonus and Player attribute bonus: names base, level, start_level, per_level, exponent, coefficient. The result is a fraction of base: 0.5 adds half.
-- Mob XP multiplier: names level, per_level, exponent. 1 is the game's XP.
-- Operators: + - * / ^ and parentheses. Functions: min, max, clamp, floor, ceil, round, abs, sqrt, log, exp, if(test, a, b).
-- A formula with a problem shows it in red and Save stays off. Defaults puts Strata's own back.
+The formulas
+- Area level: the level a mob spawns at. Names level (the biome's or tier's), local_difficulty (the game's 0 to 6.75), chunk_scale (the setting), player_level (the nearest player's XP level, 0 with none within 128 blocks), world_stage (the World level stage). Runs only while Chunk scaling is on. For example level * (1 + chunk_scale * local_difficulty) + 0.5 * player_level scales spawns with the players, half a level per XP level.
+- Mob attribute bonus: how much a stat grows. Names base, level, start_level, per_level, exponent, coefficient. The result is a fraction of base: 0.5 adds half.
+- Player attribute bonus: the same for players, with no coefficient.
+- Mob XP multiplier: names level, per_level, exponent. 1 is the game's XP. 2 doubles it.
+
+Writing a formula
+- Operators: + - * / ^ and parentheses.
+- Functions: min, max, clamp(x, low, high), floor, ceil, round, abs, sqrt, log, exp, if(test, a, b). In if, a test of 0 is false and anything else is true.
+- Type in the box. A formula with a problem shows it in red, and Save stays off. The line under it names the problem.
+- Defaults puts Strata's own formulas back.
+- Save writes them. Each profile keeps its own.
+
+The shipped formulas
+- Area level: level * (1 + chunk_scale * local_difficulty)
+- Attribute bonus: if(level - start_level + 1, per_level * (level - start_level + 1) ^ exponent, 0) * coefficient
+- XP multiplier: if(level, 1 + per_level * level ^ exponent, 1)
+
+Step by step: a capped bonus
+1. Scaling > Formulas.
+2. Mob attribute bonus. Type min(if(level - start_level + 1, per_level * (level - start_level + 1) ^ exponent, 0) * coefficient, 3).
+3. Save. No stat grows past four times its base.
 
 Examples
 - A flat bonus of 2 per level: 2 * level / base.
-- A cap on the bonus: min(per_level * level, 3).
-- Double XP above level 20: if(level - 20, 2, 1).
+- Double XP above level 20: if(max(0, level - 20), 2, 1).
+- Steps of 10 levels: per_level * floor(level / 10) * 10.
 
 When it applies: at once, after Save. Each profile keeps its own.

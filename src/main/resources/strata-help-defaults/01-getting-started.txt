@@ -1,32 +1,58 @@
 # Getting started
 @screen ClientScreen
-Strata changes how your world plays: which mobs spawn where, how strong they are, what they carry and drop, and the items, blocks and world generation of the game and its mods.
+Strata changes how your world plays: which mobs spawn where, how strong they are, what they carry and drop, and the items, blocks and world generation of the game and its mods. You edit everything in game. You never open a file.
 
+Opening the editor
+- Type /strata ui in chat. On a server you need operator.
+- Or press the Strata button on the title screen or the pause menu, or Config on Strata in the Mods list.
+- Or set a key (K, P or O) as Editor key in Options > Settings.
+
+The main menu
 The main menu has three sections: World, Items and Blocks.
+- World: tiers, biomes, mobs, structures, dimensions, terrain and features.
+- Items: items, item variants, loot tables, chest loot, and the item data (recipes, brewing, enchantments and the rest).
+- Blocks: blocks, block variants, ores, vegetation and block replacements.
 The dropdown at the title moves between a section's screens. Blocks has tabs across the top instead.
+
 The buttons at the top right are on every screen:
 - Go to: any World, Items or Blocks screen in one click.
-- Profiles: save, load and switch configs.
+- Profiles: save, load and switch whole configs.
 - Scaling: mob scaling, player scaling and the formulas.
 - Options: Strata's settings and tools.
 - Exit: closes the editor.
-- ?: the help for the screen you are on.
+- ?: the help for the screen you are on. Help itself lists every section.
 
 How the screens work
 - Click a row to select it. Edit, or a double-click, opens it.
 - Ctrl-click picks one more row. Shift-click picks a run of rows.
 - Remove and On / Off act on every picked row.
-- Yellow is a value you changed. Grey is switched off or locked.
-- Restore puts back the value under yours. Restore all clears every change.
+- Yellow is a value you changed. Grey is switched off or locked. White is the game's own value.
+- Blank is the game's own value. Clear a field to go back to it.
+- Restore puts back the value under yours. Restore all clears every change on the screen.
 - Ctrl+Z, or Undo, takes back the last change.
-- Click a group heading to open or fold it. A search shows every match.
+- Click a group heading to open or fold it. A search shows every match, folded groups too.
 - Click a column heading over a list to change, add or remove a column.
+- Set value writes the value you typed. Pick... opens a list to choose from.
+- A line under a list explains a grey value, or what a selected field means.
 
-Examples
-- Make zombies stronger deep underground: World > Tiers, make a tier, put the deep biomes in it, set its level.
-- Give skeletons iron swords: World > Mobs, edit the skeleton, Equipment.
-- Make diamonds rarer: Blocks > Ores, type a lower chance for diamond ore.
-- Keep your work for the next launch: Profiles, Save.
+The three scopes
+Many things exist at three scopes: Global, a tier and a biome.
+- Global is the whole world.
+- A tier is a group of biomes you make.
+- A biome is one biome.
+A biome's value wins over its tier's. A tier's value wins over Global's. A scope with no value of its own shows the value it inherits.
 
-Your edits save at once, but the next launch loads the active profile over them.
-Press Save in Profiles to keep them.
+Your first ten minutes
+1. Open World > Tiers. Press + Add tier and name it "Deep". Set its level to 20.
+2. Press + Add biomes. Search "deep" and press Add shown. The deep dark and the deep caves join the tier.
+3. Open World > Mobs. Edit the zombie. Open Equipment and give it an iron sword at 25%.
+4. Open Blocks > Ores. Type a lower chance for diamond ore.
+5. Press Profiles at the top. Press Save and name the profile. Press Activate.
+6. Walk into a deep cave. Type /strata mob get near a zombie to see its level.
+
+Saving
+Your edits write to the working config at once. The next launch loads the active profile over them.
+Press Save in Profiles to keep them. Save often. See Profiles.
+
+Where the files live
+Everything is under config/strata/. Profiles are in config/strata/profiles/<name>/. Help text is in config/strata/help/. Custom textures and sounds are in config/strata/assets_pack/. You never need to open these to use Strata.

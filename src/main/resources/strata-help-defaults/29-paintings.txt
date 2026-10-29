@@ -3,12 +3,26 @@
 Where: Items > Data... > Paintings.
 
 The paintings and their tags in one list, a group each.
+A placed painting picks at random from the placeable tag, among the sizes that fit the wall.
 
-What you can do here
-- A painting's size and texture.
-- Painting tags: which paintings a placed painting can pick.
+Paintings
+- Asset id: the texture.
+- Width and Height: in blocks, 1 to 16.
+- Title and Author: shown when the painting item is hovered.
+- Select a field, type a value, Set value.
+
+Painting tags
+- placeable: what a placed painting may pick.
+- Duplicate element adds a painting: type its id in Value first. Remove element takes one out.
+
+Step by step: your own painting
+1. Options > Custom textures & sounds. + Add custom... Texture, category misc. Browse... to a 32 by 32 PNG. Name it.
+2. Items > Data... > Paintings. Select a 2 by 2 painting, for example wanderer.
+3. Asset id, pick your texture. Set value.
+4. /reload.
 
 Examples
 - Only small paintings when placed: remove the large ones from the placeable tag.
+- A rare painting: remove it from placeable, and give it in a chest instead.
 
 When it applies: at the next world load or /reload.

@@ -37,7 +37,7 @@ public final class DriftCheckSelfTest {
             "RegistryPickerScreen",
             "ScalingEditScreen", "ScalingScreen", "FormulasScreen",
             "SpawnRulesScreen",
-            "SpecialMobsScreen", "SpecialSpawnsScreen",
+            "SpecialMobsScreen", "SpecialSpawnsScreen", "WorldLevelScreen",
             "StrataOptionsScreen", "StrataScreen",
             "TestModeScreen",
             "TradeEntryScreen", "TradesScreen", "ReplacementsScreen", "OverridesScreen", "SectionNav",

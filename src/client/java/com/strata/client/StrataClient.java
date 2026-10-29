@@ -85,6 +85,18 @@ public final class StrataClient {
         com.strata.runtime.MobModels.onChange = ModelSwap::resizeLoaded;
         com.strata.runtime.VariantEntityRegistry.afterRegisterNow = StrataClient::renderNewVariants;
 
+        // THE STRATA BUTTON on the title screen and the pause menu: the editor, out of the box.
+        NeoForge.EVENT_BUS.addListener((net.neoforged.neoforge.client.event.ScreenEvent.Init.Post e) -> {
+            if (e.getScreen() instanceof net.minecraft.client.gui.screens.TitleScreen
+                    || e.getScreen() instanceof net.minecraft.client.gui.screens.PauseScreen pause && pause.showsPauseMenu()) {
+                net.minecraft.client.gui.screens.Screen screen = e.getScreen();
+                e.addListener(net.minecraft.client.gui.components.Button.builder(
+                        net.minecraft.network.chat.Component.literal("Strata"),
+                        b -> Minecraft.getInstance().setScreen(ScreenNavigator.get().startAt(screen, new ClientScreen())))
+                        .bounds(4, 4, 60, 20).build());
+            }
+        });
+
         // A scrolling form's header and footer bands, painted after the frame over content scrolled under
         // them.
         NeoForge.EVENT_BUS.addListener((net.neoforged.neoforge.client.event.ScreenEvent.Render.Post e) -> {

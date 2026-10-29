@@ -118,6 +118,12 @@ public class StrataCommands {
                                         .then(Commands.argument("player", EntityArgument.player())
                                                 .requires(s -> s.hasPermission(2))
                                                 .executes(ctx -> getLevel(ctx, EntityArgument.getPlayer(ctx, "player"))))))
+                        .then(Commands.literal("stage")
+                                .executes(this::getStage)
+                                // Setting the world's stage needs operator level 2.
+                                .then(Commands.argument("stage", IntegerArgumentType.integer(0))
+                                        .requires(s -> s.hasPermission(2))
+                                        .executes(ctx -> setStage(ctx, IntegerArgumentType.getInteger(ctx, "stage")))))
                         .then(Commands.literal("mob")
                                 .then(Commands.literal("get")
                                         .executes(this::getNearestMob))
@@ -548,6 +554,25 @@ public class StrataCommands {
                 + " with the variant" + (mobLevel > 0 ? ", at level " + mobLevel : "")
                 + ". It becomes its own mob at the next world load."), false);
         return 1;
+    }
+
+    /** The world's stage, by number and name. */
+    private int getStage(CommandContext<CommandSourceStack> ctx) {
+        String level = String.format(java.util.Locale.ROOT, "%.2f", com.strata.runtime.WorldLevel.level());
+        ctx.getSource().sendSuccess(() -> Component.literal("World stage " + stageWords(com.strata.runtime.WorldLevel.stage())
+                + ", world level " + level + ", highest player level " + com.strata.runtime.WorldLevel.highestPlayerLevel()), false);
+        return 1;
+    }
+
+    private int setStage(CommandContext<CommandSourceStack> ctx, int stage) {
+        int now = com.strata.runtime.WorldLevel.setStage(ctx.getSource().getServer(), stage);
+        ctx.getSource().sendSuccess(() -> Component.literal("World stage set to " + stageWords(now)), true);
+        return 1;
+    }
+
+    private static String stageWords(int stage) {
+        var row = com.strata.runtime.WorldLevel.rules().stages().get(stage);
+        return stage + (row == null || row.name().isEmpty() ? "" : " (" + row.name() + ")");
     }
 
     private int getLevel(CommandContext<CommandSourceStack> ctx, ServerPlayer player) {

@@ -69,10 +69,10 @@ public class ProfileScreen extends StrataScreen {
         saveButton = Button.builder(Component.literal("Save"), b -> saveProfile()).build();
         Button activateButton = Button.builder(Component.literal("Activate"), b -> activateSelected()).build();
         Button deleteButton = Button.builder(Component.literal("Remove"), b -> deleteSelected()).build();
-        // ONE FILE: a picked profile is written as config/strata/exports/<name>.zip; Import
-        // takes a.zip from config/strata/imports/ as a profile.
-        Button exportButton = Button.builder(Component.literal("Export file"), b -> exportSelected()).build();
-        Button importButton = Button.builder(Component.literal("Import..."), b -> pickImport()).build();
+        // A profile is a folder in config/strata/profiles: copy one in or out to share it. The list reads the
+        // folder each time this screen opens.
+        Button folderButton = Button.builder(Component.literal("Open folder"),
+                b -> net.minecraft.Util.getPlatform().openFile(ProfileManager.profilesFolder().toFile())).build();
         // THE SERVER SCREEN IS GONE: Activate loads the profile here and, as an operator on a server, onto
         // the server too; the two actions that were on the Server screen are buttons here.
         Button regenerateButton = Button.builder(Component.literal("Regenerate on next start"),
@@ -85,8 +85,8 @@ public class ProfileScreen extends StrataScreen {
                 b -> send(StrataCommands.reloadCommand())).build();
         Button serverButton = Button.builder(Component.literal(com.strata.ui.screen.ListScreenLayouts.SERVER_BUTTON),
                 b -> loadToServer()).build();
-        placeAll(layout, new String[]{"save", "activate", "delete", "export", "import", "regenerate", "reload", "server"},
-                saveButton, activateButton, deleteButton, exportButton, importButton, regenerateButton,
+        placeAll(layout, new String[]{"save", "activate", "delete", "folder", "regenerate", "reload", "server"},
+                saveButton, activateButton, deleteButton, folderButton, regenerateButton,
                 reloadButton, serverButton);
         boolean operator = isOperator(StrataNetwork.OPERATOR);
         regenerateButton.active = operator;
@@ -98,7 +98,7 @@ public class ProfileScreen extends StrataScreen {
             regenerateButton.setTooltip(tip);
             reloadButton.setTooltip(tip);
         }
-        needsSelection(() -> list.getSelected() != null && !list.manyPicked(), activateButton, exportButton);
+        needsSelection(() -> list.getSelected() != null && !list.manyPicked(), activateButton);
         needsSelection(() -> !list.pickedIds().isEmpty(), deleteButton);
         // Del presses Delete here, as on Behaviors: Del presses a list's "remove".
         keyPresses("remove", deleteButton);
@@ -263,53 +263,6 @@ public class ProfileScreen extends StrataScreen {
                 "Remove profile" + (names.size() > 1 ? "s " : " ") + listed + "? This cannot be undone.",
                 () -> {
                     showResult(ProfileManager.deleteProfiles(names), "Removed: " + listed);
-                    profiles = ProfileManager.listProfiles();
-                    rebuild();
-                }));
-    }
-
-    private void exportSelected() {
-        BrowseList.Entry sel = list.getSelected();
-        if (sel == null) return;
-        String name = sel.label;
-        showResult(ProfileManager.exportFile(name), "Exported: config/strata/exports/" + name + ProfileManager.ZIP);
-    }
-
-    /** The picker's first entry: open the folder the files are taken from. */
-    private static final String OPEN_FOLDER = "strata:open_imports";
-
-    /** Picks a.zip from config/strata/imports/ to import. */
-    private void pickImport() {
-        List<com.strata.game.RegistryQuery.Option> options = new ArrayList<>();
-        options.add(new com.strata.game.RegistryQuery.Option(OPEN_FOLDER,
-                "Open the imports folder (drop a .zip in, then Import again)", "folder"));
-        options.addAll(RegistryPickerScreen.plainOptions("file", ProfileManager.importable()));
-        com.strata.client.nav.ScreenNavigator.get().navigateTo(new RegistryPickerScreen("Import a profile file",
-                options, picked -> {
-                    if (OPEN_FOLDER.equals(picked)) {
-                        net.minecraft.Util.getPlatform().openFile(ProfileManager.importsFolder().toFile());
-                    } else {
-                        deferTo(() -> confirmImport(picked));
-                    }
-                }));
-    }
-
-    /** Checks the file, then asks, saying when it replaces a profile of that name. */
-    private void confirmImport(String fileName) {
-        String problem = ProfileManager.importProblem(fileName);
-        if (problem != null) {
-            statusOk = false;
-            status = problem;
-            return;
-        }
-        String name = ProfileManager.importName(fileName);
-        boolean replaces = profiles.stream().anyMatch(p -> p.name().equals(name));
-        minecraft.setScreen(new ConfirmDialog(this,
-                (replaces ? "Replace the profile '" + name + "' with " : "Import ") + fileName
-                        + (replaces ? "?" : " as the profile '" + name + "'?")
-                        + "\nActivate it to use it.",
-                () -> {
-                    showResult(ProfileManager.importFile(fileName), "Imported: " + name);
                     profiles = ProfileManager.listProfiles();
                     rebuild();
                 }));

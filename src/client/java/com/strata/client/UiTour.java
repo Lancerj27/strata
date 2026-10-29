@@ -156,6 +156,7 @@ public final class UiTour {
                 // The Biomes tab with every biome's natural mobs shown.
                 new Step("mobs_biomes_default_mobs", () -> new MobListScreen("biome", ""), press("Default mobs")),
                 new Step("mob_caps", MobCapScreen::new, null),
+                new Step("world_level", WorldLevelScreen::new, null),
                 new Step("special_mobs", () -> new SpecialMobsScreen("global", ""), null),
                 new Step("goal_sets", GoalSetsScreen::new, null),
                 new Step("replacements_plains", () -> new ReplacementsScreen("biome", "minecraft:plains",

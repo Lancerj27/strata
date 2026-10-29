@@ -5,23 +5,40 @@
 @screen OverridesScreen:biome
 Where: World > Biomes.
 
-Every biome of the game and its mods, grouped by tier.
-A biome takes its tier's settings until you give it its own.
+Every biome of the game and its mods, grouped by tier. Biomes with no tier are in their own group.
+A biome takes its tier's settings until you give it its own. A biome's own value always wins.
 
-What you can do here
-- Edit opens a biome: its level, coefficient and own lists.
-- From a tier's + Add biomes, Add shown to <tier> puts every biome the search shows into that tier.
-- Mobs, Blocks and Structures open the biome's own lists.
-- Rules holds the biome's spawn switches, over its tier's.
-- Climate & looks edits the biome itself: temperature, rain, colours, music, ambience, and the carvers and features it places.
+The biome list
+- Search finds a biome by name or id.
+- Edit, or a double-click, opens a biome.
+- Columns show the biome's tier, level and more. Click a heading to change the columns.
+
+The biome editor
+- Level: the biome's own area level. Blank takes the tier's.
+- Coefficient: the biome's own scaling multiplier. Blank takes the tier's.
+- Mobs, Blocks and Structures open the biome's own lists. A biome list sits over its tier list.
+- Rules holds the biome's spawn switches, over its tier's. See Tiers for what each rule does.
+- Climate & looks edits the biome itself: temperature, downfall, rain or snow, sky, water and fog colors, grass and foliage colors, music, ambience, the mob spawns, and the carvers and features it places.
 - Biome data: the chance a new chunk gets its animals, and each spawn cost's charge and energy budget.
-- Data... opens biome placement (climate ranges), biome modifiers (a mod's additions) and biome tags.
+- Data... opens biome placement (the climate ranges the world picks biomes with), biome modifiers (what a mod adds to biomes) and biome tags.
+
+Climate & looks
+This is the biome's own definition, as the game loads it.
+- Select a field, type a value, Set value. Restore puts one field back.
+- Features are grouped by step (ores, vegetation, lakes and so on). Select one and press Remove element to stop the biome placing it.
+- Duplicate element copies a list member. Change the copy.
+- A color is a whole number. The field's help line shows the game's value.
+
+Step by step: a biome with its own level
+1. World > Biomes. Search "plains". Edit Plains.
+2. Type 5 in Level. Set value.
+3. Plains is now level 5, even inside a level 1 tier.
 
 Examples
-- Make Plains a level 5 biome inside a level 1 tier.
 - Stop rain in a biome: Climate & looks, Rain or snow, false.
-- Change the grass colour of a swamp: Climate & looks, its grass colour.
+- Change the grass color of a swamp: Climate & looks, its grass color.
 - Take one ore out of one biome: Climate & looks, select the feature, Remove element.
+- Give a modded biome a tier: open the tier, + Add biomes, search the mod's name.
 
 When it applies
 - Level and coefficient: at once.

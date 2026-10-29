@@ -1,10 +1,30 @@
 # When changes apply
-At once: mob stats, abilities, scaling, curves, loot entries, block values, mob caps, special spawns, game rules, world settings.
-To mobs that spawn next: equipment. Goal sets also reach every mob the next time it loads.
-At the next world load or /reload: recipes, tags, data maps, loot tables, chest loot, advancements, enchantments.
-In land made after the next world load: spawn lists, ores, vegetation, block replacements, structures, features.
-In a new world only: dimensions, terrain, world types.
-At the next game start: item values, block variants, Own entity variants.
+Every change writes to the working config at once. When the game reads it depends on what it is.
 
+At once
+Mob stats, abilities, scaling, curves, formulas, loot entries, block values, mob caps, special spawns, spawn rules, game rules, world settings, player base stats, textures, sounds, models.
+
+To mobs that spawn next
+Equipment. Goal sets also reach every mob the next time it loads.
+
+At the next world load or /reload
+Recipes, tags, data maps, loot tables, chest loot, advancements, enchantments, brewing, armor trims, banner patterns, jukebox songs, paintings, damage types, chat types, cat and wolf variants, mob tags. Trades reach the next trader that levels up.
+
+In land made after the next world load
+Spawn lists, ores, vegetation, block replacements, structures, features, biome climate and looks.
+
+In a new world only
+Dimensions, terrain, world types.
+
+At the next game start
+Item values, block variants, Own entity variants, Special spawners and Trade changes switches.
+
+Old land
 Regenerate (Profiles, or /strata regenerate) also updates what exists at the next start: mobs as they load, and each old chunk once.
-Ores turned off become stone. Builds stay.
+Ores turned off become stone. Block replacements apply. Builds stay.
+
+How to get a change fast
+1. Mob or block values: nothing to do. Look at the next mob.
+2. Recipes, tags, loot: type /reload.
+3. Spawns, ores, structures: walk to land not made yet, or Regenerate and restart.
+4. Items and block variants: restart the game.

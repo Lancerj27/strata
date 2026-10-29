@@ -24,6 +24,7 @@ public final class SectionNav {
         m.put(key(Sections.WORLD, "Dimensions"), () -> new OverridesScreen(OverrideViews.DIMENSIONS));
         m.put(key(Sections.WORLD, "Terrain"), () -> new OverridesScreen(OverrideViews.TERRAIN));
         m.put(key(Sections.WORLD, "Features"), () -> new OverridesScreen(OverrideViews.FEATURES));
+        m.put(key(Sections.WORLD, "World level"), WorldLevelScreen::new);
         m.put(key(Sections.OPTIONS, "World types"), () -> new OverridesScreen(OverrideViews.WORLD_TYPES));
         m.put(key(Sections.ITEMS, "Items"), ItemsScreen::new);
         m.put(key(Sections.ITEMS, "Loot tables"), ChestsScreen::lootTables);

@@ -60,7 +60,7 @@ public final class TitlePath {
             Map.entry("ProfileScreen", PROFILES), Map.entry("ScalingScreen", SCALING), Map.entry("ScalingEditScreen", SCALING), Map.entry("FormulasScreen", SCALING), Map.entry("MobBiomesScreen", WORLD),
             Map.entry("StrataOptionsScreen", OPTIONS), Map.entry("TestModeScreen", OPTIONS),
             // Mob caps is opened from the Mobs list.
-            Map.entry("MobCapScreen", WORLD),
+            Map.entry("MobCapScreen", WORLD), Map.entry("WorldLevelScreen", WORLD),
             Map.entry("PlayerBaseStatsScreen", OPTIONS), Map.entry("PlayerSpawnScreen", OPTIONS),
             // Custom textures & sounds: a machine-wide library in Options.
             Map.entry("CustomAssetsScreen", OPTIONS), Map.entry("CustomAssetScreen", OPTIONS),

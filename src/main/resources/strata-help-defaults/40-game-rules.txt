@@ -3,13 +3,31 @@
 Where: Options > Game rules.
 
 Every game rule of the game and its mods, grouped by the game's categories, its default beside a changed one.
+The profile carries them: every world and server that loads the profile gets them. /gamerule changes the open world only.
 
 What you can do here
-- Select a rule, type its value, Set value.
+- Select a rule, type its value, Set value. A switch takes true or false.
+- Restore puts the game's value back. Restore all clears every rule.
+- Search finds a rule by name.
+
+Rules worth knowing
+- keepInventory: keep items on death.
+- mobGriefing: creepers, endermen and villagers change blocks. Mob griefing per mob is in Mob data.
+- doDaylightCycle, doWeatherCycle: whether time and weather move.
+- doInsomnia: phantoms. doPatrolSpawning, doTraderSpawning, doWardenSpawning.
+- randomTickSpeed: how fast crops grow and fire spreads. 3 is the game's.
+- playersSleepingPercentage: how many must sleep to skip the night.
+- maxEntityCramming, spawnRadius, fallDamage, fireDamage, drowningDamage.
+
+Step by step: a casual world
+1. keepInventory true.
+2. doInsomnia false.
+3. playersSleepingPercentage 1.
+4. Save in Profiles. Every world on the profile plays this way.
 
 Examples
-- keepInventory true.
 - randomTickSpeed 6 for faster crops.
 - doInsomnia false: no phantoms.
+- mobGriefing false, then Mob griefing On for the sheep in Mob data, so sheep still eat grass.
 
-When it applies: each time a world starts, and when Strata reloads with a world open. The profile carries it to every world and server.
+When it applies: each time a world starts, and when Strata reloads with a world open.

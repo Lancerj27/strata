@@ -2,18 +2,37 @@
 @screen ProfileScreen
 Where: Profiles (top bar).
 
-A profile is a whole saved config. Every launch loads the ACTIVE profile.
+A profile is a whole saved config: every table, every override, every curve, every formula, and the names of the custom files it uses. Every launch loads the ACTIVE profile.
+Your edits write to the working config at once. Save copies the working config into a profile. Without a Save, the next launch loads the active profile over your edits.
 
-What you can do here
-- Save: keeps your edits as a profile. Do this, or the next launch loads the active profile over them.
+The list
+- One row per profile. The active one is marked. Default is always there.
+- Save: keeps your edits as a profile. Pick an existing one to overwrite it, or type a new name.
 - Activate: makes a profile the one every launch loads, and loads it now. On a server, as an operator, onto the server too.
+- Duplicate copies a profile. Rename changes its name. Delete removes it. Default cannot be deleted.
 - Default: the game as it is. It has no rows and Strata's shipped settings, which leave the game its own. Strata writes it again at every start.
-- Export file writes a profile as a .zip in config/strata/exports. Import... takes one from config/strata/imports.
-- Regenerate on next start: the next start updates mobs and existing land.
-- Load active profile to server: sends the active profile, and the custom files it uses, to the server you are on.
-- Reload server config (operators).
+
+Moving profiles
+- A profile is a folder in config/strata/profiles. Open folder shows them.
+- To share one, copy its folder. To take one in, drop the folder there and open Profiles again.
+- Custom textures and sounds live in config/strata/assets_pack; copy the files a profile names as well.
+- Load active profile to server: sends the active profile, and the custom files it uses, to the server you are on. Operator.
+- Reload server config: the server reads its config again. Operator.
+- Regenerate on next start: the next start updates mobs as they load, and each old chunk once, to the profile. Ores turned off become stone. Builds stay.
+
+Step by step: two ways to play
+1. Build your hard config. Save as "hard-mode".
+2. Activate Default. Edit a few easy things. Save as "easy-mode".
+3. Activate "hard-mode" for tonight. Activate "easy-mode" for a friend.
+
+Step by step: send a config to a friend
+1. Save your profile. Open folder.
+2. Send the profile's folder.
+3. Your friend drops it into their config/strata/profiles, opens Profiles and presses Activate.
 
 Examples
-- "hard-mode" and "easy-mode" profiles to switch between.
-- Send your config to a friend with Export file.
 - Play the plain game for a while: Activate Default.
+- Back up before a big change: Duplicate the profile.
+- Test a change on old land: Regenerate on next start, then restart.
+
+See Moving a config to a server for a server.
