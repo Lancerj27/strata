@@ -12,6 +12,11 @@ A Minecraft mod for NeoForge 1.21.1 that lets you configure mobs, items, blocks,
 
 Open the editor with the **Strata** button on the title screen or the pause menu, with `/strata ui`, or from **Config** on Strata in the Mods list. You can also set a key (K, P or O) as `editorKey` in `strata-common.toml`. Each screen has a **?** button that opens its help page.
 
+## Downloads
+
+- [CurseForge](https://www.curseforge.com/minecraft/customization/strata/preview)
+- The newest build of each branch is on the [Releases](https://github.com/Lancerj27/strata/releases) page, as a `dev-<branch>` prerelease with the jar and a source zip.
+
 ## Requirements
 
 - Minecraft 1.21.1
