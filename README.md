@@ -14,7 +14,7 @@ Open the editor with the **Strata** button on the title screen or the pause menu
 
 ## Downloads
 
-- [CurseForge](https://www.curseforge.com/minecraft/customization/strata/preview)
+- [CurseForge]([https://www.curseforge.com/minecraft/mc-mods/strata-mod])
 - The newest build of each branch is on the [Releases](https://github.com/Lancerj27/strata/releases) page, as a `dev-<branch>` prerelease with the jar and a source zip.
 
 ## Requirements
